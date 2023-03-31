@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">TimeToWork</string>
+    <string name="IniciodeSesión">Inicio de Sesión</string>
+    <string name="Usuario">Usuario</string>
+    <string name="logo">logo</string>
+    <string name="user">User</string>
+    <string name="contraseña">Contraseña:</string>
+    <string name="password">Password</string>
+    <string name="iniciarSesion">Iniciar Sesión</string>
+    <string name="olvidasteTuContraseña"><u>¿Olvidaste tu contraseña?</u></string>
+    <string name="nuevaEmpresa">Nueva Empresa</string>
+    <string name="CrearCuenta">Crear cuenta de Empresa</string>
+    <string name="nombreEmpresa">Nombre Empresa</string>
+    <string name="nombreAdmin">Nombre Admin</string>
+    <string name="numerosEmpleados">Nº Empleados</string>
+    <string name="pais">País:</string>
+    <string name="provincia">Provincia:</string>
+    <string name="ciudad">Ciudad</string>
+    <string name="repetirContraseña">Repetir Contraseña:</string>
+    <string name="terminosDeUso">Estoy de acuerdo con los <FONT COLOR="blue"><u><i>términos de uso</i></u></FONT></string>
+    <string name="crearCuenta">Crear Cuenta</string>
+</resources>
