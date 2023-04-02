@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission> <!--añadimos permiso para acceder a internet-->
+    <!-- android:usesCleartextTraffic="true" -> permite conectarse a URLs http sin protocolos de seguridad-->
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -12,6 +15,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TimeToWork"
         tools:targetApi="33">
+        <activity
+            android:name=".Horarios"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".UsuarioPerfil"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ReestablecerContrasena"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".CrearCuenta"
             android:exported="false">

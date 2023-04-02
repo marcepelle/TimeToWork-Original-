@@ -19,4 +19,21 @@
     <string name="repetirContraseña">Repetir Contraseña:</string>
     <string name="terminosDeUso">Estoy de acuerdo con los <FONT COLOR="blue"><u><i>términos de uso</i></u></FONT></string>
     <string name="crearCuenta">Crear Cuenta</string>
+    <string name="country">Country</string>
+    <string name="province">Province</string>
+    <string name="city">City</string>
+    <string name="nameAdmin">Name Admin</string>
+    <string name="nameCompany">Name Company</string>
+    <string name="reestablecerContrasena">Reestablecer Contraseña</string>
+    <string name="solicitarContrasena">Solicitar Contraseña</string>
+    <string name="fechaUsrProfile">Fecha:</string>
+    <string name="userProfile">Usuario:</string>
+    <string name="fechaInUsrProfile" />
+    <string name="HoraOutUsrProfile">Hora Salida:</string>
+    <string name="horaInUsrProfile">Hora Entrada:</string>
+    <string name="ficharEntrada">Fichar Entrada</string>
+    <string name="ficharSalida">Fichar Salida</string>
+    <string name="mensajes">Mensajes</string>
+    <string name="horario">Horario</string>
+    <string name="perfil">Perfil</string>
 </resources>

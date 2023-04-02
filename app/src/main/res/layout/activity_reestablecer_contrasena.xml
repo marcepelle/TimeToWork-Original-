@@ -4,46 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#57B85B"
-    android:backgroundTint="#539F56"
-    tools:context=".MainActivity">
+    android:background="#539F56"
+    tools:context=".ReestablecerContrasena">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="173dp"
-        android:layout_height="111dp"
-        android:contentDescription="@string/logo"
+    <TextView
+        android:id="@+id/textUserResPwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Usuario"
+        android:textColor="#212121"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.231"
-        app:srcCompat="@drawable/logo" />
+        app:layout_constraintVertical_bias="0.418"
+        tools:text="Usuario:" />
 
     <Button
-        android:id="@+id/btnNuevaEmpresa"
+        android:id="@+id/btnSolicitarResPwd"
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:backgroundTint="#A5A5A5"
         android:shadowColor="#303030"
-        android:text="@string/nuevaEmpresa"
-        android:textColor="#4E342E"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.879" />
-
-    <Button
-        android:id="@+id/btnIniciarSesion"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:backgroundTint="#A5A5A5"
-        android:shadowColor="#303030"
-        android:text="@string/iniciarSesion"
+        android:text="@string/solicitarContrasena"
+        android:textAlignment="center"
         android:textColor="#4E342E"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -54,10 +39,10 @@
         app:layout_constraintVertical_bias="0.703" />
 
     <TextView
-        android:id="@+id/textPassword"
+        android:id="@+id/textEmpresaResPwd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/contraseña"
+        android:text="@string/nombreEmpresa"
         android:textColor="#212121"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,16 +52,16 @@
         app:layout_constraintVertical_bias="0.54" />
 
     <EditText
-        android:id="@+id/editPassword"
+        android:id="@+id/editEmpresaResPwd"
         android:layout_width="150dp"
         android:layout_height="48dp"
         android:autofillHints=""
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
-        android:hint="@string/password"
+        android:hint="@string/nameCompany"
         android:includeFontPadding="true"
-        android:inputType="text|textPassword"
+        android:inputType="text"
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
         android:textColorHint="#2E7D32"
@@ -87,22 +72,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.603" />
 
-    <TextView
-        android:id="@+id/textTitleMain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/IniciodeSesión"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.126" />
-
     <EditText
-        android:id="@+id/editUser"
+        android:id="@+id/editUserResPwd"
         android:layout_width="150dp"
         android:layout_height="48dp"
         android:autofillHints=""
@@ -122,34 +93,30 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.474" />
 
-    <TextView
-        android:id="@+id/textForgetPsswd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/olvidasteTuContraseña"
-        android:textColor="#3554FD"
-        android:textColorHighlight="#00168F"
-        android:textIsSelectable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.773"
-        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
-
-    <TextView
-        android:id="@+id/textUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Usuario"
-        android:textColor="#212121"
+    <ImageView
+        android:id="@+id/logoResPwd"
+        android:layout_width="173dp"
+        android:layout_height="111dp"
+        android:contentDescription="@string/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.418"
-        tools:text="Usuario:" />
+        app:layout_constraintVertical_bias="0.231"
+        app:srcCompat="@drawable/logo" />
 
+    <TextView
+        android:id="@+id/textTitleResetPsswd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reestablecerContrasena"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.126" />
 </androidx.constraintlayout.widget.ConstraintLayout>
