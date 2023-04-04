@@ -12,7 +12,7 @@ public class Persona {
     private String nombres;
     @SerializedName("apellido")
     @Expose
-    private String apellidos;
+    private String apellido;
 
 
     public int getId() {
@@ -31,12 +31,12 @@ public class Persona {
         this.nombres = nombres;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class Persona {
         return "Persona{" +
                 "id=" + id +
                 ", nombres='" + nombres + '\'' +
-                ", apellidos='" + apellidos + '\'' +
+                ", apellidos='" + apellido + '\'' +
                 '}';
     }
 }

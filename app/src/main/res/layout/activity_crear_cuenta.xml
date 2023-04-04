@@ -8,39 +8,16 @@
     tools:context=".CrearCuenta">
 
     <EditText
-        android:id="@+id/editNomAdmin"
+        android:id="@+id/editTelefonoEmp"
         android:layout_width="150dp"
-        android:layout_height="30dp"
+        android:layout_height="20dp"
         android:autofillHints=""
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
-        android:hint="@string/nameAdmin"
+        android:hint="@string/phoneNumber"
         android:includeFontPadding="true"
-        android:inputType="textPersonName"
-        android:paddingStart="5dp"
-        android:paddingEnd="5dp"
-        android:textColorHint="#2E7D32"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/editNumEmpleados"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.831"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editNomEmpresa"
-        app:layout_constraintVertical_bias="0.5"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <EditText
-        android:id="@+id/editNumEmpleados"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:autofillHints=""
-        android:background="#FFFFFF"
-        android:backgroundTint="#FFFFFF"
-        android:ems="10"
-        android:hint="0"
-        android:includeFontPadding="true"
-        android:inputType="number"
+        android:inputType="number|text"
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
         android:textColorHint="#2E7D32"
@@ -49,14 +26,109 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.831"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editNomAdmin"
+        app:layout_constraintTop_toBottomOf="@+id/editNombAdmin"
+        app:layout_constraintVertical_bias="0.5"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/textTelefonoEmp"
+        android:layout_width="150dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="44dp"
+        android:text="@string/telefonoEmpresa"
+        android:textColor="#212121"
+        app:layout_constraintBottom_toTopOf="@+id/textPais"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textNombAdmin"
+        app:layout_constraintVertical_bias="0.5"
+        tools:text="Telefono:" />
+
+    <TextView
+        android:id="@+id/textCorreo"
+        android:layout_width="150dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="44dp"
+        android:text="@string/txtCorreo"
+        android:textColor="#212121"
+        app:layout_constraintBottom_toTopOf="@+id/textContrasena"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textCiudad"
+        app:layout_constraintVertical_bias="0.5"
+        tools:text="Correo:" />
+
+    <EditText
+        android:id="@+id/editCorreo"
+        android:layout_width="150dp"
+        android:layout_height="20dp"
+        android:autofillHints=""
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:ems="10"
+        android:hint="@string/emailCrearcuenta"
+        android:includeFontPadding="true"
+        android:inputType="text|textEmailAddress"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:textColorHint="#2E7D32"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/editContrasena"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.831"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editCiudad"
+        app:layout_constraintVertical_bias="0.5"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/editCIF"
+        android:layout_width="150dp"
+        android:layout_height="20dp"
+        android:autofillHints=""
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:ems="10"
+        android:hint="@string/CIF"
+        android:includeFontPadding="true"
+        android:inputType="textPersonName"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:textColorHint="#2E7D32"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/editNombAdmin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.831"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editNomEmpresa"
+        app:layout_constraintVertical_bias="0.5"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/editNombAdmin"
+        android:layout_width="150dp"
+        android:layout_height="20dp"
+        android:autofillHints=""
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:ems="10"
+        android:hint="@string/nameAdmin"
+        android:includeFontPadding="true"
+        android:inputType="text"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:textColorHint="#2E7D32"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTelefonoEmp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.831"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editCIF"
         app:layout_constraintVertical_bias="0.5"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/editPais"
         android:layout_width="150dp"
-        android:layout_height="30dp"
+        android:layout_height="20dp"
         android:autofillHints=""
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
@@ -72,14 +144,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.831"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editNumEmpleados"
+        app:layout_constraintTop_toBottomOf="@+id/editTelefonoEmp"
         app:layout_constraintVertical_bias="0.5"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/editCiudad"
         android:layout_width="150dp"
-        android:layout_height="30dp"
+        android:layout_height="20dp"
         android:autofillHints=""
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
@@ -91,7 +163,7 @@
         android:paddingEnd="5dp"
         android:textColorHint="#2E7D32"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/editContrasena"
+        app:layout_constraintBottom_toTopOf="@+id/editCorreo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.831"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +174,7 @@
     <EditText
         android:id="@+id/editContrasena"
         android:layout_width="150dp"
-        android:layout_height="30dp"
+        android:layout_height="20dp"
         android:autofillHints=""
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
@@ -118,14 +190,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.831"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editCiudad"
+        app:layout_constraintTop_toBottomOf="@+id/editCorreo"
         app:layout_constraintVertical_bias="0.5"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/editRepetirContra"
         android:layout_width="150dp"
-        android:layout_height="30dp"
+        android:layout_height="20dp"
         android:autofillHints=""
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
@@ -148,7 +220,7 @@
     <EditText
         android:id="@+id/editProvincia"
         android:layout_width="150dp"
-        android:layout_height="30dp"
+        android:layout_height="20dp"
         android:autofillHints=""
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
@@ -171,7 +243,7 @@
     <EditText
         android:id="@+id/editNomEmpresa"
         android:layout_width="150dp"
-        android:layout_height="30dp"
+        android:layout_height="20dp"
         android:autofillHints=""
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
@@ -183,7 +255,7 @@
         android:paddingEnd="5dp"
         android:textColorHint="#2E7D32"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/editNomAdmin"
+        app:layout_constraintBottom_toTopOf="@+id/editCIF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.831"
         app:layout_constraintStart_toStartOf="parent"
@@ -202,31 +274,31 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.524"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.909" />
+        app:layout_constraintVertical_bias="0.944" />
 
     <TextView
         android:id="@+id/textContrasena"
         android:layout_width="150dp"
-        android:layout_height="30dp"
+        android:layout_height="20dp"
         android:layout_marginStart="44dp"
         android:text="@string/contraseña"
         android:textColor="#212121"
         app:layout_constraintBottom_toTopOf="@+id/textRepetirContrasena"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textCiudad"
+        app:layout_constraintTop_toBottomOf="@+id/textCorreo"
         app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/textNomEmpresa"
         android:layout_width="150dp"
-        android:layout_height="30dp"
+        android:layout_height="20dp"
         android:layout_marginStart="44dp"
         android:text="@string/nombreEmpresa"
         android:textColor="#212121"
-        app:layout_constraintBottom_toTopOf="@+id/textNomAdmin"
+        app:layout_constraintBottom_toTopOf="@+id/textCIF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintVertical_bias="0.5"
@@ -235,11 +307,11 @@
     <TextView
         android:id="@+id/textCiudad"
         android:layout_width="150dp"
-        android:layout_height="30dp"
+        android:layout_height="20dp"
         android:layout_marginStart="44dp"
         android:text="@string/ciudad"
         android:textColor="#212121"
-        app:layout_constraintBottom_toTopOf="@+id/textContrasena"
+        app:layout_constraintBottom_toTopOf="@+id/textCorreo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textProvincia"
         app:layout_constraintVertical_bias="0.5"
@@ -248,20 +320,20 @@
     <TextView
         android:id="@+id/textPais"
         android:layout_width="150dp"
-        android:layout_height="30dp"
+        android:layout_height="20dp"
         android:layout_marginStart="44dp"
         android:text="@string/pais"
         android:textColor="#212121"
         app:layout_constraintBottom_toTopOf="@+id/textProvincia"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textNumEmpleados"
+        app:layout_constraintTop_toBottomOf="@+id/textTelefonoEmp"
         app:layout_constraintVertical_bias="0.5"
         tools:text="País:" />
 
     <TextView
         android:id="@+id/textProvincia"
         android:layout_width="150dp"
-        android:layout_height="30dp"
+        android:layout_height="20dp"
         android:layout_marginStart="44dp"
         android:text="@string/provincia"
         android:textColor="#212121"
@@ -272,35 +344,35 @@
         tools:text="Provincia:" />
 
     <TextView
-        android:id="@+id/textNomAdmin"
+        android:id="@+id/textCIF"
         android:layout_width="150dp"
-        android:layout_height="30dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="44dp"
+        android:text="@string/CIF"
+        android:textColor="#212121"
+        app:layout_constraintBottom_toTopOf="@+id/textNombAdmin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textNomEmpresa"
+        app:layout_constraintVertical_bias="0.5"
+        tools:text="CIF:" />
+
+    <TextView
+        android:id="@+id/textNombAdmin"
+        android:layout_width="150dp"
+        android:layout_height="20dp"
         android:layout_marginStart="44dp"
         android:text="@string/nombreAdmin"
         android:textColor="#212121"
-        app:layout_constraintBottom_toTopOf="@+id/textNumEmpleados"
+        app:layout_constraintBottom_toTopOf="@+id/textTelefonoEmp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textNomEmpresa"
+        app:layout_constraintTop_toBottomOf="@+id/textCIF"
         app:layout_constraintVertical_bias="0.5"
         tools:text="Nombre Admin:" />
 
     <TextView
-        android:id="@+id/textNumEmpleados"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="44dp"
-        android:text="@string/numerosEmpleados"
-        android:textColor="#212121"
-        app:layout_constraintBottom_toTopOf="@+id/textPais"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textNomAdmin"
-        app:layout_constraintVertical_bias="0.5"
-        tools:text="Nº Empleados:" />
-
-    <TextView
         android:id="@+id/textRepetirContrasena"
         android:layout_width="150dp"
-        android:layout_height="30dp"
+        android:layout_height="20dp"
         android:layout_marginStart="44dp"
         android:text="@string/repetirContraseña"
         android:textColor="#212121"
@@ -324,8 +396,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="173dp"
-        android:layout_height="111dp"
+        android:layout_width="133dp"
+        android:layout_height="71dp"
         android:contentDescription="@string/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -345,7 +417,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintVertical_bias="0.837" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

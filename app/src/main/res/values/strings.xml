@@ -36,4 +36,9 @@
     <string name="mensajes">Mensajes</string>
     <string name="horario">Horario</string>
     <string name="perfil">Perfil</string>
+    <string name="CIF">CIF</string>
+    <string name="emailCrearcuenta">email</string>
+    <string name="txtCorreo">Correo</string>
+    <string name="telefonoEmpresa">Telefono:</string>
+    <string name="phoneNumber">Phone Number</string>
 </resources>

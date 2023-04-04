@@ -12,8 +12,6 @@ import androidx.annotation.Nullable;
 
 import com.example.timetowork.models.Persona;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 public class PersonaAdapter extends ArrayAdapter<Persona> {
@@ -48,7 +46,7 @@ public class PersonaAdapter extends ArrayAdapter<Persona> {
         //asignamos los datos a los textview
         txtidPersona.setText(String.format("ID:%s", personas.get(position).getId()));
         txtNombre.setText(String.format("Nombre:%s", personas.get(position).getNombres()));
-        txtApellidos.setText(String.format("Apellido:%s", personas.get(position).getApellidos()));
+        txtApellidos.setText(String.format("Apellido:%s", personas.get(position).getApellido()));
 
         return rowView; //devolvemos todas las filas
     }

@@ -16,6 +16,7 @@
         android:theme="@style/Theme.TimeToWork"
         tools:targetApi="33">
         <activity
+
             android:name=".Horarios"
             android:exported="false">
             <meta-data

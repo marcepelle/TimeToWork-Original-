@@ -39,8 +39,8 @@ public class Horarios extends AppCompatActivity {
     }
 
     public void listarHorarios(){
-        personaService= Apis.getPersonaService();
-        Call<List<Persona>> call=personaService.getPersonas();
+        personaService= Apis.getPersonaService(); //obtenemos la interfaz PersonaService para poder hacer las peticiones al endpoint de la API correspondiente
+        Call<List<Persona>> call=personaService.getPersonas(); //invocación de un metodo retrofit para que haga una solicitud a un servidor web
         call.enqueue(new Callback<List<Persona>>() {
             @Override
             public void onResponse(Call<List<Persona>> call, Response<List<Persona>> response) { //operación realizada con exito
