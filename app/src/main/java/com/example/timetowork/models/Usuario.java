@@ -40,6 +40,9 @@ public class Usuario {
     @SerializedName("esAdmin")
     @Expose
     private boolean esAdmin = false;
+    @SerializedName("idEmpresa_fk")
+    @Expose
+    private Empresa idEmpresa_fk;
 
     public Usuario() {
     }
@@ -146,6 +149,14 @@ public class Usuario {
         this.esAdmin = esAdmin;
     }
 
+    public Empresa getIdEmpresa_fk() {
+        return idEmpresa_fk;
+    }
+
+    public void setIdEmpresa_fk(Empresa idEmpresa_fk) {
+        this.idEmpresa_fk = idEmpresa_fk;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -160,6 +171,7 @@ public class Usuario {
                 ", correoUsuario='" + correoUsuario + '\'' +
                 ", contrasena='" + contrasena + '\'' +
                 ", esAdmin=" + esAdmin +
+                ", idEmpresa_fk=" + idEmpresa_fk +
                 '}';
     }
 }

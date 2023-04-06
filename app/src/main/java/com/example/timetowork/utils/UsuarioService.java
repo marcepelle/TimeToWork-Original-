@@ -5,14 +5,16 @@ import com.example.timetowork.models.Usuario;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public interface UsuarioService {
 
     @POST("crearUsuario")
-    Call<Usuario> crearUsuario(@Body Usuario usuario);
+    Call<Void> crearUsuario(@Body Usuario usuario);
     @POST("crearEmpresa")
-    Call<Empresa> crearEmpresa(@Body Empresa empresa);
+    Call<Void> crearEmpresa(@Body Empresa empresa);
 
 
 }

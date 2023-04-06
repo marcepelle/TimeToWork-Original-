@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.timetowork.databinding.ActivityCrearCuentaBinding;
+import com.example.timetowork.models.Empresa;
 import com.example.timetowork.models.Usuario;
 import com.example.timetowork.utils.Apis;
 import com.example.timetowork.utils.UsuarioService;
@@ -30,11 +31,13 @@ import retrofit2.Response;
 
 public class CrearCuenta extends AppCompatActivity {
     UsuarioService usuarioService;
+    ActivityCrearCuentaBinding binding;
+    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        com.example.timetowork.databinding.ActivityCrearCuentaBinding binding = ActivityCrearCuentaBinding.inflate(getLayoutInflater()); //obtenemos la instancia del binding para obtener acceso a cada vista del activity
+        binding = ActivityCrearCuentaBinding.inflate(getLayoutInflater()); //obtenemos la instancia del binding para obtener acceso a cada vista del activity
         View view = binding.getRoot();
         setContentView(view);
         String text = "Estoy de acuerdo con los términos de uso";
@@ -55,41 +58,80 @@ public class CrearCuenta extends AppCompatActivity {
 
         binding.btnCrearCuenta.setOnClickListener(v -> {
             if(binding.checkBoxTerminos.isChecked()){
-                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                Usuario usuario = new Usuario();
-                usuario.setNombreUsuario(String.valueOf(binding.editNombAdmin.getText()));
-                usuario.setTelefono(Integer.parseInt(String.valueOf(binding.editTelefonoEmp.getText())));
-                usuario.setDireccion(binding.editCiudad.getText() +", "+binding.editProvincia.getText()+", "+binding.editPais.getText()+".");
-                usuario.setEmpresaUsuario(String.valueOf(binding.editNomEmpresa.getText()));
-                usuario.setLugarTrabajo(String.valueOf(binding.editCiudad.getText()));
-                usuario.setFechaNacimiento(dateFormat.format(new Date()));
-                usuario.setCorreoUsuario(String.valueOf(binding.editCorreo.getText()));
-                usuario.setContrasena(String.valueOf(binding.editContrasena.getText()));
-                usuario.setEsAdmin(true);
+                Empresa empresa;
+                empresa = modeloEmpresa();
+                crearCuentaEmpresa(empresa);
+                Usuario usuario;
+                usuario = modeloUsuario();
                 crearCuentaUsuario(usuario);
-                Intent intentCrear = new Intent(CrearCuenta.this, MainActivity.class);
-                startActivity(intentCrear);
+                //Intent intentCrear = new Intent(CrearCuenta.this, MainActivity.class);
+                //startActivity(intentCrear);
             }
         });
     }
 
+
+    private Empresa modeloEmpresa(){
+        Empresa empresa = new Empresa();
+        empresa.setCIF(String.valueOf(binding.editCIF.getText()));
+        empresa.setNombreEmpresa(String.valueOf(binding.editNomEmpresa.getText()));
+        empresa.setTelefono(Integer.parseInt(String.valueOf(binding.editTelefonoEmp.getText())));
+        empresa.setNombreAdmin(String.valueOf(binding.editNombAdmin.getText()));
+        empresa.setPais(String.valueOf(binding.editPais.getText()));
+        empresa.setProvincia(String.valueOf(binding.editProvincia.getText()));
+        empresa.setCiudad(String.valueOf(binding.editCiudad.getText()));
+        return empresa;
+    }
+    private void crearCuentaEmpresa(Empresa empresa) {
+        usuarioService = Apis.getUsuarioService();
+        Call<Void> call = usuarioService.crearEmpresa(empresa);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.d("Exito", "Exito al crear cuenta Empresa");
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("Fallo", t.getMessage());
+            }
+        });
+    }
+
+    private Usuario modeloUsuario(){
+        Usuario usuario = new Usuario();
+        usuario.setNombreUsuario(String.valueOf(binding.editNombAdmin.getText()));
+        usuario.setApellidosUsuario(null);
+        usuario.setTelefono(Integer.parseInt(String.valueOf(binding.editTelefonoEmp.getText())));
+        usuario.setDireccion(binding.editCiudad.getText() +", "+binding.editProvincia.getText()+", "+binding.editPais.getText()+".");
+        usuario.setEmpresaUsuario(String.valueOf(binding.editNomEmpresa.getText()));
+        usuario.setLugarTrabajo(String.valueOf(binding.editCiudad.getText()));
+        usuario.setFechaNacimiento(dateFormat.format(new Date()));
+        usuario.setCorreoUsuario(String.valueOf(binding.editCorreo.getText()));
+        usuario.setContrasena(String.valueOf(binding.editContrasena.getText()));
+        usuario.setEsAdmin(true);
+        return usuario;
+    }
+
     private void crearCuentaUsuario(Usuario usuario) {
         usuarioService = Apis.getUsuarioService();
-        Call<Usuario>call= usuarioService.crearUsuario(usuario);
-        call.enqueue(new Callback<Usuario>() {
+        Call<Void> call= usuarioService.crearUsuario(usuario);
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.isSuccessful()){
-                    Toast.makeText(CrearCuenta.this,"Cuenta creada", Toast.LENGTH_SHORT).show();
-                    Log.d("Exito", "Exito al crear cuenta");
+                    Toast.makeText(CrearCuenta.this, "Cuenta Creada", Toast.LENGTH_SHORT).show();
+                    Log.d("Exito", "Exito al crear cuenta Usuario");
                 }
             }
 
             @Override
-            public void onFailure(Call<Usuario> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                     Toast.makeText(CrearCuenta.this,"Cuenta no creada", Toast.LENGTH_SHORT).show();
                     Log.e("Fallo", t.getMessage());
             }
         });
     }
+
+
 }

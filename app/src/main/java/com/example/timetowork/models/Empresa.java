@@ -4,7 +4,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Empresa {
-    @SerializedName("CIF")
+    @SerializedName("idEmpresa")
+    @Expose
+    private int idEmpresa;
+    @SerializedName("cif")
     @Expose
     private String CIF;
     @SerializedName("nombreEmpresa")
@@ -13,7 +16,7 @@ public class Empresa {
     @SerializedName("telefono")
     @Expose
     private int telefono;
-    @SerializedName("nombreAdmin")
+    @SerializedName("nombreadmin")
     @Expose
     private String nombreAdmin;
     @SerializedName("pais")
@@ -22,10 +25,17 @@ public class Empresa {
     @SerializedName("provincia")
     @Expose
     private String provincia;
-    @SerializedName("Ciudad")
+    @SerializedName("ciudad")
     @Expose
     private String ciudad;
 
+    public int getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(int idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
     public String getCiudad() {
         return ciudad;
     }
@@ -84,7 +94,8 @@ public class Empresa {
 
     @Override
     public String toString() {
-        return "Empresa{CIF='" + CIF + '\'' +
+        return "Empresa{idEmpresa='" + idEmpresa + '\'' +
+                "CIF='" + CIF + '\'' +
                 ", nombreEmpresa='" + nombreEmpresa + '\'' +
                 ", telefono='" + telefono + '\'' +
                 ", nombreadmin='" + nombreAdmin + '\'' +
