@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.timetowork.databinding.ActivityUsuarioPerfilBinding;
+import com.example.timetowork.models.Usuario;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,7 +29,9 @@ public class UsuarioPerfil extends AppCompatActivity {
         bindingPerfil = ActivityUsuarioPerfilBinding.inflate(getLayoutInflater());
         View view = bindingPerfil.getRoot();
         setContentView(view);
-
+        Bundle intentObtenido = getIntent().getExtras();
+        Usuario usuarioLoggueado = (Usuario) intentObtenido.getSerializable("usuario");
+        bindingPerfil.textTitleUsrProfile.append(usuarioLoggueado.getNombreUsuario());
         currentDate =" " + dateFormat.format(new Date()); //obteniendo la fecha actual con el formato especificado
         bindingPerfil.textFechaUsrProfile.append(currentDate); //añadimos la fecha al textview
         bindingPerfil.btnEntradaUsrProfile.setOnClickListener(v -> { //evento al clicar el boton de fichar entrada
@@ -41,8 +45,8 @@ public class UsuarioPerfil extends AppCompatActivity {
             }
         });
         bindingPerfil.btnHorario.setOnClickListener(v -> {
-            Intent intentHorarios = new Intent(UsuarioPerfil.this, Horarios.class);
-            startActivity(intentHorarios);
+            //Intent intentHorarios = new Intent(UsuarioPerfil.this, Horarios.class);
+            //startActivity(intentHorarios);
         });
     }
 

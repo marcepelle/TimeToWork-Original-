@@ -3,10 +3,11 @@ package com.example.timetowork.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Date;
 
-public class Usuario {
+public class Usuario implements Serializable {
     @SerializedName("idUsuario")
     @Expose
     private int idUsuario;
@@ -40,18 +41,18 @@ public class Usuario {
     @SerializedName("esAdmin")
     @Expose
     private boolean esAdmin = false;
-    @SerializedName("idEmpresa_fk")
+    @SerializedName("empresa_fk")
     @Expose
-    private Empresa idEmpresa_fk;
+    private Empresa empresa_fk;
 
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String nombreUsuario, String apellidosUsuario,int telefono, String direccion, String empresaUsuario, String lugarTrabajo, String fechaNacimiento, String correoUsuario, String contrasena, boolean esAdmin) {
+    public Usuario(int idUsuario, String nombreUsuario, String apellidosUsuario, int telefono, String direccion, String empresaUsuario, String lugarTrabajo, String fechaNacimiento, String correoUsuario, String contrasena, boolean esAdmin, Empresa empresa_fk) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.apellidosUsuario = apellidosUsuario;
-        this.telefono=telefono;
+        this.telefono = telefono;
         this.direccion = direccion;
         this.empresaUsuario = empresaUsuario;
         this.lugarTrabajo = lugarTrabajo;
@@ -59,6 +60,7 @@ public class Usuario {
         this.correoUsuario = correoUsuario;
         this.contrasena = contrasena;
         this.esAdmin = esAdmin;
+        this.empresa_fk = empresa_fk;
     }
 
     public int getIdUsuario() {
@@ -149,12 +151,12 @@ public class Usuario {
         this.esAdmin = esAdmin;
     }
 
-    public Empresa getIdEmpresa_fk() {
-        return idEmpresa_fk;
+    public Empresa getEmpresa_fk() {
+        return empresa_fk;
     }
 
-    public void setIdEmpresa_fk(Empresa idEmpresa_fk) {
-        this.idEmpresa_fk = idEmpresa_fk;
+    public void setEmpresa_fk(Empresa empresa_fk) {
+        this.empresa_fk = empresa_fk;
     }
 
     @Override
@@ -163,15 +165,15 @@ public class Usuario {
                 "idUsuario=" + idUsuario +
                 ", nombreUsuario='" + nombreUsuario + '\'' +
                 ", apellidosUsuario='" + apellidosUsuario + '\'' +
-                ", telefono='" + telefono + '\'' +
+                ", telefono=" + telefono +
                 ", direccion='" + direccion + '\'' +
                 ", empresaUsuario='" + empresaUsuario + '\'' +
                 ", lugarTrabajo='" + lugarTrabajo + '\'' +
-                ", fechaNacimiento=" + fechaNacimiento +
+                ", fechaNacimiento='" + fechaNacimiento + '\'' +
                 ", correoUsuario='" + correoUsuario + '\'' +
                 ", contrasena='" + contrasena + '\'' +
                 ", esAdmin=" + esAdmin +
-                ", idEmpresa_fk=" + idEmpresa_fk +
+                ", empresa_fk=" + empresa_fk +
                 '}';
     }
 }

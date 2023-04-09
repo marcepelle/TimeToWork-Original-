@@ -64,8 +64,8 @@ public class CrearCuenta extends AppCompatActivity {
                 Usuario usuario;
                 usuario = modeloUsuario();
                 crearCuentaUsuario(usuario);
-                //Intent intentCrear = new Intent(CrearCuenta.this, MainActivity.class);
-                //startActivity(intentCrear);
+                Intent intentCrear = new Intent(CrearCuenta.this, MainActivity.class);
+                startActivity(intentCrear);
             }
         });
     }
@@ -88,6 +88,7 @@ public class CrearCuenta extends AppCompatActivity {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+
                 Log.d("Exito", "Exito al crear cuenta Empresa");
             }
 

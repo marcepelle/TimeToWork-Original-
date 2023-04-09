@@ -9,6 +9,16 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.timetowork.databinding.ActivityMainBinding;
+import com.example.timetowork.models.CorreoContrasena;
+import com.example.timetowork.models.Usuario;
+import com.example.timetowork.utils.Apis;
+import com.example.timetowork.utils.UsuarioService;
+
+import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
             Intent btnNewEmpIntent = new Intent(MainActivity.this, CrearCuenta.class); // intención que tiene de realizar un cambio de actividad
             startActivity(btnNewEmpIntent); // inicia una instancia de CrearCuenta
             Toast.makeText(this, "Crear Nueva Empresa", Toast.LENGTH_SHORT).show();
-            //Log.d("Hello","Button clicked");
         });
 
         bindingMain.textForgetPsswd.setOnClickListener(v -> {
@@ -35,9 +44,35 @@ public class MainActivity extends AppCompatActivity {
         });
 
         bindingMain.btnIniciarSesion.setOnClickListener(v -> {
+            CorreoContrasena correoContrasena = new CorreoContrasena();
+            correoContrasena.setCorreo(String.valueOf(bindingMain.editUser.getText()));
+            correoContrasena.setPassword(String.valueOf(bindingMain.editPassword.getText()));
+            Usuario userLogged = null;
+            try {
+                userLogged = usuarioLoggueado(correoContrasena);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if(userLogged!=null){
             Intent editUsrProfileIntent  = new Intent(MainActivity.this, UsuarioPerfil.class);
+            editUsrProfileIntent.putExtra("usuario", userLogged); //habiendo implementado la interfaz serializable puedo pasar un objeto a otra activity
             startActivity(editUsrProfileIntent);
             Toast.makeText(this, "Sesión Iniciada", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(this, "Correo o contraseña incorrectas", Toast.LENGTH_SHORT).show();
+            }
         });
     }
+
+    private Usuario usuarioLoggueado(CorreoContrasena correoContrasena) throws IOException {
+        UsuarioService usuarioService = Apis.getUsuarioService();
+        Call<Usuario> call = usuarioService.loginUsuario(correoContrasena);
+        Response<Usuario> response = call.execute();
+        if(response.isSuccessful()){
+            return response.body();
+        }
+        return null;
+    }
+
 }
