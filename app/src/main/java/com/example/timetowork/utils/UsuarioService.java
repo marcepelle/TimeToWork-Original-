@@ -17,5 +17,5 @@ public interface UsuarioService {
     @POST("crearEmpresa")
     Call<Void> crearEmpresa(@Body Empresa empresa);
     @POST("loginUsuario")
-    Call<Usuario> loginUsuario(@Body CorreoContrasena correoContrasena);
+    Call<String> loginUsuario(@Body CorreoContrasena correoContrasena);
 }

@@ -30,8 +30,8 @@ public class UsuarioPerfil extends AppCompatActivity {
         View view = bindingPerfil.getRoot();
         setContentView(view);
         Bundle intentObtenido = getIntent().getExtras();
-        Usuario usuarioLoggueado = (Usuario) intentObtenido.getSerializable("usuario");
-        bindingPerfil.textTitleUsrProfile.append(usuarioLoggueado.getNombreUsuario());
+        String idUsuario = intentObtenido.getString("id");
+        bindingPerfil.textTitleUsrProfile.append(idUsuario);
         currentDate =" " + dateFormat.format(new Date()); //obteniendo la fecha actual con el formato especificado
         bindingPerfil.textFechaUsrProfile.append(currentDate); //añadimos la fecha al textview
         bindingPerfil.btnEntradaUsrProfile.setOnClickListener(v -> { //evento al clicar el boton de fichar entrada

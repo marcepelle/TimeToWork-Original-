@@ -1,6 +1,8 @@
 package com.example.timetowork;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,12 +15,10 @@ import com.example.timetowork.models.CorreoContrasena;
 import com.example.timetowork.models.Usuario;
 import com.example.timetowork.utils.Apis;
 import com.example.timetowork.utils.UsuarioService;
-
-import java.io.IOException;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.internal.EverythingIsNonNull;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,32 +47,39 @@ public class MainActivity extends AppCompatActivity {
             CorreoContrasena correoContrasena = new CorreoContrasena();
             correoContrasena.setCorreo(String.valueOf(bindingMain.editUser.getText()));
             correoContrasena.setPassword(String.valueOf(bindingMain.editPassword.getText()));
-            Usuario userLogged = null;
-            try {
-                userLogged = usuarioLoggueado(correoContrasena);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if(userLogged!=null){
-            Intent editUsrProfileIntent  = new Intent(MainActivity.this, UsuarioPerfil.class);
-            editUsrProfileIntent.putExtra("usuario", userLogged); //habiendo implementado la interfaz serializable puedo pasar un objeto a otra activity
-            startActivity(editUsrProfileIntent);
-            Toast.makeText(this, "Sesión Iniciada", Toast.LENGTH_SHORT).show();
+            if(Build.VERSION.SDK_INT>=33) {
+                Toast.makeText(this, "Intentando iniciar sesion", Toast.LENGTH_SHORT).show();
+                usuarioLoggueado(correoContrasena);
             }
             else{
-                Toast.makeText(this, "Correo o contraseña incorrectas", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "No se puede realizar la acción", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-    private Usuario usuarioLoggueado(CorreoContrasena correoContrasena) throws IOException {
+    @SuppressLint("RestrictedApi")
+    private void usuarioLoggueado(CorreoContrasena correoContrasena)  {
         UsuarioService usuarioService = Apis.getUsuarioService();
-        Call<Usuario> call = usuarioService.loginUsuario(correoContrasena);
-        Response<Usuario> response = call.execute();
-        if(response.isSuccessful()){
-            return response.body();
-        }
-        return null;
-    }
+        Call<String> call = usuarioService.loginUsuario(correoContrasena);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.body() != null) {
+                    Toast.makeText(MainActivity.this, "Sesión Iniciada", Toast.LENGTH_SHORT).show();
+                    Intent editUsrProfileIntent  = new Intent(MainActivity.this, UsuarioPerfil.class);
+                    editUsrProfileIntent.putExtra("id", response.body()); //habiendo implementado la interfaz serializable puedo pasar un objeto a otra activity
+                    startActivity(editUsrProfileIntent);
+                    Log.d("ResUsuario", "Usuario id:" + response.body());
 
+                } else {
+                    // Si la autenticación falló, mostrar un mensaje de error
+                    Log.d("ResUsuario", "Usuario id:" + response.body());
+                    Toast.makeText(MainActivity.this, "Error de autenticación", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.d("ResUsuario", "fallo al intentar el usuario ");
+            }
+        });
+    }
 }
