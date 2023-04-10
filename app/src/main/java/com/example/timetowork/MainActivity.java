@@ -59,14 +59,14 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("RestrictedApi")
     private void usuarioLoggueado(CorreoContrasena correoContrasena)  {
         UsuarioService usuarioService = Apis.getUsuarioService();
-        Call<String> call = usuarioService.loginUsuario(correoContrasena);
-        call.enqueue(new Callback<String>() {
+        Call<Usuario> call = usuarioService.loginUsuario(correoContrasena);
+        call.enqueue(new Callback<Usuario>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                 if (response.body() != null) {
                     Toast.makeText(MainActivity.this, "Sesión Iniciada", Toast.LENGTH_SHORT).show();
                     Intent editUsrProfileIntent  = new Intent(MainActivity.this, UsuarioPerfil.class);
-                    editUsrProfileIntent.putExtra("id", response.body()); //habiendo implementado la interfaz serializable puedo pasar un objeto a otra activity
+                    editUsrProfileIntent.putExtra("usuario", response.body()); //habiendo implementado la interfaz serializable puedo pasar un objeto a otra activity
                     startActivity(editUsrProfileIntent);
                     Log.d("ResUsuario", "Usuario id:" + response.body());
 
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<Usuario> call, Throwable t) {
                 Log.d("ResUsuario", "fallo al intentar el usuario ");
             }
         });

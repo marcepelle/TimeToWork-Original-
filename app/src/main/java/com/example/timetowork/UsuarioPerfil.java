@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.timetowork.databinding.ActivityUsuarioPerfilBinding;
 import com.example.timetowork.models.Usuario;
@@ -30,8 +31,14 @@ public class UsuarioPerfil extends AppCompatActivity {
         View view = bindingPerfil.getRoot();
         setContentView(view);
         Bundle intentObtenido = getIntent().getExtras();
-        String idUsuario = intentObtenido.getString("id");
-        bindingPerfil.textTitleUsrProfile.append(idUsuario);
+        Usuario usuarioIntent = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            usuarioIntent = intentObtenido.getSerializable("usuario", Usuario.class);
+        }
+        else {
+            Toast.makeText(this, "Usuario no obtenido", Toast.LENGTH_SHORT).show();
+        }
+        bindingPerfil.textTitleUsrProfile.append(usuarioIntent.getNombreUsuario());
         currentDate =" " + dateFormat.format(new Date()); //obteniendo la fecha actual con el formato especificado
         bindingPerfil.textFechaUsrProfile.append(currentDate); //añadimos la fecha al textview
         bindingPerfil.btnEntradaUsrProfile.setOnClickListener(v -> { //evento al clicar el boton de fichar entrada

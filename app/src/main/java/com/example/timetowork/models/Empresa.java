@@ -3,10 +3,11 @@ package com.example.timetowork.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Empresa {
+public class Empresa implements Serializable {
     @SerializedName("idEmpresa")
     @Expose
     private int idEmpresa;
