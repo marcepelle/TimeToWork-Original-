@@ -40,5 +40,12 @@
     <string name="emailCrearcuenta">email</string>
     <string name="txtCorreo">Correo</string>
     <string name="telefonoEmpresa">Telefono:</string>
+    <string name="NumeroTelefono">Número de telefono</string>
+    <string name="direccion">Dirección</string>
+    <string name="centrotrabajo">Centro de Trabajo</string>
+    <string name="establecerDatos">Establecer datos</string>
+    <string name="gestionUsuarios">Gestión de Usuarios</string>
+    <string name="volver">Volver</string>
+    <string name="perfilPerAdm">Perfil:</string>
     <string name="phoneNumber">Phone Number</string>
 </resources>

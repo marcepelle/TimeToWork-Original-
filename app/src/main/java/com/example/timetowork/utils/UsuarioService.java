@@ -18,4 +18,6 @@ public interface UsuarioService {
     Call<Void> crearEmpresa(@Body Empresa empresa);
     @POST("loginUsuario")
     Call<Usuario> loginUsuario(@Body CorreoContrasena correoContrasena);
+    @POST("actualizarUsuario")
+    Call<Usuario> actualizarUsuario(@Body Usuario usuario);
 }

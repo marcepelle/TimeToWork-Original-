@@ -18,16 +18,15 @@ import com.example.timetowork.utils.UsuarioService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.internal.EverythingIsNonNull;
 
 public class MainActivity extends AppCompatActivity {
-
+    ActivityMainBinding bindingMain;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
 
-        com.example.timetowork.databinding.ActivityMainBinding bindingMain = ActivityMainBinding.inflate(getLayoutInflater()); // crea una instancia de la clase de vinculación para la actividad que se usará
+        bindingMain = ActivityMainBinding.inflate(getLayoutInflater()); // crea una instancia de la clase de vinculación para la actividad que se usará
         View view = bindingMain.getRoot();//referencia a la vista raíz
         setContentView(view); // para que sea la vista activa en la pantalla
 
@@ -65,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                 if (response.body() != null) {
                     Toast.makeText(MainActivity.this, "Sesión Iniciada", Toast.LENGTH_SHORT).show();
-                    Intent editUsrProfileIntent  = new Intent(MainActivity.this, UsuarioPerfil.class);
+                    Intent editUsrProfileIntent  = new Intent(MainActivity.this, UsuarioSesion.class);
                     editUsrProfileIntent.putExtra("usuario", response.body()); //habiendo implementado la interfaz serializable puedo pasar un objeto a otra activity
                     startActivity(editUsrProfileIntent);
                     Log.d("ResUsuario", "Usuario id:" + response.body());
