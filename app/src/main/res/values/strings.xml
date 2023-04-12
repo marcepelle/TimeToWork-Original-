@@ -48,4 +48,5 @@
     <string name="volver">Volver</string>
     <string name="perfilPerAdm">Perfil:</string>
     <string name="phoneNumber">Phone Number</string>
+    <string name="listaUsuarios">Lista de Usuarios</string>
 </resources>

@@ -47,6 +47,11 @@ public class PerfilAdmin extends AppCompatActivity {
             usuarioIntent.setLugarTrabajo(String.valueOf(bindingPerfilAdmin.editCentroTrabajoPerAdm.getText()));
             actualizarUsuario(usuarioIntent);
         });
+        bindingPerfilAdmin.btnGestionUsuariosPerAdm.setOnClickListener(v -> {
+            Intent intentGestionUusario = new Intent(PerfilAdmin.this, GestionUsuarios.class);
+            intentGestionUusario.putExtra("usuario", usuarioIntent);
+            startActivity(intentGestionUusario);
+        });
 
         bindingPerfilAdmin.btnVolverPerAdm.setOnClickListener(v -> {
             Intent intentVolver = new Intent(PerfilAdmin.this, UsuarioSesion.class);

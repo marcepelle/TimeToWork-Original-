@@ -4,6 +4,8 @@ import com.example.timetowork.models.CorreoContrasena;
 import com.example.timetowork.models.Empresa;
 import com.example.timetowork.models.Usuario;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -20,4 +22,6 @@ public interface UsuarioService {
     Call<Usuario> loginUsuario(@Body CorreoContrasena correoContrasena);
     @POST("actualizarUsuario")
     Call<Usuario> actualizarUsuario(@Body Usuario usuario);
+    @POST("listarUsuarios")
+    Call<ArrayList<Usuario>> listarUsuarios(@Body Usuario usuario);
 }
