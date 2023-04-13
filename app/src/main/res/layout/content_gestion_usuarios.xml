@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#539F56"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    >
 
     <LinearLayout
         android:id="@+id/constraintLayout2"
@@ -18,44 +19,6 @@
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="#539F56">
-
-            <ImageView
-                android:id="@+id/logoPerAdm2"
-                android:layout_width="120dp"
-                android:layout_height="86dp"
-                android:contentDescription="@string/logo"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.953"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.14"
-                app:srcCompat="@drawable/logo"
-                tools:layout_conversion_absoluteHeight="72dp"
-                tools:layout_conversion_absoluteWidth="117dp" />
-
-            <TextView
-                android:id="@+id/textTitleLista"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:text="@string/listaUsuarios"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.159"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.3"
-                tools:layout_conversion_absoluteHeight="33dp"
-                tools:layout_conversion_absoluteWidth="178dp" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:id="@+id/linearLista"
@@ -82,6 +45,7 @@
                 android:id="@+id/lugarTrabajo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#673AB7"
                 android:text="" />
 
         </LinearLayout>

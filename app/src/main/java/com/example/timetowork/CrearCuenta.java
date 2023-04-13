@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
@@ -58,12 +57,8 @@ public class CrearCuenta extends AppCompatActivity {
 
         binding.btnCrearCuenta.setOnClickListener(v -> {
             if(binding.checkBoxTerminos.isChecked()){
-                Empresa empresa;
-                empresa = modeloEmpresa();
-                crearCuentaEmpresa(empresa);
-                Usuario usuario;
-                usuario = modeloUsuario();
-                crearCuentaUsuario(usuario);
+                crearCuentaEmpresa(modeloEmpresa());
+                crearCuentaUsuario(modeloUsuario());
                 Intent intentCrear = new Intent(CrearCuenta.this, MainActivity.class);
                 startActivity(intentCrear);
             }

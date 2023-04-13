@@ -5,13 +5,81 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#009688"
+    android:orientation="vertical"
     tools:context=".GestionUsuarios">
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listaUsuarios"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="200dp"
+            android:background="#539F56">
+
+                <ImageView
+                    android:id="@+id/logoPerAdm2"
+                    android:layout_width="120dp"
+                    android:layout_height="86dp"
+                    android:contentDescription="@string/logo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.953"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.14"
+                    app:srcCompat="@drawable/logo"
+                    tools:layout_conversion_absoluteHeight="72dp"
+                    tools:layout_conversion_absoluteWidth="117dp" />
+
+                <TextView
+                    android:id="@+id/textTitleLista"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:text="@string/listaUsuarios"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.062"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:layout_conversion_absoluteHeight="33dp"
+                    tools:layout_conversion_absoluteWidth="178dp" />
+
+                <Button
+                    android:id="@+id/btnNuevoEmpContGest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#19635C"
+                    android:text="@string/nuevoUsuario"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.933"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.894" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="531dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/listaUsuarios"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 </LinearLayout>
 
 

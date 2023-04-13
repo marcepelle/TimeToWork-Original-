@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.timetowork.databinding.ActivityGestionUsuariosBinding;
@@ -39,6 +41,12 @@ public class GestionUsuarios extends AppCompatActivity {
             usuarioIntent = new Usuario();
         }
         obtenerUsuarios(usuarioIntent);
+        Button btnNuevEmp = findViewById(R.id.btnNuevoEmpContGest);
+        bindingGestionUser.btnNuevoEmpContGest.setOnClickListener(v -> {
+            Intent intentNuevEmp = new Intent(GestionUsuarios.this, NuevoEmpleado.class);
+            intentNuevEmp.putExtra("usuario", usuarioIntent);
+            startActivity(intentNuevEmp);
+        });
     }
 
     private void obtenerUsuarios(Usuario usuario) {
