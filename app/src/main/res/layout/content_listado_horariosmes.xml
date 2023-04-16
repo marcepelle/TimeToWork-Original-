@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLista"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#009688"
+    android:orientation="vertical"
+    tools:context=".HorarioSelect"
+    tools:layout_editor_absoluteY="5dp">
+
+    <View
+        android:id="@+id/dividerStartHorMes"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/black"
+        android:backgroundTint="#000000" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtNumDiaHorMes"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:background="#009688"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"
+            android:text="10"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            android:backgroundTint="#000000" />
+
+        <TextView
+            android:id="@+id/txtNombreDiaHorMes"
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:background="#009688"
+            android:backgroundTint="#009688"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"
+            android:text="Miercoles"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            android:backgroundTint="#000000" />
+
+        <TextView
+            android:id="@+id/txtTrabajadorHorMes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#8BC34A"
+            android:text="@string/centroContList"
+            tools:text="Centro de Trabajo:" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/dividerEndHorMes"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/black"
+        android:backgroundTint="#020202" />
+
+</LinearLayout>

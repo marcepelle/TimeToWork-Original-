@@ -69,8 +69,10 @@ public class UsuarioSesion extends AppCompatActivity {
             startActivity(intentPerfil);
         });
         bindingSesion.btnHorario.setOnClickListener(v -> {
-            //Intent intentHorarios = new Intent(UsuarioPerfil.this, Horarios.class);
-            //startActivity(intentHorarios);
+            Intent intentHorarios = new Intent(UsuarioSesion.this, HorarioSelect.class);
+            intentHorarios.putExtra("usuario", usuarioIntent);
+            intentHorarios.putExtra("mes", 0);
+            startActivity(intentHorarios);
 
         });
         bindingSesion.btnMensajes.setOnClickListener(v -> {

@@ -39,7 +39,7 @@ public class ListadoUsuarios extends AppCompatActivity {
             usuarioIntent = new Usuario();
         }
         obtenerUsuarios(usuarioIntent);
-        bindingGestionUser.btnNuevoEmpContGest.setOnClickListener(v -> {
+        bindingGestionUser.btnNuevEmpLisUs.setOnClickListener(v -> {
             Intent intentNuevEmp = new Intent(ListadoUsuarios.this, NuevoEmpleado.class);
             intentNuevEmp.putExtra("usuario", usuarioIntent);
             startActivity(intentNuevEmp);

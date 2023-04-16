@@ -69,4 +69,6 @@
     <string name="centroContList">"Centro de Trabajo: "</string>
     <string name="informHoras">Informe de horas trabajadas</string>
     <string name="cerrarSesion">Cerrar Sesión</string>
+    <string name="horariosTitle">"Horarios: "</string>
+    <string name="verMesHorSel">Ver Mes</string>
 </resources>
