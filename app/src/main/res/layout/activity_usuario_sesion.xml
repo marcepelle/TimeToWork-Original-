@@ -7,6 +7,20 @@
     android:background="#539F56"
     tools:context=".UsuarioSesion">
 
+    <Button
+        android:id="@+id/btnCerrarSesionUsrProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:backgroundTint="#19635C"
+        android:text="@string/cerrarSesion"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.935" />
+
     <ImageView
         android:id="@+id/logoUsrProfile"
         android:layout_width="113dp"

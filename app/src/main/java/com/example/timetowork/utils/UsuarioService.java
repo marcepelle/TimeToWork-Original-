@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -24,4 +25,6 @@ public interface UsuarioService {
     Call<Usuario> actualizarUsuario(@Body Usuario usuario);
     @POST("listarUsuarios")
     Call<ArrayList<Usuario>> listarUsuarios(@Body Usuario usuario);
+    @POST("borrarUsuario")
+    Call<Void> borrarUsuario(@Body Usuario usuario);
 }

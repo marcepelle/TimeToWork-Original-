@@ -20,10 +20,16 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="33">
         <activity
+            android:name=".HorarioSelect"
+            android:exported="false" />
+        <activity
+            android:name=".GestionUsuario"
+            android:exported="false" />
+        <activity
             android:name=".NuevoEmpleado"
             android:exported="false" />
         <activity
-            android:name=".GestionUsuarios"
+            android:name=".ListadoUsuarios"
             android:exported="false" />
         <activity
             android:name=".PerfilEmpleado"

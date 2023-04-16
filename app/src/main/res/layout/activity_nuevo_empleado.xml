@@ -8,6 +8,20 @@
     android:backgroundTint="#539F56"
     tools:context=".NuevoEmpleado">
 
+    <Button
+        android:id="@+id/btnVolverNuevEmp"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:backgroundTint="#19635C"
+        android:text="@string/volver"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.909" />
+
     <TextView
         android:id="@+id/textFechaNacimientoNuevEmp"
         android:layout_width="wrap_content"
@@ -48,8 +62,9 @@
         android:id="@+id/textDireccionNuevEmp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/direccionEmpleado"
-        android:textColor="#212121"
+        android:text="@string/dirEmpNuevEmp"
+        android:textColor="#000000"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/textCentroTrabajoNuevEmp"
         app:layout_constraintStart_toStartOf="@+id/textCentroTrabajoNuevEmp"
         app:layout_constraintTop_toBottomOf="@+id/textTelefonoNuevEmp"
@@ -60,17 +75,18 @@
         android:id="@+id/btnCrearCuentaNuevEmp"
         android:layout_width="150dp"
         android:layout_height="60dp"
-        android:backgroundTint="#A5A5A5"
+        android:backgroundTint="#19635C"
         android:shadowColor="#303030"
         android:text="@string/crearCuenta"
-        android:textColor="#4E342E"
-        android:textSize="12sp"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.944" />
+        app:layout_constraintVertical_bias="0.804" />
 
     <TextView
         android:id="@+id/textNombEmpleadoNuevEmp"
@@ -118,7 +134,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editContrasenaNuevEmp"
         app:layout_constraintVertical_bias="0.5"
-        tools:ignore="TouchTargetSizeCheck" />
+        tools:ignore="TouchTargetSizeCheck,DuplicateSpeakableTextCheck" />
 
     <EditText
         android:id="@+id/editNombEmpleadoNuevEmp"

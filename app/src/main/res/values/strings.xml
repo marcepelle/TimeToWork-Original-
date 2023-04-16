@@ -53,11 +53,20 @@
     <string name="nombreEmpleado">Nombre Empleado</string>
     <string name="apelidosEmpleado">Apellidos</string>
     <string name="apellidoHint">Apellido</string>
-    <string name="direccionEmpleado" />
+    <string name="direccionEmpleado">Dirección:</string>
     <string name="direccionHint">Dirección</string>
     <string name="centroDeTrabajo">Centro de Trabajo:</string>
     <string name="centroTrabajoHint">Centro de Trabajo</string>
     <string name="fechaNacimineto">Fecha de Nacimiento:</string>
     <string name="fechaNacimientoHint">dd/mm/yy</string>
     <string name="repetirPassNuevEmp">Password</string>
+    <string name="repetirPassGesUs">Password</string>
+    <string name="eliminarUsGesUs">Eliminar Usuario</string>
+    <string name="informeHoras">Informe</string>
+    <string name="dirEmpNuevEmp">Dirección</string>
+    <string name="nombreContList">Nombre:</string>
+    <string name="apellidosContList">Apellidos:</string>
+    <string name="centroContList">"Centro de Trabajo: "</string>
+    <string name="informHoras">Informe de horas trabajadas</string>
+    <string name="cerrarSesion">Cerrar Sesión</string>
 </resources>

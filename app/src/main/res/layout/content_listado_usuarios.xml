@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLista"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#009688"
+    android:orientation="vertical"
+    tools:context=".ListadoUsuarios"
+    tools:layout_editor_absoluteY="5dp">
+
+    <View
+        android:id="@+id/dividerStart"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/black"
+        android:backgroundTint="#000000" />
+
+    <TextView
+        android:id="@+id/nombreUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#009688"
+        android:text="@string/nombreContList"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/apellidosUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#8BC34A"
+        android:backgroundTint="#8BC34A"
+        android:text="@string/apellidosContList" />
+
+    <TextView
+        android:id="@+id/lugarTrabajo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#8BC34A"
+        android:text="@string/centroContList"
+        tools:text="Centro de Trabajo:" />
+
+    <View
+        android:id="@+id/dividerEnd"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/black"
+        android:backgroundTint="#020202" />
+
+</LinearLayout>

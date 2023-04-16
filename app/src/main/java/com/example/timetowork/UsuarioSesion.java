@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -57,9 +58,11 @@ public class UsuarioSesion extends AppCompatActivity {
         bindingSesion.btnPerfil.setOnClickListener(v -> {
             Intent intentPerfil;
             if(usuarioIntent.isEsAdmin()) {
+                Log.d("EsAdmin", "EsAdmin: " + usuarioIntent.isEsAdmin());
                 intentPerfil = new Intent(UsuarioSesion.this, PerfilAdmin.class);
             }
             else{
+                Log.d("EsAdmin", "EsAdmin: " + usuarioIntent.isEsAdmin());
                 intentPerfil = new Intent(UsuarioSesion.this, PerfilEmpleado.class);
             }
             intentPerfil.putExtra("usuario", usuarioIntent);
@@ -69,6 +72,13 @@ public class UsuarioSesion extends AppCompatActivity {
             //Intent intentHorarios = new Intent(UsuarioPerfil.this, Horarios.class);
             //startActivity(intentHorarios);
 
+        });
+        bindingSesion.btnMensajes.setOnClickListener(v -> {
+
+        });
+        bindingSesion.btnCerrarSesionUsrProfile.setOnClickListener(v -> {
+            Intent intentCerrarSesion = new Intent(UsuarioSesion.this, MainActivity.class);
+            startActivity(intentCerrarSesion);
         });
     }
 

@@ -48,7 +48,7 @@ public class PerfilAdmin extends AppCompatActivity {
             actualizarUsuario(usuarioIntent);
         });
         bindingPerfilAdmin.btnGestionUsuariosPerAdm.setOnClickListener(v -> {
-            Intent intentGestionUusario = new Intent(PerfilAdmin.this, GestionUsuarios.class);
+            Intent intentGestionUusario = new Intent(PerfilAdmin.this, ListadoUsuarios.class);
             intentGestionUusario.putExtra("usuario", usuarioIntent);
             startActivity(intentGestionUusario);
         });

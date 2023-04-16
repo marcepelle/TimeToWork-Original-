@@ -8,12 +8,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.timetowork.databinding.ActivityGestionUsuarioBinding;
 import com.example.timetowork.databinding.ActivityNuevoEmpleadoBinding;
 import com.example.timetowork.models.Usuario;
 import com.example.timetowork.utils.Apis;
 import com.example.timetowork.utils.UsuarioService;
 
-import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,14 +43,33 @@ public class NuevoEmpleado extends AppCompatActivity {
         }
         bindingNuevEmp.btnCrearCuentaNuevEmp.setOnClickListener(v -> {
             if (userConseguido) {
-                crearCuentaUsuario(modeloEmpleado(usuarioIntent));
-
+                if(!emptyEdits(bindingNuevEmp)) {
+                    crearCuentaUsuario(modeloEmpleado(usuarioIntent));
+                    Intent intentListUs = new Intent(NuevoEmpleado.this, ListadoUsuarios.class);
+                    intentListUs.putExtra("usuario", usuarioIntent);
+                    startActivity(intentListUs);
+                }
+                else{
+                    Toast.makeText(this, "Debes rellenar los espacios", Toast.LENGTH_SHORT).show();
+                }
             }
             else{
                 Toast.makeText(this, "Version android insuficiente", Toast.LENGTH_SHORT).show();
             }
         });
+        bindingNuevEmp.btnVolverNuevEmp.setOnClickListener(v -> {
+            Intent intentVolver = new Intent(NuevoEmpleado.this, ListadoUsuarios.class);
+            intentVolver.putExtra("usuario", usuarioIntent);
+            startActivity(intentVolver);
+        });
 
+    }
+
+    private boolean emptyEdits(ActivityNuevoEmpleadoBinding binding) {
+        if(binding.editNombEmpleadoNuevEmp.getText().toString().isEmpty()||binding.editApellidosNuevEmp.getText().toString().isEmpty()||binding.editTelefonoNuevEmp.getText().toString().isEmpty()||binding.editDireccionNuevEmp.getText().toString().isEmpty()||binding.editCentroDeTrabajoNuevEmp.getText().toString().isEmpty()||binding.editFechaNacimientoNuevEmp.getText().toString().isEmpty()||binding.editCorreoNuevEmp.getText().toString().isEmpty()||binding.editContrasenaNuevEmp.getText().toString().isEmpty()||binding.editRepetirContraNuevEmp.getText().toString().isEmpty()){
+            return true;
+        }
+        return false;
     }
 
     private Usuario modeloEmpleado(Usuario usuarioAdmin){
