@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class Usuario implements Serializable {
     @SerializedName("idUsuario")
@@ -44,11 +45,14 @@ public class Usuario implements Serializable {
     @SerializedName("empresa_fk")
     @Expose
     private Empresa empresa_fk;
+    @SerializedName("horarios")
+    @Expose
+    private List<Horario> horarios;
 
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String nombreUsuario, String apellidosUsuario, int telefono, String direccion, String empresaUsuario, String lugarTrabajo, String fechaNacimiento, String correoUsuario, String contrasena, boolean esAdmin, Empresa empresa_fk) {
+    public Usuario(int idUsuario, String nombreUsuario, String apellidosUsuario, int telefono, String direccion, String empresaUsuario, String lugarTrabajo, String fechaNacimiento, String correoUsuario, String contrasena, boolean esAdmin, Empresa empresa_fk, List<Horario> horarios) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.apellidosUsuario = apellidosUsuario;
@@ -61,6 +65,7 @@ public class Usuario implements Serializable {
         this.contrasena = contrasena;
         this.esAdmin = esAdmin;
         this.empresa_fk = empresa_fk;
+        this.horarios = horarios;
     }
 
     public int getIdUsuario() {
@@ -157,6 +162,14 @@ public class Usuario implements Serializable {
 
     public void setEmpresa_fk(Empresa empresa_fk) {
         this.empresa_fk = empresa_fk;
+    }
+
+    public List<Horario> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<Horario> horarios) {
+        this.horarios = horarios;
     }
 
     @Override

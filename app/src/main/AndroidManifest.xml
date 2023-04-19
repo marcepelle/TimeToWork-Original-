@@ -20,6 +20,9 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="33">
         <activity
+            android:name=".FijarJornada"
+            android:exported="false" />
+        <activity
             android:name=".HorarioSelect"
             android:exported="false" />
         <activity

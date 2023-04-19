@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#539F56"
+    tools:context=".FijarJornada">
+
+    <Button
+        android:id="@+id/btnEliminarJornadaFijJor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#19635C"
+        android:text="@string/eliminarJornada"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85" />
+
+    <EditText
+        android:id="@+id/editHoraSalidaFijJor"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:ems="10"
+        android:hint="@string/horaFijJor"
+        android:inputType="text"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.519" />
+
+    <TextView
+        android:id="@+id/txtHoraSalidaFijJor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/horaSalidaFijJor"
+        android:textColor="#212121"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.537" />
+
+    <EditText
+        android:id="@+id/editHoraEntradaFijJor"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:ems="10"
+        android:hint="@string/horaFijJor"
+        android:inputType="text"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.424" />
+
+    <TextView
+        android:id="@+id/txtHoraEntradaFijJor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/horaEntradaFijJor"
+        android:textColor="#212121"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.133"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.448" />
+
+    <Button
+        android:id="@+id/btnVolverFijJor"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:backgroundTint="#19635C"
+        android:text="@string/volver"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.934" />
+
+    <Button
+        android:id="@+id/btnFijarJornadaFijJor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#19635C"
+        android:text="@string/fijarJornada"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.78" />
+
+    <Button
+        android:id="@+id/btnSeleccionarFijJor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#19635C"
+        android:text="@string/elegirEmpleado"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.906"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.077"
+        tools:text="Elegir Empleado" />
+
+    <TextView
+        android:id="@+id/txtSelecEmpleadoFijJor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/selecEmpleadoFijJor"
+        android:textColor="#212121"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.126"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.171"
+        tools:text="Empleado: " />
+
+    <EditText
+        android:id="@+id/editDesdeFijJor"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:ems="10"
+        android:hint="@string/fechaFijJor"
+        android:inputType="text"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.234" />
+
+    <EditText
+        android:id="@+id/editHastaFijJor"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:ems="10"
+        android:hint="@string/fechaFijJor"
+        android:inputType="text"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.329" />
+
+    <TextView
+        android:id="@+id/txtSelecDiasFijJor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/selecDiasFijJor"
+        android:textColor="#212121"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.921"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.198" />
+
+    <TextView
+        android:id="@+id/txtDesdeFechaFijJor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/desdeFecha"
+        android:textColor="#212121"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.133"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.266" />
+
+    <TextView
+        android:id="@+id/txtHastaFechaFijJor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hastaFecha"
+        android:textColor="#212121"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.132"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.356" />
+
+    <RadioGroup
+        android:id="@+id/radGroupDiasFijJor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.921"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.426">
+
+        <CheckBox
+            android:id="@+id/CheckLunesFijJor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/radLunesFijJor" />
+
+        <CheckBox
+            android:id="@+id/CheckMartesFijJor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/radMartesFijJor"
+            tools:text="Martes" />
+
+        <CheckBox
+            android:id="@+id/CheckMiercolesFijJor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/radMiercolesFijJor" />
+
+        <CheckBox
+            android:id="@+id/CheckJuevesFijJor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/radJuevesFijJor" />
+
+        <CheckBox
+            android:id="@+id/CheckViernesFijJor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/radViernesFijJor" />
+
+        <CheckBox
+            android:id="@+id/CheckSabadoFijJor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/radSabadoFijJor" />
+
+        <CheckBox
+            android:id="@+id/CheckDomingoFijJor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/radDomingoFijJor" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textTitleFijJor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fijarJornada"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="180dp"
+        android:layout_height="48dp"
+        android:background="@android:drawable/spinner_background"
+        android:contentDescription="@string/txtCorreo"
+        android:popupBackground="@android:drawable/spinner_dropdown_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.19"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.077" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

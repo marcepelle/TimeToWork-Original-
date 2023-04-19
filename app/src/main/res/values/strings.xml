@@ -71,4 +71,22 @@
     <string name="cerrarSesion">Cerrar Sesión</string>
     <string name="horariosTitle">"Horarios: "</string>
     <string name="verMesHorSel">Ver Mes</string>
+    <string name="fijarJornada">Fijar Jornada</string>
+    <string name="desdeFecha">Desde fecha:</string>
+    <string name="fechaFijJor">YYYY-MM-DD</string>
+    <string name="hastaFecha">Hasta fecha:</string>
+    <string name="radLunesFijJor">Lunes</string>
+    <string name="radMartesFijJor">Martes</string>
+    <string name="radMiercolesFijJor">Miercoles</string>
+    <string name="radJuevesFijJor">Jueves</string>
+    <string name="radViernesFijJor">Viernes</string>
+    <string name="radSabadoFijJor">Sabado</string>
+    <string name="radDomingoFijJor">Domingo</string>
+    <string name="selecDiasFijJor">Seleccionar días:</string>
+    <string name="selecEmpleadoFijJor">Seleccionar empleado:</string>
+    <string name="horaEntradaFijJor">Hora Entrada:</string>
+    <string name="horaSalidaFijJor">Hora Salida:</string>
+    <string name="horaFijJor">HH:MM:SS</string>
+    <string name="elegirEmpleado">elegir</string>
+    <string name="eliminarJornada">Borrar Jornada</string>
 </resources>

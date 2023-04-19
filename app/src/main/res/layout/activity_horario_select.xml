@@ -16,6 +16,19 @@
         android:background="#539F56">
 
         <Button
+            android:id="@+id/btnFijarJornadaHorSel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#19635C"
+            android:text="@string/fijarJornada"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.937"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.894" />
+
+        <Button
             android:id="@+id/btnVolverHorSel"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
@@ -27,7 +40,7 @@
             app:layout_constraintHorizontal_bias="0.95"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.894" />
+            app:layout_constraintVertical_bias="0.578" />
 
         <ImageView
             android:id="@+id/logoHorSel"
@@ -48,16 +61,15 @@
             android:id="@+id/textTitleHorSel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:text="@string/horariosTitle"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.062"
+            app:layout_constraintHorizontal_bias="0.057"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_bias="0.26"
             tools:layout_conversion_absoluteHeight="33dp"
             tools:layout_conversion_absoluteWidth="178dp"
             tools:text="Horarios:" />

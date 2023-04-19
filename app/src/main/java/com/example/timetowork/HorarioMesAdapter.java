@@ -2,6 +2,7 @@ package com.example.timetowork;
 
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.timetowork.models.Horario;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,28 +25,40 @@ public class HorarioMesAdapter extends RecyclerView.Adapter<HorarioMesAdapter.Ho
 
     int numMonth;
     int year;
-    ArrayList<String> trabajadorHorario;
-
-    public HorarioMesAdapter(Context context, String month, int numMonth, int year, ArrayList<String> trabajadorHorario) {
+    ArrayList<Horario> trabajadorHorario = new ArrayList<Horario>();
+    ArrayList<Horario> arrayAuxiliar = new ArrayList<Horario>();
+    public HorarioMesAdapter(Context context, String month, int numMonth, int year, ArrayList<Horario> trabajadorHorario) {
         this.context = context;
         this.month = month;
         this.year = year;
-        this.trabajadorHorario = trabajadorHorario;
+        this.trabajadorHorario.addAll(trabajadorHorario);
         this.numMonth=numMonth;
     }
 
     @NonNull
     @Override
-    public HorarioMesAdapter.HorarioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HorarioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.content_listado_horariosmes, parent, false);
         return new HorarioViewHolder(view);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull HorarioViewHolder holder, int position) {
         holder.txtDia.setText(String.valueOf(position + 1));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             holder.txtNombreDia.setText(String.valueOf(LocalDate.of(year,numMonth + 1, position + 1).getDayOfWeek()));
+            boolean coincidenFechas = false;
+            for (int i=0; i<trabajadorHorario.size();i++){
+                if(LocalDate.parse(trabajadorHorario.get(i).getFecha()).equals(LocalDate.of(year,numMonth + 1, position + 1))){
+                    holder.txtTrabajador.setText(" Empleado: " + trabajadorHorario.get(i).getEmpleado() + " Horario("+ trabajadorHorario.get(i).getHoraEntrada() + " - " + trabajadorHorario.get(i).getHoraSalida() + ").");
+                    Log.d("BindViewHolder", "Insertando en:" + position + ".....................");
+                    coincidenFechas = true;
+                }
+            }
+            if (!coincidenFechas) {
+                holder.txtTrabajador.setText("");
+            }
         }
     }
 
@@ -62,6 +77,7 @@ public class HorarioMesAdapter extends RecyclerView.Adapter<HorarioMesAdapter.Ho
             txtNombreDia = (TextView) itemView.findViewById(R.id.txtNombreDiaHorMes);
             txtTrabajador = (TextView) itemView.findViewById(R.id.txtTrabajadorHorMes);
         }
+
     }
     public static int numDiasMes(String month, int year) {
         int numDias = 0;

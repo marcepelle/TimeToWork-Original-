@@ -8,11 +8,7 @@ import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.DELETE;
-import retrofit2.http.GET;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
 
 public interface UsuarioService {
     @POST("crearUsuario")
@@ -23,6 +19,8 @@ public interface UsuarioService {
     Call<Usuario> loginUsuario(@Body CorreoContrasena correoContrasena);
     @POST("actualizarUsuario")
     Call<Usuario> actualizarUsuario(@Body Usuario usuario);
+    @POST("obtenerUsuario")
+    Call<Usuario> obtenerUsuario(@Body CorreoContrasena correoContrasena);
     @POST("listarUsuarios")
     Call<ArrayList<Usuario>> listarUsuarios(@Body Usuario usuario);
     @POST("borrarUsuario")

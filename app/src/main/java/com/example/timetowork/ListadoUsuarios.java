@@ -50,7 +50,6 @@ public class ListadoUsuarios extends AppCompatActivity {
             startActivity(intentVolver);
         });
     }
-
     private void obtenerUsuarios(Usuario usuario) {
         UsuarioService usuarioService = Apis.getUsuarioService();
         Call<ArrayList<Usuario>> call = usuarioService.listarUsuarios(usuario);
