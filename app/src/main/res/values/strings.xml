@@ -82,11 +82,14 @@
     <string name="radViernesFijJor">Viernes</string>
     <string name="radSabadoFijJor">Sabado</string>
     <string name="radDomingoFijJor">Domingo</string>
-    <string name="selecDiasFijJor">Seleccionar días:</string>
+    <string name="selecDiasFijJor">Días:</string>
     <string name="selecEmpleadoFijJor">Seleccionar empleado:</string>
     <string name="horaEntradaFijJor">Hora Entrada:</string>
     <string name="horaSalidaFijJor">Hora Salida:</string>
     <string name="horaFijJor">HH:MM:SS</string>
-    <string name="elegirEmpleado">elegir</string>
+    <string name="elegirEmpleado">Elegir empleado</string>
     <string name="eliminarJornada">Borrar Jornada</string>
+    <string name="txtCentrodeTrabajo">Centro de Trabajo</string>
+    <string name="centroHorSel">Centro:</string>
+    <string name="txtEmpleado">Empleado:</string>
 </resources>

@@ -14,9 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.timetowork.models.Horario;
 
 import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 public class HorarioMesAdapter extends RecyclerView.Adapter<HorarioMesAdapter.HorarioViewHolder> {
 
@@ -45,9 +47,9 @@ public class HorarioMesAdapter extends RecyclerView.Adapter<HorarioMesAdapter.Ho
 
     @Override
     public void onBindViewHolder(@NonNull HorarioViewHolder holder, int position) {
-        holder.txtDia.setText(String.valueOf(position + 1));
+        holder.txtDia.setText(String.valueOf(position + 1 ) + "-" + month);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            holder.txtNombreDia.setText(String.valueOf(LocalDate.of(year,numMonth + 1, position + 1).getDayOfWeek()));
+            holder.txtNombreDia.setText(String.valueOf(LocalDate.of(year,numMonth + 1, position + 1).getDayOfWeek().getDisplayName(TextStyle.SHORT, new Locale("es", "ES"))));
             boolean coincidenFechas = false;
             for (int i=0; i<trabajadorHorario.size();i++){
                 if(LocalDate.parse(trabajadorHorario.get(i).getFecha()).equals(LocalDate.of(year,numMonth + 1, position + 1))){

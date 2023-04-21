@@ -15,15 +15,13 @@ import com.example.timetowork.models.Horario;
 import com.example.timetowork.models.Usuario;
 import com.example.timetowork.utils.Apis;
 import com.example.timetowork.utils.HorarioService;
+import com.example.timetowork.utils.UsuarioService;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
+import java.util.Arrays;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,6 +35,10 @@ public class UsuarioSesion extends AppCompatActivity {
     private String horaEntrada, horaSalida, currentDate, currentTime;
     ActivityUsuarioSesionBinding bindingSesion;
     private boolean fichadoEntrada, fichadoSalida;
+    ArrayList<ArrayList<String>> correoUsuarios;
+    String[] centrosUsuarios;
+    int posicionCentro;
+    int posicionCorreo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class UsuarioSesion extends AppCompatActivity {
             usuarioIntent = new Usuario();
             Toast.makeText(this, "Sin sesion, Version Android desactualizada", Toast.LENGTH_SHORT).show();
         }
-
+        CorreoCentroUsuariosParaSpinner(usuarioIntent);
         bindingSesion.textTitleUsrProfile.append(usuarioIntent.getNombreUsuario());
         fecha = LocalDate.now();
         currentDate =" " + fecha; //obteniendo la fecha actual con el formato especificado
@@ -84,8 +86,14 @@ public class UsuarioSesion extends AppCompatActivity {
         });
         bindingSesion.btnHorario.setOnClickListener(v -> {
             Intent intentHorarios = new Intent(UsuarioSesion.this, HorarioSelect.class);
+            Log.d("ResIntent", correoUsuarios.toString());
             intentHorarios.putExtra("usuario", usuarioIntent);
+            intentHorarios.putExtra("usuarioSpinner", usuarioIntent);
             intentHorarios.putExtra("mes", 0);
+            intentHorarios.putExtra("posicionCentro", posicionCentro);
+            intentHorarios.putExtra("posicionEmpleado", posicionCorreo);
+            intentHorarios.putExtra("CorreosSpinner", correoUsuarios);
+            intentHorarios.putExtra("CentrosSpinner", centrosUsuarios);
             startActivity(intentHorarios);
 
         });
@@ -190,5 +198,50 @@ public class UsuarioSesion extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void CorreoCentroUsuariosParaSpinner(Usuario usuario) {
+        UsuarioService usuarioService = Apis.getUsuarioService();
+        Call<ArrayList<Usuario>> call = usuarioService.listarUsuarios(usuario);
+        call.enqueue(new Callback<ArrayList<Usuario>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Usuario>> call, Response<ArrayList<Usuario>> response) {
+                if(response.body().size()!=0) {
+                    String [] arrayAuxCentros = new String[response.body().size()];
+                    Log.d("ResBody", response.body().toString());
+                    for (int i = 0; i < response.body().size(); i++) {
+                        arrayAuxCentros[i] = response.body().get(i).getLugarTrabajo();
+                    }
+                    centrosUsuarios = Arrays.stream(arrayAuxCentros).distinct().toArray(String[]::new);
+                }
+                correoUsuarios = new ArrayList<ArrayList<String>>();
+
+                for(int i=0;i<centrosUsuarios.length;i++){
+                    ArrayList<String> arrayAuxCorreos = new ArrayList<>();
+                    int contador = 0;
+                    if(centrosUsuarios[i].equals(usuario.getLugarTrabajo())){
+                        posicionCentro = i;
+                    }
+                    for (int j= 0; j < response.body().size(); j++) {
+                        if(centrosUsuarios[i].equals(response.body().get(j).getLugarTrabajo())) {
+                            Log.d("ResCorreoCentro", "cen: " + centrosUsuarios[i] + "res: " + response.body().get(j).getLugarTrabajo());
+                            arrayAuxCorreos.add(response.body().get(j).getCorreoUsuario());
+                            if(response.body().get(j).getCorreoUsuario().equals(usuario.getCorreoUsuario())){
+                                posicionCorreo = contador;
+                            }
+                            contador++;
+                        }
+                    }
+                    Log.d("ResCorreoCentro", arrayAuxCorreos.toString());
+                    correoUsuarios.add(arrayAuxCorreos);
+                }
+                Log.d("ResCorreoCentro", correoUsuarios.toString());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Usuario>> call, Throwable t) {
+                Toast.makeText(UsuarioSesion.this, "Lista Correos no Obtenida", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

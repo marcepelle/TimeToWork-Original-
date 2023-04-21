@@ -24,7 +24,7 @@
 
         <TextView
             android:id="@+id/txtNumDiaHorMes"
-            android:layout_width="30dp"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:background="#009688"
             android:paddingStart="2dp"
@@ -43,7 +43,7 @@
 
         <TextView
             android:id="@+id/txtNombreDiaHorMes"
-            android:layout_width="140dp"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
             android:background="#009688"
             android:backgroundTint="#009688"

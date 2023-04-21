@@ -12,8 +12,48 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:background="#539F56">
+
+        <Spinner
+            android:id="@+id/spinnerCentroTrabajoHorSel"
+            android:layout_width="180dp"
+            android:layout_height="48dp"
+            android:background="@android:drawable/spinner_background"
+            android:contentDescription="@string/txtCentrodeTrabajo"
+            android:popupBackground="@android:drawable/spinner_dropdown_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/spinnerCorreosHorSel"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.351" />
+
+        <Spinner
+            android:id="@+id/spinnerMesHorSel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/spinner_background"
+            android:dropDownSelector="@android:drawable/btn_dropdown"
+            android:entries="@array/Mes"
+            android:minHeight="48dp"
+            android:popupBackground="@android:drawable/spinner_dropdown_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/spinnerCentroTrabajoHorSel"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.046" />
+
+        <Spinner
+            android:id="@+id/spinnerCorreosHorSel"
+            android:layout_width="180dp"
+            android:layout_height="48dp"
+            android:background="@android:drawable/spinner_background"
+            android:contentDescription="@string/txtCorreo"
+            android:popupBackground="@android:drawable/spinner_dropdown_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.608" />
 
         <Button
             android:id="@+id/btnFijarJornadaHorSel"
@@ -21,6 +61,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#19635C"
             android:text="@string/fijarJornada"
+            android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.937"
@@ -37,10 +78,10 @@
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintHorizontal_bias="0.455"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.578" />
+            app:layout_constraintVertical_bias="0.896" />
 
         <ImageView
             android:id="@+id/logoHorSel"
@@ -49,10 +90,10 @@
             android:contentDescription="@string/logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.953"
+            app:layout_constraintHorizontal_bias="0.996"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.14"
+            app:layout_constraintVertical_bias="0.075"
             app:srcCompat="@drawable/logo"
             tools:layout_conversion_absoluteHeight="72dp"
             tools:layout_conversion_absoluteWidth="117dp" />
@@ -65,14 +106,44 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.057"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textTitleCentroHorSel"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.26"
+            app:layout_constraintVertical_bias="0.17"
             tools:layout_conversion_absoluteHeight="33dp"
             tools:layout_conversion_absoluteWidth="178dp"
             tools:text="Horarios:" />
+
+        <TextView
+            android:id="@+id/textTitleCentroHorSel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/centroHorSel"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textTitleEmpleadoHorSel"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.412"
+            tools:layout_conversion_absoluteHeight="33dp"
+            tools:layout_conversion_absoluteWidth="178dp"
+            tools:text="Centro:" />
+
+        <TextView
+            android:id="@+id/textTitleEmpleadoHorSel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txtEmpleado"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.043"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.645"
+            tools:layout_conversion_absoluteHeight="33dp"
+            tools:layout_conversion_absoluteWidth="178dp"
+            tools:text="Empleado:" />
 
         <Button
             android:id="@+id/btnVerMesHorSel"
@@ -87,26 +158,12 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.894" />
 
-        <Spinner
-            android:id="@+id/spinnerMesHorSel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/spinner_background"
-            android:dropDownSelector="@android:drawable/btn_dropdown"
-            android:entries="@array/Mes"
-            android:minHeight="48dp"
-            android:popupBackground="@android:drawable/spinner_dropdown_background"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.063"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.552" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -114,8 +171,10 @@
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listaHorarios"

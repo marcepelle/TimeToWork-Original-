@@ -60,7 +60,7 @@ public class ListadoUsuarios extends AppCompatActivity {
                 Log.d("ResUsuario", response.body().toString());
                 Log.d("ResUsuario2", usuarios.toString());
                 Toast.makeText(ListadoUsuarios.this, "Lista Obtenida", Toast.LENGTH_SHORT).show();
-                UsuarioAdapter usuarioAdapter = new UsuarioAdapter(ListadoUsuarios.this, usuarios);
+                UsuarioAdapter usuarioAdapter = new UsuarioAdapter(ListadoUsuarios.this, usuarios, usuario);
                 bindingGestionUser.listaUsuarios.setAdapter(usuarioAdapter);
             }
 

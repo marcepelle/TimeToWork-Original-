@@ -37,7 +37,12 @@ import retrofit2.Response;
 public class FijarJornada extends AppCompatActivity {
     ActivityFijarJornadaBinding bindingFijar;
     ArrayList<Usuario> usuarios;
+    ArrayList<ArrayList<String>> correosSpinner = new ArrayList<>();
+    String[] centrosSpinner;
     private int mYear, mMonth, mDay, mHour, mMinute;
+
+    Boolean selectedCentro = false;
+    Boolean selectedEmpleado = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,23 +52,39 @@ public class FijarJornada extends AppCompatActivity {
         setContentView(viewFijar);
         Bundle bundle = getIntent().getExtras();
         Usuario usuarioIntent;
+        Usuario usuarioSpinner;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            usuarioIntent = bundle.getSerializable("usuario", Usuario.class);
+            usuarioIntent = bundle.getSerializable("usuario", Usuario.class); //usuario sesion
+            usuarioSpinner = bundle.getSerializable("usuarioSpinner", Usuario.class); //usuario a tratar los datos
+            correosSpinner = (ArrayList<ArrayList<String>>) bundle.getSerializable("CorreosSpinner"); //recogemos lo valores del array que contiene los datos de los empleados
         }
         else {
             usuarioIntent = new Usuario();
-        }
-        Usuario usuarioSpinner;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            usuarioSpinner = bundle.getSerializable("usuarioSpinner", Usuario.class);
-        }else{
             usuarioSpinner = new Usuario();
         }
-        obtenerUsuariosParaSpinner(usuarioIntent); //obetner correos de los usuarios para el spinner
-        Log.d("Bundle", "onCreate: item" + String.valueOf(bundle.get("posicionItem")));
         bindingFijar.txtSelecEmpleadoFijJor.setText("Empleado: " + usuarioSpinner.getNombreUsuario() + " " + usuarioSpinner.getApellidosUsuario());
-        bindingFijar.btnSeleccionarFijJor.setOnClickListener(v -> {
-            obtenerUsuario(bindingFijar.spinner.getSelectedItem().toString(), usuarioIntent, bindingFijar.spinner.getSelectedItemPosition());
+        centrosSpinner = bundle.getStringArray("CentrosSpinner"); //recogemos lo valores del array que contiene los datos de los centros
+        bindingFijar.spinnerCentroTrabajoFijJor.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, centrosSpinner)); //rellenamos el spinner de centros
+        bindingFijar.spinnerCentroTrabajoFijJor.setSelection((Integer) bundle.get("posicionCentro")); //fijamos la posicion de centro de empresa
+        bindingFijar.spinnerCorreosFijJor.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, correosSpinner.get((Integer) bundle.get("posicionCentro")))); //rellenamos el spiner de correos de empleados
+        bindingFijar.spinnerCorreosFijJor.setSelection((Integer) bundle.get("posicionEmpleado"));
+        bindingFijar.spinnerCentroTrabajoFijJor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //cada vez que se cambie el item seleccionado del centro cambiaran los datos del spinner de los empleados
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(!selectedCentro){
+                    selectedCentro = true;
+                    return;
+                }
+                bindingFijar.spinnerCorreosFijJor.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, correosSpinner.get(position)));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        bindingFijar.btnElegirEmpFijJor.setOnClickListener(v -> {
+            obtenerUsuario(bindingFijar.spinnerCorreosFijJor.getSelectedItem().toString(), usuarioIntent);
         });
         bindingFijar.editDesdeFijJor.setOnClickListener(v -> {
             fijarFechaEnEdit(bindingFijar.editDesdeFijJor.getId());
@@ -90,7 +111,12 @@ public class FijarJornada extends AppCompatActivity {
         bindingFijar.btnVolverFijJor.setOnClickListener(v -> {
             Intent intentVolver = new Intent(FijarJornada.this, HorarioSelect.class);
             intentVolver.putExtra("usuario", usuarioIntent);
-            intentVolver.putExtra("mes", 1);
+            intentVolver.putExtra("usuarioSpinner", usuarioIntent);
+            intentVolver.putExtra("CorreosSpinner", correosSpinner);
+            intentVolver.putExtra("CentrosSpinner", centrosSpinner);
+            intentVolver.putExtra("posicionCentro", bindingFijar.spinnerCentroTrabajoFijJor.getSelectedItemPosition());
+            intentVolver.putExtra("posicionEmpleado", bindingFijar.spinnerCorreosFijJor.getSelectedItemPosition());
+            intentVolver.putExtra("mes", 0);
             startActivity(intentVolver);
         });
     }
@@ -251,7 +277,7 @@ public class FijarJornada extends AppCompatActivity {
         });
     }
 
-    private void obtenerUsuario(String correo, Usuario usuarioIntent, int position) {
+    private void obtenerUsuario(String correo, Usuario usuarioIntent) { //quitar postion
         CorreoContrasena correoContrasena = new CorreoContrasena();
         correoContrasena.setCorreo(correo);
         UsuarioService usuarioService = Apis.getUsuarioService();
@@ -262,7 +288,10 @@ public class FijarJornada extends AppCompatActivity {
                 Intent intentObtenerU = new Intent(FijarJornada.this, FijarJornada.class);
                 intentObtenerU.putExtra("usuario", usuarioIntent);
                 intentObtenerU.putExtra("usuarioSpinner", response.body());
-                intentObtenerU.putExtra("posicionItem", position);
+                intentObtenerU.putExtra("CorreosSpinner", correosSpinner);
+                intentObtenerU.putExtra("CentrosSpinner", centrosSpinner);
+                intentObtenerU.putExtra("posicionCentro", bindingFijar.spinnerCentroTrabajoFijJor.getSelectedItemPosition());
+                intentObtenerU.putExtra("posicionEmpleado", bindingFijar.spinnerCorreosFijJor.getSelectedItemPosition());
                 startActivity(intentObtenerU);
             }
 
@@ -272,31 +301,6 @@ public class FijarJornada extends AppCompatActivity {
             }
         });
     }
-
-    private void obtenerUsuariosParaSpinner(Usuario usuario) {
-        UsuarioService usuarioService = Apis.getUsuarioService();
-        Call<ArrayList<Usuario>> call = usuarioService.listarUsuarios(usuario);
-        call.enqueue(new Callback<ArrayList<Usuario>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Usuario>> call, Response<ArrayList<Usuario>> response) {
-               if(response.body().size()!=0) {
-                   String[] correoUsuarios = new String[response.body().size()];
-                   Log.d("ResBody", response.body().toString());
-                   Toast.makeText(FijarJornada.this, "Lista Obtenida", Toast.LENGTH_SHORT).show();
-                   for (int i = 0; i < response.body().size(); i++) {
-                       correoUsuarios[i] = response.body().get(i).getCorreoUsuario();
-                   }
-                   bindingFijar.spinner.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, correoUsuarios));
-               }
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Usuario>> call, Throwable t) {
-                Toast.makeText(FijarJornada.this, "Lista no Obtenida", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
 
     private Horario modeloHorario(Usuario usuario, LocalDate fecha, ActivityFijarJornadaBinding binding) {
         Horario horario = new Horario();

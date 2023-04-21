@@ -1,14 +1,11 @@
 package com.example.timetowork;
 
 
-import static android.view.MotionEvent.ACTION_HOVER_ENTER;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -19,20 +16,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.timetowork.models.Usuario;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.UsuarioViewHolder> {
     Context context;
     ArrayList<Usuario> listaUsuario;
 
+    Usuario usuarioIntent;
 
-    public UsuarioAdapter(Context context, ArrayList<Usuario> listaUsuario) {
+
+    public UsuarioAdapter(Context context, ArrayList<Usuario> listaUsuario, Usuario usuario) {
         this.listaUsuario = listaUsuario;
         for(int i =0; i<this.listaUsuario.size();i++){
             if(this.listaUsuario.get(i).isEsAdmin()){
                 this.listaUsuario.remove(i);
             }
         }
+        this.usuarioIntent=usuario;
         this.context = context;
     }
 
@@ -54,8 +53,10 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.UsuarioV
         }
         holder.itemView.setOnClickListener(v -> {
             Intent intentGestUs = new Intent(context, GestionUsuario.class);
-            intentGestUs.putExtra("usuario", listaUsuario.get(0));
+            intentGestUs.putExtra("usuario", usuarioIntent);
+            Log.d("Usuario Adapter", "UsuarioAdapter 1: " + usuarioIntent);
             intentGestUs.putExtra("usuarioGestionado", listaUsuario.get(position));
+            Log.d("Usuario Adapter", "UsuarioAdapter 2: " + listaUsuario.get(position));
             context.startActivity(intentGestUs);
         });
 
