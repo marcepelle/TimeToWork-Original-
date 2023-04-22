@@ -92,4 +92,24 @@
     <string name="txtCentrodeTrabajo">Centro de Trabajo</string>
     <string name="centroHorSel">Centro:</string>
     <string name="txtEmpleado">Empleado:</string>
+    <string name="mensajesMens">Mensajes:</string>
+    <string name="btnRecibidoMens">Recibidos</string>
+    <string name="btnEnviadoMens">Envíados</string>
+    <string name="nuevoMensajeMens">Nuevo Mensaje</string>
+    <string name="EnviarMensajeEnvMens">Enviar Mensaje:</string>
+    <string name="deEnvMens">De:</string>
+    <string name="centroEnvMens">Centro:</string>
+    <string name="paraEnvMens">Para:</string>
+    <string name="asuntoEnvMens">Asunto:</string>
+    <string name="mensajeEnvMens">Mensaje:</string>
+    <string name="mensajeHintEnvMens">Mensaje........</string>
+    <string name="enviarEnvMens">Envíar Mensaje</string>
+    <string name="deRespMens">De:</string>
+    <string name="paraRespMens">Para:</string>
+    <string name="fechaRespMens">Fecha:</string>
+    <string name="asuntoRespMens">Asunto:</string>
+    <string name="mensajeRespMens">Mensaje:</string>
+    <string name="mensajeHintRespMens">Mensaje......</string>
+    <string name="contestarRespMens">Contestar</string>
+    <string name="responderRespMens">Responder Mensaje:</string>
 </resources>

@@ -20,6 +20,15 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="33">
         <activity
+            android:name=".ResponderMensaje"
+            android:exported="false" />
+        <activity
+            android:name=".EnviarMensaje"
+            android:exported="false" />
+        <activity
+            android:name=".MensajesPerfil"
+            android:exported="false" />
+        <activity
             android:name=".FijarJornada"
             android:exported="false" />
         <activity

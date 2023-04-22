@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#539F56"
+    android:contentDescription="@string/volver"
+    android:foregroundTint="#FFFFFF"
+    tools:context=".MensajesPerfil">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutSmall"
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/logoMens"
+            android:layout_width="120dp"
+            android:layout_height="65dp"
+            android:contentDescription="@string/logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.945"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1"
+            app:srcCompat="@drawable/logo"
+            tools:layout_conversion_absoluteHeight="72dp"
+            tools:layout_conversion_absoluteWidth="117dp" />
+
+        <TextView
+            android:id="@+id/textTitleMens"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mensajesMens"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.062"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.272"
+            tools:layout_conversion_absoluteHeight="33dp"
+            tools:layout_conversion_absoluteWidth="178dp"
+            tools:text="Mensajes:" />
+
+        <Button
+            android:id="@+id/btnRecibidosMens"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:backgroundTint="#19635C"
+            android:text="@string/btnRecibidoMens"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.909" />
+
+        <Button
+            android:id="@+id/btnEnviadosMens"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="#19635C"
+            android:text="@string/btnEnviadoMens"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.909" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:contentDescription="@string/nuevoMensajeMens"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.905"
+            app:srcCompat="@android:drawable/ic_dialog_email" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnVolverMens"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#19635C"
+            android:contentDescription="@string/volver"
+            android:foregroundGravity="center"
+            android:src="@android:drawable/ic_menu_revert"
+            android:tint="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.938"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.573"
+            app:rippleColor="#FFFFFF" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/constraintLayoutSmall">
+
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#8F9A87"
+            android:stretchColumns="1,2,3,4,5,6">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#f1f1f1">
+
+                <TextView
+                    android:id="@+id/txtFechaMens"
+                    android:layout_column="1"
+                    android:layout_gravity="center"
+                    android:width="80dp"
+                    android:text="Fecha"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDeMens"
+                    android:layout_column="2"
+                    android:layout_gravity="center"
+                    android:width="150dp"
+                    android:text="De"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtParaMens"
+                    android:layout_column="3"
+                    android:layout_gravity="center"
+                    android:width="150dp"
+                    android:text="Para"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtAsuntoMens"
+                    android:layout_column="4"
+                    android:layout_gravity="center"
+                    android:width="150dp"
+                    android:text="Asunto"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtAccionMens"
+                    android:layout_column="5"
+                    android:layout_gravity="center"
+                    android:width="50dp"
+                    android:text="Acción"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/txtVistoMens"
+                    android:layout_column="6"
+                    android:layout_gravity="center"
+                    android:width="50dp"
+                    android:text="Visto"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@id/listaMensajesMens"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </TableLayout>
+
+    </HorizontalScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

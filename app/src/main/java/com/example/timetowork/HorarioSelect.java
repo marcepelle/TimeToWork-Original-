@@ -51,16 +51,10 @@ public class HorarioSelect extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             usuarioIntent = bundleHorSel.getSerializable("usuario", Usuario.class);
             usuarioSpinner = bundleHorSel.getSerializable("usuarioSpinner", Usuario.class);
-        }
-        else{
-            usuarioIntent = new Usuario();
-            usuarioSpinner = new Usuario();
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             correosSpinner = (ArrayList<ArrayList<String>>) bundleHorSel.getSerializable("CorreosSpinner");
         }
-        Obtenerhoraios(usuarioSpinner);
         centrosSpinner = bundleHorSel.getStringArray("CentrosSpinner");
+        Obtenerhoraios(usuarioSpinner);
         bindingHorSel.spinnerCentroTrabajoHorSel.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, centrosSpinner));
         bindingHorSel.spinnerCentroTrabajoHorSel.setSelection((Integer) bundleHorSel.get("posicionCentro"));
         bindingHorSel.spinnerCorreosHorSel.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, correosSpinner.get((Integer) bundleHorSel.get("posicionCentro"))));

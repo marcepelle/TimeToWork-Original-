@@ -12,9 +12,11 @@ import android.widget.Toast;
 
 import com.example.timetowork.databinding.ActivityUsuarioSesionBinding;
 import com.example.timetowork.models.Horario;
+import com.example.timetowork.models.Mensaje;
 import com.example.timetowork.models.Usuario;
 import com.example.timetowork.utils.Apis;
 import com.example.timetowork.utils.HorarioService;
+import com.example.timetowork.utils.MensajeService;
 import com.example.timetowork.utils.UsuarioService;
 
 import java.time.LocalDate;
@@ -36,6 +38,9 @@ public class UsuarioSesion extends AppCompatActivity {
     ActivityUsuarioSesionBinding bindingSesion;
     private boolean fichadoEntrada, fichadoSalida;
     ArrayList<ArrayList<String>> correoUsuarios;
+
+    ArrayList<Mensaje> mensajesRecibidos;
+    ArrayList<Mensaje> mensajesEnviados;
     String[] centrosUsuarios;
     int posicionCentro;
     int posicionCorreo;
@@ -56,6 +61,8 @@ public class UsuarioSesion extends AppCompatActivity {
             Toast.makeText(this, "Sin sesion, Version Android desactualizada", Toast.LENGTH_SHORT).show();
         }
         CorreoCentroUsuariosParaSpinner(usuarioIntent);
+        ObtenerRecibidos(usuarioIntent);
+        ObtenerEnviados(usuarioIntent);
         bindingSesion.textTitleUsrProfile.append(usuarioIntent.getNombreUsuario());
         fecha = LocalDate.now();
         currentDate =" " + fecha; //obteniendo la fecha actual con el formato especificado
@@ -95,9 +102,17 @@ public class UsuarioSesion extends AppCompatActivity {
             intentHorarios.putExtra("CorreosSpinner", correoUsuarios);
             intentHorarios.putExtra("CentrosSpinner", centrosUsuarios);
             startActivity(intentHorarios);
-
         });
         bindingSesion.btnMensajes.setOnClickListener(v -> {
+            Intent intentMensajes = new Intent(UsuarioSesion.this, MensajesPerfil.class);
+            intentMensajes.putExtra("usuario", usuarioIntent);
+            intentMensajes.putExtra("posicionCentro", posicionCentro);
+            intentMensajes.putExtra("posicionEmpleado", posicionCorreo);
+            intentMensajes.putExtra("CorreosSpinner", correoUsuarios);
+            intentMensajes.putExtra("CentrosSpinner", centrosUsuarios);
+            intentMensajes.putExtra("mensajesRecibidos", mensajesRecibidos);
+            intentMensajes.putExtra("mensajesEnviados", mensajesEnviados);
+            startActivity(intentMensajes);
 
         });
         bindingSesion.btnCerrarSesionUsrProfile.setOnClickListener(v -> {
@@ -105,6 +120,47 @@ public class UsuarioSesion extends AppCompatActivity {
             startActivity(intentCerrarSesion);
         });
     }
+
+    private void ObtenerEnviados(Usuario usuarioIntent) {
+        MensajeService mensajeService = Apis.getMensajeService();
+        Call<ArrayList<Mensaje>> call = mensajeService.getEnviados(usuarioIntent);
+        call.enqueue(new Callback<ArrayList<Mensaje>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Mensaje>> call, Response<ArrayList<Mensaje>> response) {
+                if(response.body().size()!=0){
+                    mensajesEnviados = response.body();
+                    return;
+                }
+                mensajesEnviados = new ArrayList<Mensaje>();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Mensaje>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void ObtenerRecibidos(Usuario usuarioIntent) {
+        MensajeService mensajeService = Apis.getMensajeService();
+        Call<ArrayList<Mensaje>> call = mensajeService.getRecibidos(usuarioIntent);
+        call.enqueue(new Callback<ArrayList<Mensaje>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Mensaje>> call, Response<ArrayList<Mensaje>> response) {
+                if(response.body().size()!=0){
+                    mensajesRecibidos = response.body();
+                    return;
+                }
+                mensajesRecibidos= new ArrayList<Mensaje>();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Mensaje>> call, Throwable t) {
+
+            }
+        });
+    }
+
     private void obtenerFicha(Usuario usuario){
         Horario horario = modeloHorario(usuario);
         HorarioService horarioService = Apis.getHorarioService();
@@ -207,35 +263,11 @@ public class UsuarioSesion extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<Usuario>> call, Response<ArrayList<Usuario>> response) {
                 if(response.body().size()!=0) {
-                    String [] arrayAuxCentros = new String[response.body().size()];
-                    Log.d("ResBody", response.body().toString());
-                    for (int i = 0; i < response.body().size(); i++) {
-                        arrayAuxCentros[i] = response.body().get(i).getLugarTrabajo();
-                    }
-                    centrosUsuarios = Arrays.stream(arrayAuxCentros).distinct().toArray(String[]::new);
+                    listarCentroYCorreos(response.body(), usuario);
+                    return;
                 }
+                centrosUsuarios = new String[]{"vacio"};
                 correoUsuarios = new ArrayList<ArrayList<String>>();
-
-                for(int i=0;i<centrosUsuarios.length;i++){
-                    ArrayList<String> arrayAuxCorreos = new ArrayList<>();
-                    int contador = 0;
-                    if(centrosUsuarios[i].equals(usuario.getLugarTrabajo())){
-                        posicionCentro = i;
-                    }
-                    for (int j= 0; j < response.body().size(); j++) {
-                        if(centrosUsuarios[i].equals(response.body().get(j).getLugarTrabajo())) {
-                            Log.d("ResCorreoCentro", "cen: " + centrosUsuarios[i] + "res: " + response.body().get(j).getLugarTrabajo());
-                            arrayAuxCorreos.add(response.body().get(j).getCorreoUsuario());
-                            if(response.body().get(j).getCorreoUsuario().equals(usuario.getCorreoUsuario())){
-                                posicionCorreo = contador;
-                            }
-                            contador++;
-                        }
-                    }
-                    Log.d("ResCorreoCentro", arrayAuxCorreos.toString());
-                    correoUsuarios.add(arrayAuxCorreos);
-                }
-                Log.d("ResCorreoCentro", correoUsuarios.toString());
             }
 
             @Override
@@ -243,5 +275,36 @@ public class UsuarioSesion extends AppCompatActivity {
                 Toast.makeText(UsuarioSesion.this, "Lista Correos no Obtenida", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void listarCentroYCorreos(ArrayList<Usuario> response, Usuario usuario) {
+        String [] arrayAuxCentros = new String[response.size()];
+        Log.d("ResBody", response.toString());
+        for (int i = 0; i < response.size(); i++) {
+            arrayAuxCentros[i] = response.get(i).getLugarTrabajo();
+        }
+        centrosUsuarios = Arrays.stream(arrayAuxCentros).distinct().toArray(String[]::new);
+        correoUsuarios = new ArrayList<ArrayList<String>>();
+
+        for(int i=0;i<centrosUsuarios.length;i++){
+            ArrayList<String> arrayAuxCorreos = new ArrayList<>();
+            int contador = 0;
+            if(centrosUsuarios[i].equals(usuario.getLugarTrabajo())){
+                posicionCentro = i;
+            }
+            for (int j = 0; j < response.size(); j++) {
+                if(centrosUsuarios[i].equals(response.get(j).getLugarTrabajo())) {
+                    Log.d("ResCorreoCentro", "cen: " + centrosUsuarios[i] + "res: " + response.get(j).getLugarTrabajo());
+                    arrayAuxCorreos.add(response.get(j).getCorreoUsuario());
+                    if(response.get(j).getCorreoUsuario().equals(usuario.getCorreoUsuario())){
+                        posicionCorreo = contador;
+                    }
+                    contador++;
+                }
+            }
+            Log.d("ResCorreoCentro", arrayAuxCorreos.toString());
+            correoUsuarios.add(arrayAuxCorreos);
+        }
+        Log.d("ResCorreoCentro", correoUsuarios.toString());
     }
 }

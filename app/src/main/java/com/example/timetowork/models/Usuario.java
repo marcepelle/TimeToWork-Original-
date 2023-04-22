@@ -49,10 +49,14 @@ public class Usuario implements Serializable {
     @Expose
     private List<Horario> horarios;
 
+    @SerializedName("mensajes")
+    @Expose
+    private List<Mensaje> mensajes;
+
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String nombreUsuario, String apellidosUsuario, int telefono, String direccion, String empresaUsuario, String lugarTrabajo, String fechaNacimiento, String correoUsuario, String contrasena, boolean esAdmin, Empresa empresa_fk, List<Horario> horarios) {
+    public Usuario(int idUsuario, String nombreUsuario, String apellidosUsuario, int telefono, String direccion, String empresaUsuario, String lugarTrabajo, String fechaNacimiento, String correoUsuario, String contrasena, boolean esAdmin, Empresa empresa_fk, List<Horario> horarios, List<Mensaje> mensajes) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.apellidosUsuario = apellidosUsuario;
@@ -66,6 +70,7 @@ public class Usuario implements Serializable {
         this.esAdmin = esAdmin;
         this.empresa_fk = empresa_fk;
         this.horarios = horarios;
+        this.mensajes = mensajes;
     }
 
     public int getIdUsuario() {
@@ -170,6 +175,14 @@ public class Usuario implements Serializable {
 
     public void setHorarios(List<Horario> horarios) {
         this.horarios = horarios;
+    }
+
+    public List<Mensaje> getMensajes() {
+        return mensajes;
+    }
+
+    public void setMensajes(List<Mensaje> mensajes) {
+        this.mensajes = mensajes;
     }
 
     @Override

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="1,2,3,4,5,6"
+    >
+
+    <TableRow android:backgroundTint="#454545">
+
+        <TextView
+            android:id="@+id/txtFechaContMens"
+            android:layout_column="1"
+            android:width="80dp"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/txtDeContMens"
+            android:layout_column="2"
+            android:width="150dp"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/txtParaContMens"
+            android:layout_column="3"
+            android:width="150dp"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/txtAsuntoContMens"
+            android:layout_column="4"
+            android:width="150dp"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/txtAccionContMens"
+            android:layout_column="5"
+            android:width="50dp"
+            android:layout_gravity="center" />
+        <TextView
+            android:id="@+id/txtVistoContMens"
+            android:layout_column="6"
+            android:width="50dp"
+            android:layout_gravity="center" />
+    </TableRow>
+</TableLayout>
