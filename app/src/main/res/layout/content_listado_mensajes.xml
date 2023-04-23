@@ -34,8 +34,11 @@
         <TextView
             android:id="@+id/txtAccionContMens"
             android:layout_column="5"
+            android:layout_gravity="center"
             android:width="50dp"
-            android:layout_gravity="center" />
+            android:textColor="#3F51B5"
+            android:textIsSelectable="false"
+            android:textStyle="bold|italic" />
         <TextView
             android:id="@+id/txtVistoContMens"
             android:layout_column="6"

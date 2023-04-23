@@ -38,10 +38,10 @@ public class UsuarioSesion extends AppCompatActivity {
     ActivityUsuarioSesionBinding bindingSesion;
     private boolean fichadoEntrada, fichadoSalida;
     ArrayList<ArrayList<String>> correoUsuarios;
-
+    String[] centrosUsuarios;
     ArrayList<Mensaje> mensajesRecibidos;
     ArrayList<Mensaje> mensajesEnviados;
-    String[] centrosUsuarios;
+
     int posicionCentro;
     int posicionCorreo;
 
@@ -107,7 +107,7 @@ public class UsuarioSesion extends AppCompatActivity {
             Intent intentMensajes = new Intent(UsuarioSesion.this, MensajesPerfil.class);
             intentMensajes.putExtra("usuario", usuarioIntent);
             intentMensajes.putExtra("posicionCentro", posicionCentro);
-            intentMensajes.putExtra("posicionEmpleado", posicionCorreo);
+            intentMensajes.putExtra("posicionCorreo", posicionCorreo);
             intentMensajes.putExtra("CorreosSpinner", correoUsuarios);
             intentMensajes.putExtra("CentrosSpinner", centrosUsuarios);
             intentMensajes.putExtra("mensajesRecibidos", mensajesRecibidos);

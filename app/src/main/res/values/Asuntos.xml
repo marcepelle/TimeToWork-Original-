@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Asuntos">Asuntos</string>
+    <string-array name="Asunto">
+        <item>Baja</item>
+        <item>Cambio de Turno</item>
+        <item>Importante</item>
+        <item>Incidencia</item>
+        <item>Otros</item>
+        <item>Vacaciones</item>
+    </string-array>
+</resources>

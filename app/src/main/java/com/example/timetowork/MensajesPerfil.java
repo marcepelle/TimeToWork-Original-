@@ -38,22 +38,24 @@ public class MensajesPerfil extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             usuarioIntent = bundleMens.getSerializable("usuario", Usuario.class);
             correosSpinner =  bundleMens.getSerializable("CorreosSpinner", ArrayList.class);
-            recibidos = (ArrayList<Mensaje>)  bundleMens.getSerializable("mensajesRecibidos");
-            enviados = (ArrayList<Mensaje>) bundleMens.getSerializable("mensajesEnviados");
+            recibidos = (ArrayList<Mensaje>)  bundleMens.getSerializable("mensajesRecibidos", ArrayList.class);
+            enviados = (ArrayList<Mensaje>) bundleMens.getSerializable("mensajesEnviados", ArrayList.class);
         }
+        posicionCentro = Integer.valueOf(bundleMens.get("posicionCentro").toString());
+        posicionCorreo = Integer.valueOf(bundleMens.get("posicionCorreo").toString());
         centrosSpinner = bundleMens.getStringArray("CentrosSpinner");
         bindingMens.listaMensajesMens.setLayoutManager(new LinearLayoutManager(this));
         bindingMens.btnRecibidosMens.setOnClickListener(v -> {
-            bindingMens.listaMensajesMens.setAdapter(new MensajesAdapter(this, recibidos, usuarioIntent));
+            bindingMens.listaMensajesMens.setAdapter(new MensajesAdapter(this, recibidos, usuarioIntent, correosSpinner, centrosSpinner));
         });
         bindingMens.btnEnviadosMens.setOnClickListener(v -> {
-            bindingMens.listaMensajesMens.setAdapter(new MensajesAdapter(this, enviados, usuarioIntent));
+            bindingMens.listaMensajesMens.setAdapter(new MensajesAdapter(this, enviados, usuarioIntent, correosSpinner, centrosSpinner));
         });
         bindingMens.floatingActionButton.setOnClickListener(v -> {
             Intent intentMens = new Intent(MensajesPerfil.this, EnviarMensaje.class);
             intentMens.putExtra("usuario", usuarioIntent);
             intentMens.putExtra("posicionCentro", posicionCentro);
-            intentMens.putExtra("posicionEmpleado", posicionCorreo);
+            intentMens.putExtra("posicionCorreo", posicionCorreo);
             intentMens.putExtra("CorreosSpinner", correosSpinner);
             intentMens.putExtra("CentrosSpinner", centrosSpinner);
             intentMens.putExtra("mensajesRecibidos", recibidos);

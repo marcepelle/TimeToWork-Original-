@@ -91,6 +91,7 @@
         android:layout_height="48dp"
         android:background="@android:drawable/spinner_background"
         android:contentDescription="@string/txtCorreo"
+        android:entries="@array/Asunto"
         android:popupBackground="@android:drawable/spinner_dropdown_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
