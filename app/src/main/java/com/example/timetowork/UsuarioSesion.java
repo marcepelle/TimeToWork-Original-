@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.timetowork.databinding.ActivityUsuarioSesionBinding;
@@ -24,6 +25,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +38,7 @@ public class UsuarioSesion extends AppCompatActivity {
     LocalTime hora;
     private String horaEntrada, horaSalida, currentDate, currentTime;
     ActivityUsuarioSesionBinding bindingSesion;
-    private boolean fichadoEntrada, fichadoSalida;
+    private boolean fichadoEntrada, fichadoSalida, existeHorario;
     ArrayList<ArrayList<String>> correoUsuarios;
     String[] centrosUsuarios;
     ArrayList<Mensaje> mensajesRecibidos;
@@ -44,6 +46,9 @@ public class UsuarioSesion extends AppCompatActivity {
 
     int posicionCentro;
     int posicionCorreo;
+
+    ArrayList<Integer> anios;
+    ArrayList<Horario> horarios = new ArrayList<Horario>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +68,7 @@ public class UsuarioSesion extends AppCompatActivity {
         CorreoCentroUsuariosParaSpinner(usuarioIntent);
         ObtenerRecibidos(usuarioIntent);
         ObtenerEnviados(usuarioIntent);
+        Obtenerhoraios(usuarioIntent);
         bindingSesion.textTitleUsrProfile.append(usuarioIntent.getNombreUsuario());
         fecha = LocalDate.now();
         currentDate =" " + fecha; //obteniendo la fecha actual con el formato especificado
@@ -82,12 +88,12 @@ public class UsuarioSesion extends AppCompatActivity {
         });
         obtenerFicha(usuarioIntent);
         bindingSesion.btnEntradaUsrProfile.setOnClickListener(v -> { //evento al clicar el boton de fichar entrada
-            if (!fichadoEntrada) { //si ya se ha fichado la entrada no se puede volver a fichar
+            if (!fichadoEntrada && existeHorario) { //si ya se ha fichado la entrada no se puede volver a fichar
                 ficharEntrada(usuarioIntent);
             }
         });
         bindingSesion.btnSalidaUsrProfile.setOnClickListener(v -> { //evento al clicar el boton de fichar salida
-            if(!fichadoSalida) { //si ya se ha fichado la salida no se puede volver a fichar
+            if(!fichadoSalida && existeHorario) { //si ya se ha fichado la salida no se puede volver a fichar
                 ficharSalida(usuarioIntent);
             }
         });
@@ -101,6 +107,8 @@ public class UsuarioSesion extends AppCompatActivity {
             intentHorarios.putExtra("posicionEmpleado", posicionCorreo);
             intentHorarios.putExtra("CorreosSpinner", correoUsuarios);
             intentHorarios.putExtra("CentrosSpinner", centrosUsuarios);
+            intentHorarios.putExtra("posicionAnios", 0);
+            intentHorarios.putExtra("anios", anios);
             startActivity(intentHorarios);
         });
         bindingSesion.btnMensajes.setOnClickListener(v -> {
@@ -169,6 +177,7 @@ public class UsuarioSesion extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<Horario>> call, Response<ArrayList<Horario>> response) {
                 if(response.body().size()!=0) {
+                    existeHorario = true;
                     Log.d("Ficha", "Hora Entrada: " + response.body().get(0).getFichaEntrada() + " Hora Salida: " + response.body().get(0).getFichaSalida());
                     bindingSesion.textHoraInUsrProfile.setText("Hora Entrada: " + response.body().get(0).getFichaEntrada());
                     if (response.body().get(0).getFichaEntrada() == null) {
@@ -184,6 +193,7 @@ public class UsuarioSesion extends AppCompatActivity {
                     }
                 }else {
                     Log.d("Ficha", "Horario no conseguido");
+                    existeHorario = false;
                 }
             }
 
@@ -306,5 +316,38 @@ public class UsuarioSesion extends AppCompatActivity {
             correoUsuarios.add(arrayAuxCorreos);
         }
         Log.d("ResCorreoCentro", correoUsuarios.toString());
+    }
+
+    private void Obtenerhoraios(Usuario usuarioIntent) {
+        HorarioService horarioService = Apis.getHorarioService();
+        Call<ArrayList<Horario>> call = horarioService.getHorarios(usuarioIntent);
+        call.enqueue(new Callback<ArrayList<Horario>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Horario>> call, Response<ArrayList<Horario>> response) {
+                horarios.addAll(response.body());
+                listarAnios(horarios);
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Horario>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void listarAnios(ArrayList<Horario> horarios) {
+        ArrayList<Integer> arrayAuxAnios = new ArrayList<Integer>();
+        for (int i = 0; i < horarios.size(); i++) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                arrayAuxAnios.add(LocalDate.parse(horarios.get(i).getFecha()).getYear());
+            }
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            anios = (ArrayList<Integer>) arrayAuxAnios.stream().distinct().collect(Collectors.toList());
+            Log.d("UsSes", anios.toString());
+        }
+        if(anios.isEmpty()){
+            anios.add(LocalDate.now().getYear());
+        }
     }
 }

@@ -40,7 +40,7 @@ public class FijarJornada extends AppCompatActivity {
     ArrayList<ArrayList<String>> correosSpinner = new ArrayList<>();
     String[] centrosSpinner;
     private int mYear, mMonth, mDay, mHour, mMinute;
-
+    ArrayList<Integer> anios;
     Boolean selectedCentro = false;
     Boolean selectedEmpleado = false;
 
@@ -56,7 +56,8 @@ public class FijarJornada extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             usuarioIntent = bundle.getSerializable("usuario", Usuario.class); //usuario sesion
             usuarioSpinner = bundle.getSerializable("usuarioSpinner", Usuario.class); //usuario a tratar los datos
-            correosSpinner = (ArrayList<ArrayList<String>>) bundle.getSerializable("CorreosSpinner"); //recogemos lo valores del array que contiene los datos de los empleados
+            correosSpinner = (ArrayList<ArrayList<String>>) bundle.getSerializable("CorreosSpinner", ArrayList.class); //recogemos lo valores del array que contiene los datos de los empleados
+            anios =(ArrayList<Integer>) bundle.getSerializable("anios", ArrayList.class);
         }
         else {
             usuarioIntent = new Usuario();
@@ -83,8 +84,20 @@ public class FijarJornada extends AppCompatActivity {
 
             }
         });
-        bindingFijar.btnElegirEmpFijJor.setOnClickListener(v -> {
-            obtenerUsuario(bindingFijar.spinnerCorreosFijJor.getSelectedItem().toString(), usuarioIntent);
+        bindingFijar.spinnerCorreosFijJor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(!selectedEmpleado){
+                    selectedEmpleado = true;
+                    return;
+                }
+                obtenerUsuario(bindingFijar.spinnerCorreosFijJor.getSelectedItem().toString(), usuarioIntent);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
         });
         bindingFijar.editDesdeFijJor.setOnClickListener(v -> {
             fijarFechaEnEdit(bindingFijar.editDesdeFijJor.getId());
@@ -111,11 +124,13 @@ public class FijarJornada extends AppCompatActivity {
         bindingFijar.btnVolverFijJor.setOnClickListener(v -> {
             Intent intentVolver = new Intent(FijarJornada.this, HorarioSelect.class);
             intentVolver.putExtra("usuario", usuarioIntent);
-            intentVolver.putExtra("usuarioSpinner", usuarioIntent);
+            intentVolver.putExtra("usuarioSpinner", usuarioSpinner);
             intentVolver.putExtra("CorreosSpinner", correosSpinner);
             intentVolver.putExtra("CentrosSpinner", centrosSpinner);
             intentVolver.putExtra("posicionCentro", bindingFijar.spinnerCentroTrabajoFijJor.getSelectedItemPosition());
             intentVolver.putExtra("posicionEmpleado", bindingFijar.spinnerCorreosFijJor.getSelectedItemPosition());
+            intentVolver.putExtra("posicionAnios", 0);
+            intentVolver.putExtra("anios", anios);
             intentVolver.putExtra("mes", 0);
             startActivity(intentVolver);
         });
@@ -292,6 +307,7 @@ public class FijarJornada extends AppCompatActivity {
                 intentObtenerU.putExtra("CentrosSpinner", centrosSpinner);
                 intentObtenerU.putExtra("posicionCentro", bindingFijar.spinnerCentroTrabajoFijJor.getSelectedItemPosition());
                 intentObtenerU.putExtra("posicionEmpleado", bindingFijar.spinnerCorreosFijJor.getSelectedItemPosition());
+                intentObtenerU.putExtra("anios", anios);
                 startActivity(intentObtenerU);
             }
 

@@ -51,13 +51,13 @@ public class MensajesAdapter extends RecyclerView.Adapter <MensajesAdapter.Mensa
         if(usuarioIntent.getCorreoUsuario().equals(mensajes.get(position).getDe())){
             holder.accion.setText("ver");
             holder.accion.setOnClickListener(v -> {
-                AlertDialog alertDialog = dialogVerEnviado(mensajes.get(position).getContenido(),mensajes.get(position).getDe().toString());
+                AlertDialog alertDialog = dialogVerEnviado(mensajes.get(position));
                 alertDialog.show();
             });
         }else{
             holder.accion.setText("ver");
             holder.accion.setOnClickListener(v -> {
-                AlertDialog alertDialog = dialogVerRecibido(mensajes.get(position).getContenido(),mensajes.get(position).getDe().toString(), position);
+                AlertDialog alertDialog = dialogVerRecibido(mensajes.get(position));
                 alertDialog.show();
             });
         }
@@ -84,11 +84,11 @@ public class MensajesAdapter extends RecyclerView.Adapter <MensajesAdapter.Mensa
         }
     }
 
-    public AlertDialog dialogVerEnviado(String mensaje, String de) {
+    public AlertDialog dialogVerEnviado(Mensaje mensaje) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-        builder.setTitle("Mensaje de: " + de)
-                .setMessage(mensaje)
+        builder.setTitle("Mensaje de: " + mensaje.getDe() + "\n" + "Para: " + mensaje.getPara() + "\n" + "Fecha y Hora: " + mensaje.getFecha() + ", " + mensaje.getHora())
+                .setMessage(mensaje.getContenido())
                 .setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -107,17 +107,17 @@ public class MensajesAdapter extends RecyclerView.Adapter <MensajesAdapter.Mensa
         return builder.create();
     }
 
-    public AlertDialog dialogVerRecibido(String mensaje, String de, int position) {
+    public AlertDialog dialogVerRecibido(Mensaje mensaje) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-        builder.setTitle("Mensaje de: " + de)
-                .setMessage(mensaje)
+        builder.setTitle("Mensaje de: " + mensaje.getDe() + "\n" + "Para: " + mensaje.getPara() + "\n" + "Fecha y Hora: " + mensaje.getFecha() + ", " + mensaje.getHora())
+                .setMessage(mensaje.getContenido())
                 .setPositiveButton("Responder",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intentResponder = new Intent(context, ResponderMensaje.class);
-                                intentResponder.putExtra("mensaje", mensajes.get(position));
+                                intentResponder.putExtra("mensaje", mensaje);
                                 intentResponder.putExtra("usuario", usuarioIntent);
                                 intentResponder.putExtra("CorreosSpinner", correoUsuarios);
                                 intentResponder.putExtra("CentrosSpinner", centrosUsuarios);

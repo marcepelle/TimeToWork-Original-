@@ -59,6 +59,7 @@ public class HorarioMesAdapter extends RecyclerView.Adapter<HorarioMesAdapter.Ho
                 }
             }
             if (!coincidenFechas) {
+                Log.d("BindViewHolder", String.valueOf(year));
                 holder.txtTrabajador.setText("");
             }
         }

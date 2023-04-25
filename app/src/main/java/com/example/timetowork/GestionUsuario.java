@@ -10,9 +10,15 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.timetowork.databinding.ActivityGestionUsuarioBinding;
+import com.example.timetowork.models.Horario;
 import com.example.timetowork.models.Usuario;
 import com.example.timetowork.utils.Apis;
+import com.example.timetowork.utils.HorarioService;
 import com.example.timetowork.utils.UsuarioService;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,7 +26,12 @@ import retrofit2.Response;
 
 public class GestionUsuario extends AppCompatActivity {
     ActivityGestionUsuarioBinding bindinGesUs;
+    Usuario usuarioIntent;
+    Usuario usuarioGestionado;
     Boolean usuarioConseguido;
+
+    ArrayList<Integer> anios;
+    ArrayList<Horario> horarios = new ArrayList<Horario>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +39,6 @@ public class GestionUsuario extends AppCompatActivity {
         View viewGesUs = bindinGesUs.getRoot();
         setContentView(viewGesUs);
         Bundle bundleLisUs = getIntent().getExtras();
-        Usuario usuarioIntent;
-        Usuario usuarioGestionado;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             usuarioIntent = bundleLisUs.getSerializable("usuario", Usuario.class);
             usuarioGestionado = bundleLisUs.getSerializable("usuarioGestionado", Usuario.class);
@@ -41,7 +50,7 @@ public class GestionUsuario extends AppCompatActivity {
             usuarioConseguido=false;
         }
         fijarEdits(bindinGesUs, usuarioGestionado);
-
+        Obtenerhorarios(usuarioGestionado);
         bindinGesUs.btnEstablecerDatosGesUs.setOnClickListener(v -> {
             if(!emptyEdits(bindinGesUs)) {
                 usuarioGestionado.setNombreUsuario(String.valueOf(bindinGesUs.editNombEmpleadoGesUs.getText()));
@@ -64,6 +73,14 @@ public class GestionUsuario extends AppCompatActivity {
             Intent borrarIntent  = new Intent(GestionUsuario.this, ListadoUsuarios.class);
             borrarIntent.putExtra("usuario", usuarioIntent);
             startActivity(borrarIntent);
+        });
+        bindinGesUs.btnInformeUsGesUs3.setOnClickListener(v -> {
+            Intent intentInforme = new Intent(GestionUsuario.this, InformeEmpleado.class);
+            intentInforme.putExtra("usuario", usuarioIntent);
+            intentInforme.putExtra("usuarioGestionado", usuarioGestionado);
+            intentInforme.putExtra("horarios", horarios);
+            intentInforme.putExtra("anios", anios);
+            startActivity(intentInforme);
         });
         bindinGesUs.btnVolverGesUs.setOnClickListener(v -> {
             Intent intentVolver = new Intent(GestionUsuario.this, ListadoUsuarios.class);
@@ -128,5 +145,38 @@ public class GestionUsuario extends AppCompatActivity {
                 Toast.makeText(GestionUsuario.this, "Usuario no actualizado", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void Obtenerhorarios(Usuario usuario) {
+        HorarioService horarioService = Apis.getHorarioService();
+        Call<ArrayList<Horario>> call = horarioService.getHorarios(usuario);
+        call.enqueue(new Callback<ArrayList<Horario>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Horario>> call, Response<ArrayList<Horario>> response) {
+                horarios.addAll(response.body());
+                listarAnios(horarios);
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Horario>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void listarAnios(ArrayList<Horario> horarios) {
+        ArrayList<Integer> arrayAuxAnios = new ArrayList<Integer>();
+        for (int i = 0; i < horarios.size(); i++) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                arrayAuxAnios.add(LocalDate.parse(horarios.get(i).getFecha()).getYear());
+            }
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            anios = (ArrayList<Integer>) arrayAuxAnios.stream().distinct().collect(Collectors.toList());
+            Log.d("GesionUsuario", anios.toString());
+            if(anios.isEmpty()){
+                    anios.add(LocalDate.now().getYear());
+            }
+        }
     }
 }

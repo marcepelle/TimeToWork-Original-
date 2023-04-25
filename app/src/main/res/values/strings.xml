@@ -112,4 +112,15 @@
     <string name="mensajeHintRespMens">Mensaje......</string>
     <string name="contestarRespMens">Contestar</string>
     <string name="responderRespMens">Responder Mensaje:</string>
+    <string name="anioHorSel">Año</string>
+    <string name="informeInfEmp">Informe:</string>
+    <string name="anioInfEmp">Año:</string>
+    <string name="mesInfEmp">Mes:</string>
+    <string name="diaInfEmp">Día:</string>
+    <string name="fechaInfEmp">Fecha:</string>
+    <string name="horasDiasInfEmp">Horas trabajadas en el día:</string>
+    <string name="horasSemanaInfEmp">Horas trabajadas en la semana:</string>
+    <string name="horasMesInfEmp">Horas trabajadas este mes:</string>
+    <string name="entradaInfEmp">Entrada:</string>
+    <string name="salidaInfEmp">Salida:</string>
 </resources>

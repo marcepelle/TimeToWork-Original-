@@ -12,24 +12,26 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="300dp"
         android:background="#539F56">
 
         <Spinner
             android:id="@+id/spinnerCentroTrabajoHorSel"
-            android:layout_width="180dp"
+            android:layout_width="160dp"
             android:layout_height="48dp"
             android:background="@android:drawable/spinner_background"
             android:contentDescription="@string/txtCentrodeTrabajo"
             android:popupBackground="@android:drawable/spinner_dropdown_background"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/spinnerCorreosHorSel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.41"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.351" />
+            app:layout_constraintVertical_bias="0.353" />
 
         <Spinner
             android:id="@+id/spinnerMesHorSel"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:background="@android:drawable/spinner_background"
             android:dropDownSelector="@android:drawable/btn_dropdown"
@@ -37,23 +39,41 @@
             android:minHeight="48dp"
             android:popupBackground="@android:drawable/spinner_dropdown_background"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/spinnerCentroTrabajoHorSel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.311"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.046" />
+            app:layout_constraintVertical_bias="0.073" />
+
+        <Spinner
+            android:id="@+id/spinnerAnioHorSel"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/spinner_background"
+            android:contentDescription="@string/anioHorSel"
+            android:dropDownSelector="@android:drawable/btn_dropdown"
+            android:minHeight="48dp"
+            android:popupBackground="@android:drawable/spinner_dropdown_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.552"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.073" />
 
         <Spinner
             android:id="@+id/spinnerCorreosHorSel"
-            android:layout_width="180dp"
+            android:layout_width="160dp"
             android:layout_height="48dp"
             android:background="@android:drawable/spinner_background"
             android:contentDescription="@string/txtCorreo"
             android:popupBackground="@android:drawable/spinner_dropdown_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintHorizontal_bias="0.41"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.608" />
+            app:layout_constraintVertical_bias="0.607" />
 
         <Button
             android:id="@+id/btnFijarJornadaHorSel"
@@ -103,7 +123,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/horariosTitle"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textTitleCentroHorSel"
@@ -118,7 +138,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/centroHorSel"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textTitleEmpleadoHorSel"
@@ -133,7 +153,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/txtEmpleado"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

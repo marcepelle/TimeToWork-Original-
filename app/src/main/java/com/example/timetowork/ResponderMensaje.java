@@ -93,7 +93,7 @@ public class ResponderMensaje extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Mensaje mensaje = modeloMensaje(usuarioIntent, bindingResMens, mensajeIntent);
-                                mensaje.setContenido("Respuesta a correo en fecha: " + mensajeIntent.getFecha() + "Hora: " + mensajeIntent.getHora() + "/n" + "Mensaje: " + editMensaje.getText().toString());
+                                mensaje.setContenido("Respuesta a correo en fecha: " + mensajeIntent.getFecha() + "Hora: " + mensajeIntent.getHora() + "\n" + "Mensaje: " + editMensaje.getText().toString());
                                 enviarMensaje(mensaje);
                             }
                         })

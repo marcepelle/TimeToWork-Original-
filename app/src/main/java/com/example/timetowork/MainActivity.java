@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
             correoContrasena.setCorreo(String.valueOf(bindingMain.editUser.getText()));
             correoContrasena.setPassword(String.valueOf(bindingMain.editPassword.getText()));
             if(Build.VERSION.SDK_INT>=33) {
-                Toast.makeText(this, "Intentando iniciar sesion", Toast.LENGTH_SHORT).show();
                 usuarioLoggueado(correoContrasena);
             }
             else{
@@ -64,7 +63,10 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                 if (response.body() != null) {
                     Toast.makeText(MainActivity.this, "Sesión Iniciada", Toast.LENGTH_SHORT).show();
-                    Intent editUsrProfileIntent  = new Intent(MainActivity.this, UsuarioSesion.class);
+                    Intent editUsrProfileIntent  = null;
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        editUsrProfileIntent = new Intent(MainActivity.this, UsuarioSesion.class);
+                    }
                     editUsrProfileIntent.putExtra("usuario", response.body()); //habiendo implementado la interfaz serializable puedo pasar un objeto a otra activity
                     startActivity(editUsrProfileIntent);
                     Log.d("ResUsuario", "Usuario id:" + response.body());
@@ -78,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Usuario> call, Throwable t) {
                 Log.d("ResUsuario", "fallo al intentar el usuario ");
+                Toast.makeText(MainActivity.this, "Error de autenticación", Toast.LENGTH_SHORT).show();
             }
         });
     }

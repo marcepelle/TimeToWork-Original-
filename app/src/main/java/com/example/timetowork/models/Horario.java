@@ -3,12 +3,13 @@ package com.example.timetowork.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Horario {
+public class Horario implements Serializable {
         @SerializedName("idHorario")
         @Expose
         private int idHorario;
