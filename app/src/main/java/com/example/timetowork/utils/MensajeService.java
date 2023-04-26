@@ -20,4 +20,8 @@ public interface MensajeService {
     @POST("obtenerEnviados")
     Call<ArrayList<Mensaje>> getEnviados(@Body Usuario usuario);
 
+    @POST("mensajeVistoDe")
+    Call<Void> mensajeVistoDe(@Body Mensaje mensaje);
+    @POST("mensajeVistoPara")
+    Call<Void> mensajeVistoPara(@Body Mensaje mensaje);
 }

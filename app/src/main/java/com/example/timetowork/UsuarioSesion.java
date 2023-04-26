@@ -1,8 +1,10 @@
 package com.example.timetowork;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -124,9 +126,29 @@ public class UsuarioSesion extends AppCompatActivity {
 
         });
         bindingSesion.btnCerrarSesionUsrProfile.setOnClickListener(v -> {
-            Intent intentCerrarSesion = new Intent(UsuarioSesion.this, MainActivity.class);
-            startActivity(intentCerrarSesion);
+            dialogoCierreSesion();
         });
+    }
+
+    private void dialogoCierreSesion() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Cerrar sesión")
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intentCerrarSesion = new Intent(UsuarioSesion.this, MainActivity.class);
+                        intentCerrarSesion.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intentCerrarSesion);
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        builder.show();
     }
 
     private void ObtenerEnviados(Usuario usuarioIntent) {

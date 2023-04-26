@@ -46,15 +46,35 @@ public class Mensaje implements Serializable {
     @Expose
     private String contenido;
 
-    @SerializedName("visto")
+    @SerializedName("vistoDe")
     @Expose
-    private boolean visto;
+    private boolean vistoDe;
+
+    @SerializedName("vistoPara")
+    @Expose
+    private boolean vistoPara;
 
     @SerializedName("usuario_fk")
     @Expose
     private Usuario usuario_fk;
 
     public Mensaje() {
+    }
+
+    public Mensaje(int idMensaje, String de, String para, String fecha, String hora, String nomEmpresa, String centroDe, String centroPara, String asunto, String contenido, boolean vistoDe, boolean vistoPara, Usuario usuario_fk) {
+        this.idMensaje = idMensaje;
+        this.de = de;
+        this.para = para;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.nomEmpresa = nomEmpresa;
+        this.centroDe = centroDe;
+        this.centroPara = centroPara;
+        this.asunto = asunto;
+        this.contenido = contenido;
+        this.vistoDe = vistoDe;
+        this.vistoPara = vistoPara;
+        this.usuario_fk = usuario_fk;
     }
 
     public int getIdMensaje() {
@@ -137,12 +157,20 @@ public class Mensaje implements Serializable {
         this.contenido = contenido;
     }
 
-    public boolean isVisto() {
-        return visto;
+    public boolean isVistoDe() {
+        return vistoDe;
     }
 
-    public void setVisto(boolean visto) {
-        this.visto = visto;
+    public void setVistoDe(boolean vistoDe) {
+        this.vistoDe = vistoDe;
+    }
+
+    public boolean isVistoPara() {
+        return vistoPara;
+    }
+
+    public void setVistoPara(boolean vistoPara) {
+        this.vistoPara = vistoPara;
     }
 
     public Usuario getUsuario_fk() {
@@ -166,7 +194,9 @@ public class Mensaje implements Serializable {
                 ", centroPara='" + centroPara + '\'' +
                 ", asunto='" + asunto + '\'' +
                 ", contenido='" + contenido + '\'' +
-                ", visto=" + visto +
+                ", vistoDe=" + vistoDe +
+                ", vistoPara=" + vistoPara +
+                ", usuario_fk=" + usuario_fk +
                 '}';
     }
 }

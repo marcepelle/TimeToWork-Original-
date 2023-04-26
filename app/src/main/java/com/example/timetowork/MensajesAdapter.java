@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.timetowork.models.Mensaje;
 import com.example.timetowork.models.Usuario;
+import com.example.timetowork.utils.Apis;
+import com.example.timetowork.utils.MensajeService;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MensajesAdapter extends RecyclerView.Adapter <MensajesAdapter.MensajesHolder> {
 
@@ -51,18 +58,28 @@ public class MensajesAdapter extends RecyclerView.Adapter <MensajesAdapter.Mensa
         if(usuarioIntent.getCorreoUsuario().equals(mensajes.get(position).getDe())){
             holder.accion.setText("ver");
             holder.accion.setOnClickListener(v -> {
+                if(!mensajes.get(position).isVistoDe()){
+                    mensajeVistoTrue(mensajes.get(position), "De");
+                    mensajes.get(position).setVistoDe(true);
+                }
+                holder.visto.setText(String.valueOf(mensajes.get(position).isVistoDe()));
                 AlertDialog alertDialog = dialogVerEnviado(mensajes.get(position));
                 alertDialog.show();
             });
+            holder.visto.setText(String.valueOf(mensajes.get(position).isVistoDe()));
         }else{
             holder.accion.setText("ver");
             holder.accion.setOnClickListener(v -> {
+                if(!mensajes.get(position).isVistoPara()){
+                    mensajeVistoTrue(mensajes.get(position), "Para");
+                    mensajes.get(position).setVistoPara(true);
+                }
+                holder.visto.setText(String.valueOf(mensajes.get(position).isVistoPara()));
                 AlertDialog alertDialog = dialogVerRecibido(mensajes.get(position));
                 alertDialog.show();
             });
+            holder.visto.setText(String.valueOf(mensajes.get(position).isVistoPara()));
         }
-        holder.visto.setText(String.valueOf(mensajes.get(position).isVisto()));
-
     }
 
     @Override
@@ -133,5 +150,28 @@ public class MensajesAdapter extends RecyclerView.Adapter <MensajesAdapter.Mensa
                         });
 
         return builder.create();
+    }
+    private void mensajeVistoTrue(Mensaje mensaje, String destino) {
+        MensajeService mensajeService = Apis.getMensajeService();
+        Call<Void> call = null;
+        if(destino=="De"){
+            call = mensajeService.mensajeVistoDe(mensaje);
+        }else if (destino=="Para"){
+             call = mensajeService.mensajeVistoPara(mensaje);
+        }
+        else {
+            return;
+        }
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.d("mensajeAdapter", "Mesnaje visto: "  + mensaje.getIdMensaje());
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("MensajeAdapter", "Fallo de conexión");
+            }
+        });
     }
 }

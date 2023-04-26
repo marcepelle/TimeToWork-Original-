@@ -50,11 +50,12 @@ public class MainActivity extends AppCompatActivity {
                 usuarioLoggueado(correoContrasena);
             }
             else{
-                Toast.makeText(this, "No se puede realizar la acción", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Versión obsoleta", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
-    @SuppressLint("RestrictedApi")
+
     private void usuarioLoggueado(CorreoContrasena correoContrasena)  {
         UsuarioService usuarioService = Apis.getUsuarioService();
         Call<Usuario> call = usuarioService.loginUsuario(correoContrasena);
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Usuario> call, Throwable t) {
                 Log.d("ResUsuario", "fallo al intentar el usuario ");
-                Toast.makeText(MainActivity.this, "Error de autenticación", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Fallo de conexión", Toast.LENGTH_SHORT).show();
             }
         });
     }
