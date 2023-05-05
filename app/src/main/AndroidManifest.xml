@@ -20,61 +20,61 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="33">
         <activity
-            android:name=".InformeEmpleado"
+            android:name=".activities.perfil.InformeEmpleado"
             android:exported="false" />
         <activity
-            android:name=".ResponderMensaje"
+            android:name=".activities.mensajes.ResponderMensaje"
             android:exported="false" />
         <activity
-            android:name=".EnviarMensaje"
+            android:name=".activities.mensajes.EnviarMensaje"
             android:exported="false" />
         <activity
-            android:name=".MensajesPerfil"
+            android:name=".activities.mensajes.MensajesPerfil"
             android:exported="false" />
         <activity
-            android:name=".FijarJornada"
+            android:name=".activities.horarios.FijarJornada"
             android:exported="false" />
         <activity
-            android:name=".HorarioSelect"
+            android:name=".activities.horarios.HorarioSelect"
             android:exported="false" />
         <activity
-            android:name=".GestionUsuario"
+            android:name=".activities.perfil.GestionUsuario"
             android:exported="false" />
         <activity
-            android:name=".NuevoEmpleado"
+            android:name=".activities.perfil.NuevoEmpleado"
             android:exported="false" />
         <activity
-            android:name=".ListadoUsuarios"
+            android:name=".activities.perfil.ListadoUsuarios"
             android:exported="false" />
         <activity
-            android:name=".PerfilEmpleado"
+            android:name=".activities.perfil.PerfilEmpleado"
             android:exported="false" />
         <activity
-            android:name=".PerfilAdmin"
+            android:name=".activities.perfil.PerfilAdmin"
             android:exported="false" />
         <activity
-            android:name=".UsuarioSesion"
+            android:name=".activities.UsuarioSesion"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ReestablecerContrasena"
+            android:name=".activities.ReestablecerContrasena"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".CrearCuenta"
+            android:name=".activities.CrearCuenta"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package com.example.timetowork;
+package com.example.timetowork.adapters;
 
 import android.content.Context;
 import android.os.Build;
@@ -11,12 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.timetowork.R;
 import com.example.timetowork.models.Horario;
 
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 

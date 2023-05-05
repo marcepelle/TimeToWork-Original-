@@ -1,4 +1,4 @@
-package com.example.timetowork;
+package com.example.timetowork.adapters;
 
 
 import android.content.Context;
@@ -13,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.timetowork.activities.perfil.GestionUsuario;
+import com.example.timetowork.R;
 import com.example.timetowork.models.Usuario;
 
 import java.util.ArrayList;

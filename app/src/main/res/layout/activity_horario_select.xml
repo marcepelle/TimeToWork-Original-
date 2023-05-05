@@ -7,7 +7,7 @@
     android:background="#009688"
     android:divider="@android:drawable/divider_horizontal_textfield"
     android:orientation="vertical"
-    tools:context=".HorarioSelect">
+    tools:context=".activities.horarios.HorarioSelect">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

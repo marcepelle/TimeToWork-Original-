@@ -1,6 +1,5 @@
-package com.example.timetowork;
+package com.example.timetowork.activities;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;

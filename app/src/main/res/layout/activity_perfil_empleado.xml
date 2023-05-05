@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#539F56"
-    tools:context=".PerfilEmpleado">
+    tools:context=".activities.perfil.PerfilEmpleado">
 
     <TextView
         android:id="@+id/textTelefonoPerEmp"

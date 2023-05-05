@@ -1,4 +1,4 @@
-package com.example.timetowork;
+package com.example.timetowork.activities.horarios;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -6,12 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import com.example.timetowork.activities.UsuarioSesion;
+import com.example.timetowork.adapters.HorarioMesAdapter;
 import com.example.timetowork.databinding.ActivityHorarioSelectBinding;
 import com.example.timetowork.models.CorreoContrasena;
 import com.example.timetowork.models.Horario;
@@ -20,12 +21,8 @@ import com.example.timetowork.utils.Apis;
 import com.example.timetowork.utils.HorarioService;
 import com.example.timetowork.utils.UsuarioService;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import retrofit2.Call;

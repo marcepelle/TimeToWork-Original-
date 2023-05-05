@@ -1,4 +1,4 @@
-package com.example.timetowork;
+package com.example.timetowork.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

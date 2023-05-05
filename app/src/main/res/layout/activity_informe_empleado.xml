@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#539F56"
-    tools:context=".InformeEmpleado">
+    tools:context=".activities.perfil.InformeEmpleado">
 
     <ImageView
         android:id="@+id/logoInfEmp"

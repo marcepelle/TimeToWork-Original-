@@ -1,4 +1,4 @@
-package com.example.timetowork;
+package com.example.timetowork.activities.mensajes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,7 +19,6 @@ import com.example.timetowork.utils.MensajeService;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;

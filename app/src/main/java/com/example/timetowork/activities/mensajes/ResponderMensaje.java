@@ -1,4 +1,4 @@
-package com.example.timetowork;
+package com.example.timetowork.activities.mensajes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.timetowork.R;
 import com.example.timetowork.databinding.ActivityResponderMensajeBinding;
 import com.example.timetowork.models.Mensaje;
 import com.example.timetowork.models.Usuario;

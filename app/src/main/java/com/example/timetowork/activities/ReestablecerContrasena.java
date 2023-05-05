@@ -1,8 +1,10 @@
-package com.example.timetowork;
+package com.example.timetowork.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.timetowork.R;
 
 public class ReestablecerContrasena extends AppCompatActivity {
 

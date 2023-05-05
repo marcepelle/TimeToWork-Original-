@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#539F56"
-    tools:context=".CrearCuenta">
+    tools:context=".activities.CrearCuenta">
 
     <EditText
         android:id="@+id/editTelefonoEmp"

@@ -7,7 +7,7 @@
     android:background="#539F56"
     android:contentDescription="@string/volver"
     android:foregroundTint="#FFFFFF"
-    tools:context=".MensajesPerfil">
+    tools:context=".activities.mensajes.MensajesPerfil">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutSmall"

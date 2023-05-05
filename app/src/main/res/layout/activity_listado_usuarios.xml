@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#009688"
     android:orientation="vertical"
-    tools:context=".ListadoUsuarios">
+    tools:context=".activities.perfil.ListadoUsuarios">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout

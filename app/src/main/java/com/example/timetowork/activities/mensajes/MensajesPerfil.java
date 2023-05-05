@@ -1,4 +1,4 @@
-package com.example.timetowork;
+package com.example.timetowork.activities.mensajes;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,6 +8,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.timetowork.activities.UsuarioSesion;
+import com.example.timetowork.adapters.MensajesAdapter;
 import com.example.timetowork.databinding.ActivityMensajesPerfilBinding;
 import com.example.timetowork.models.Mensaje;
 import com.example.timetowork.models.Usuario;

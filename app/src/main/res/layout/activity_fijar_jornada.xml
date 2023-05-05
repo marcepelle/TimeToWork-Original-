@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#539F56"
-    tools:context=".FijarJornada">
+    tools:context=".activities.horarios.FijarJornada">
 
     <Spinner
         android:id="@+id/spinnerCentroTrabajoFijJor"

@@ -1,4 +1,4 @@
-package com.example.timetowork;
+package com.example.timetowork.activities.horarios;
 
 import androidx.appcompat.app.AppCompatActivity;
 

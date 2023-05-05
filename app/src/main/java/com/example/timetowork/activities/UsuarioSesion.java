@@ -1,4 +1,4 @@
-package com.example.timetowork;
+package com.example.timetowork.activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
@@ -10,9 +10,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.example.timetowork.activities.horarios.HorarioSelect;
+import com.example.timetowork.activities.mensajes.MensajesPerfil;
+import com.example.timetowork.activities.perfil.PerfilAdmin;
+import com.example.timetowork.activities.perfil.PerfilEmpleado;
 import com.example.timetowork.databinding.ActivityUsuarioSesionBinding;
 import com.example.timetowork.models.Horario;
 import com.example.timetowork.models.Mensaje;

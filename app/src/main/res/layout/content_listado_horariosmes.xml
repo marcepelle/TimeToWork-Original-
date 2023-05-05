@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:background="#009688"
     android:orientation="vertical"
-    tools:context=".HorarioSelect"
+    tools:context=".activities.horarios.HorarioSelect"
     tools:layout_editor_absoluteY="5dp">
 
     <View

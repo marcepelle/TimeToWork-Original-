@@ -1,4 +1,4 @@
-package com.example.timetowork;
+package com.example.timetowork.activities.perfil;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.timetowork.adapters.UsuarioAdapter;
 import com.example.timetowork.databinding.ActivityListadoUsuariosBinding;
 import com.example.timetowork.models.Usuario;
 import com.example.timetowork.utils.Apis;
