@@ -23,28 +23,19 @@ import retrofit2.Response;
 public class NuevoEmpleado extends AppCompatActivity {
 
     ActivityNuevoEmpleadoBinding bindingNuevEmp;
-    UsuarioService usuarioService;
-    boolean userConseguido;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nuevo_empleado);
+
         bindingNuevEmp = ActivityNuevoEmpleadoBinding.inflate(getLayoutInflater());
         View viewNuevEmp = bindingNuevEmp.getRoot();
         setContentView(viewNuevEmp);
-        Bundle bundleNuevEmp = getIntent().getExtras();
-        Usuario usuarioIntent;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-            usuarioIntent = bundleNuevEmp.getSerializable("usuario", Usuario.class);
-            userConseguido = true;
-        }
-        else {
-            usuarioIntent= new Usuario();
-            userConseguido = false;
-        }
-        bindingNuevEmp.btnCrearCuentaNuevEmp.setOnClickListener(v -> {
-            if (userConseguido) {
-                if(!emptyEdits(bindingNuevEmp)) {
+
+        Bundle bundleNuevEmp = getIntent().getExtras(); //obtenemos los datos pasados en el intent del anterior activity
+        Usuario usuarioIntent =(Usuario) bundleNuevEmp.getSerializable("usuario"); //obtenemos el usuario de la sesión pasado por intent
+
+        bindingNuevEmp.btnCrearCuentaNuevEmp.setOnClickListener(v -> { //Botón crear cuenta nueva, si los EditText no están vacíos llamamos al metodo crearCuentaUsuario y hacemos un intent hacia el activity ListadoUsuarios, acción al ahcer click
+                if(!emptyEdits()) {
                     crearCuentaUsuario(modeloEmpleado(usuarioIntent));
                     Intent intentListUs = new Intent(NuevoEmpleado.this, ListadoUsuarios.class);
                     intentListUs.putExtra("usuario", usuarioIntent);
@@ -53,12 +44,8 @@ public class NuevoEmpleado extends AppCompatActivity {
                 else{
                     Toast.makeText(this, "Debes rellenar los espacios", Toast.LENGTH_SHORT).show();
                 }
-            }
-            else{
-                Toast.makeText(this, "Version android insuficiente", Toast.LENGTH_SHORT).show();
-            }
         });
-        bindingNuevEmp.btnVolverNuevEmp.setOnClickListener(v -> {
+        bindingNuevEmp.btnVolverNuevEmp.setOnClickListener(v -> { //Botón volver, volvemos al activity ListadoUsuarios, acción al hacer click
             Intent intentVolver = new Intent(NuevoEmpleado.this, ListadoUsuarios.class);
             intentVolver.putExtra("usuario", usuarioIntent);
             startActivity(intentVolver);
@@ -66,20 +53,20 @@ public class NuevoEmpleado extends AppCompatActivity {
 
     }
 
-    private boolean emptyEdits(ActivityNuevoEmpleadoBinding binding) {
-        if(binding.editNombEmpleadoNuevEmp.getText().toString().isEmpty()||binding.editApellidosNuevEmp.getText().toString().isEmpty()||binding.editTelefonoNuevEmp.getText().toString().isEmpty()||binding.editDireccionNuevEmp.getText().toString().isEmpty()||binding.editCentroDeTrabajoNuevEmp.getText().toString().isEmpty()||binding.editFechaNacimientoNuevEmp.getText().toString().isEmpty()||binding.editCorreoNuevEmp.getText().toString().isEmpty()||binding.editContrasenaNuevEmp.getText().toString().isEmpty()||binding.editRepetirContraNuevEmp.getText().toString().isEmpty()){
+    private boolean emptyEdits() { //método que revisa si los editText estan vacíos
+        if(bindingNuevEmp.editNombEmpleadoNuevEmp.getText().toString().isEmpty()||bindingNuevEmp.editApellidosNuevEmp.getText().toString().isEmpty()||bindingNuevEmp.editTelefonoNuevEmp.getText().toString().isEmpty()||bindingNuevEmp.editDireccionNuevEmp.getText().toString().isEmpty()||bindingNuevEmp.editCentroDeTrabajoNuevEmp.getText().toString().isEmpty()||bindingNuevEmp.editFechaNacimientoNuevEmp.getText().toString().isEmpty()||bindingNuevEmp.editCorreoNuevEmp.getText().toString().isEmpty()||bindingNuevEmp.editContrasenaNuevEmp.getText().toString().isEmpty()||bindingNuevEmp.editRepetirContraNuevEmp.getText().toString().isEmpty()){
             return true;
         }
         return false;
     }
 
-    private Usuario modeloEmpleado(Usuario usuarioAdmin){
+    private Usuario modeloEmpleado(Usuario usuarioAdmin){ //método que devuelve un objeto Usuario con los datos que contienen los EditText
         Usuario usuario = new Usuario();
         usuario.setNombreUsuario(String.valueOf(bindingNuevEmp.editNombEmpleadoNuevEmp.getText()));
         usuario.setApellidosUsuario(String.valueOf(bindingNuevEmp.editApellidosNuevEmp.getText()));
         usuario.setTelefono(Integer.parseInt(String.valueOf(bindingNuevEmp.editTelefonoNuevEmp.getText())));
         usuario.setDireccion(String.valueOf(bindingNuevEmp.editDireccionNuevEmp.getText()));
-        usuario.setEmpresaUsuario(String.valueOf(usuarioAdmin.getEmpresaUsuario()));
+        usuario.setEmpresaUsuario(String.valueOf(usuarioAdmin.getEmpresaUsuario())); //la empresa será la misma del Admin
         usuario.setLugarTrabajo(String.valueOf(bindingNuevEmp.editCentroDeTrabajoNuevEmp.getText()));
         usuario.setFechaNacimiento(String.valueOf(bindingNuevEmp.editFechaNacimientoNuevEmp.getText()));
         usuario.setCorreoUsuario(String.valueOf(bindingNuevEmp.editCorreoNuevEmp.getText()));
@@ -87,8 +74,8 @@ public class NuevoEmpleado extends AppCompatActivity {
         usuario.setEsAdmin(false);
         return usuario;
     }
-    private void crearCuentaUsuario(Usuario usuario) {
-        usuarioService = Apis.getUsuarioService();
+    private void crearCuentaUsuario(Usuario usuario) { //creamos un Usuario en la base de datos, pasandole por parámetro un objeto Usuario
+        UsuarioService usuarioService = Apis.getUsuarioService();
         Call<Void> call= usuarioService.crearUsuario(usuario);
         call.enqueue(new Callback<Void>() {
             @Override

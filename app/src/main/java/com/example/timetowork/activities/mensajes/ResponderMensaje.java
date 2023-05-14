@@ -78,10 +78,6 @@ public class ResponderMensaje extends AppCompatActivity {
 
     }
 
-    /**
-     * Crea un diálogo de alerta sencillo
-     * @return Nuevo diálogo
-     */
     public AlertDialog createSimpleDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
