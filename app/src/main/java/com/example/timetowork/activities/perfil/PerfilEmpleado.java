@@ -34,30 +34,24 @@ public class PerfilEmpleado extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bindingPerfilEmpleado = ActivityPerfilEmpleadoBinding.inflate(getLayoutInflater());
-        View view = bindingPerfilEmpleado.getRoot();
-        setContentView(view);
-        Bundle bundlePerEmpin = getIntent().getExtras();
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-            usuarioIntent = bundlePerEmpin.getSerializable("usuario", Usuario.class);
-        }
-        else{
-            usuarioIntent = new Usuario();
-        }
-        Obtenerhorarios(usuarioIntent);
-        bindingPerfilEmpleado.editNombAdminPerEmp.setText(usuarioIntent.getNombreUsuario());
-        bindingPerfilEmpleado.editCorreoPerEmp.setText(usuarioIntent.getCorreoUsuario());
-        bindingPerfilEmpleado.editCentroTrabajoPerEmp.setText(usuarioIntent.getLugarTrabajo());
-        bindingPerfilEmpleado.editTelefonoPerEmp.setText(String.valueOf(usuarioIntent.getTelefono()));
 
-        bindingPerfilEmpleado.btnEstabDatosPerEmp.setOnClickListener(v -> {
-            usuarioIntent.setNombreUsuario(String.valueOf(bindingPerfilEmpleado.editNombAdminPerEmp.getText()));
-            usuarioIntent.setCorreoUsuario(String.valueOf(bindingPerfilEmpleado.editCorreoPerEmp.getText()));
-            usuarioIntent.setTelefono(Integer.valueOf(String.valueOf(bindingPerfilEmpleado.editTelefonoPerEmp.getText())));
-            usuarioIntent.setLugarTrabajo(String.valueOf(bindingPerfilEmpleado.editCentroTrabajoPerEmp.getText()));
+        bindingPerfilEmpleado = ActivityPerfilEmpleadoBinding.inflate(getLayoutInflater()); // crea una instancia de la clase de vinculación para la actividad que se usará
+        View view = bindingPerfilEmpleado.getRoot(); //referencia a la vista raíz
+        setContentView(view); // para que sea la vista activa en la pantalla
+
+        Bundle bundlePerEmpin = getIntent().getExtras(); //obtenemos los datos pasados en el intent del anterior activity
+        usuarioIntent = (Usuario) bundlePerEmpin.getSerializable("usuario"); //obtenemos el usuario de la sesión pasado por intent
+
+        Obtenerhorarios(usuarioIntent);
+
+        fijarEditTexts(); //rellenamos la información en los EditText con los datos del Usuario de la sesión
+
+        bindingPerfilEmpleado.btnEstabDatosPerEmp.setOnClickListener(v -> { //Botón establecer datos, llamamos al método modeloUsuario y al método actualizarUsuario, acción al hacer clic
+            modeloUsuario();
             actualizarUsuario(usuarioIntent);
         });
-        bindingPerfilEmpleado.btnInformeHorasPerEmp.setOnClickListener(v -> {
+
+        bindingPerfilEmpleado.btnInformeHorasPerEmp.setOnClickListener(v -> { //Botón Informe Empleado, intent hacia el activity InformeEmpleado, acción al hacer clic
             Intent intentInforme = new Intent(PerfilEmpleado.this, InformeEmpleado.class);
             intentInforme.putExtra("usuario", usuarioIntent);
             intentInforme.putExtra("usuarioGestionado", usuarioIntent);
@@ -66,7 +60,7 @@ public class PerfilEmpleado extends AppCompatActivity {
             startActivity(intentInforme);
         });
 
-        bindingPerfilEmpleado.btnVolverPerEmp.setOnClickListener(v -> {
+        bindingPerfilEmpleado.btnVolverPerEmp.setOnClickListener(v -> { //Botón volver, volvemos al activity UsuarioSesion, acción al hacer clic
             Intent intentVolver = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 intentVolver = new Intent(PerfilEmpleado.this, UsuarioSesion.class);
@@ -76,7 +70,21 @@ public class PerfilEmpleado extends AppCompatActivity {
         });
     }
 
-    private void actualizarUsuario(Usuario usuario) {
+    private void modeloUsuario() { //cambiamos los datos del usuario con la información de los EditText
+        usuarioIntent.setNombreUsuario(String.valueOf(bindingPerfilEmpleado.editNombAdminPerEmp.getText()));
+        usuarioIntent.setCorreoUsuario(String.valueOf(bindingPerfilEmpleado.editCorreoPerEmp.getText()));
+        usuarioIntent.setTelefono(Integer.valueOf(String.valueOf(bindingPerfilEmpleado.editTelefonoPerEmp.getText())));
+        usuarioIntent.setLugarTrabajo(String.valueOf(bindingPerfilEmpleado.editCentroTrabajoPerEmp.getText()));
+    }
+
+    private void fijarEditTexts() { //fijamos la información del usuario en los EditText
+        bindingPerfilEmpleado.editNombAdminPerEmp.setText(usuarioIntent.getNombreUsuario());
+        bindingPerfilEmpleado.editCorreoPerEmp.setText(usuarioIntent.getCorreoUsuario());
+        bindingPerfilEmpleado.editCentroTrabajoPerEmp.setText(usuarioIntent.getLugarTrabajo());
+        bindingPerfilEmpleado.editTelefonoPerEmp.setText(String.valueOf(usuarioIntent.getTelefono()));
+    }
+
+    private void actualizarUsuario(Usuario usuario) { //actualizamos el usuario en la base de datos y actualizamos el activity haciendo un intent
         UsuarioService usuarioService = Apis.getUsuarioService();
         Call<Usuario> call = usuarioService.actualizarUsuario(usuario);
         call.enqueue(new Callback<Usuario>() {
@@ -96,14 +104,14 @@ public class PerfilEmpleado extends AppCompatActivity {
         });
     }
 
-    private void Obtenerhorarios(Usuario usuario) {
+    private void Obtenerhorarios(Usuario usuario) { //obtenemos el listado de horarios para el usuario que le pasemos y rellenamos el array anios
         HorarioService horarioService = Apis.getHorarioService();
         Call<ArrayList<Horario>> call = horarioService.getHorarios(usuario);
         call.enqueue(new Callback<ArrayList<Horario>>() {
             @Override
             public void onResponse(Call<ArrayList<Horario>> call, Response<ArrayList<Horario>> response) {
-                horarios.addAll(response.body());
-                listarAnios(horarios);
+                horarios.addAll(response.body()); //añade todos los objetos horarios de la respuesta del array de la llamada a la Api
+                listarAnios(horarios); //rellenamos el array anios
             }
 
             @Override
@@ -113,16 +121,16 @@ public class PerfilEmpleado extends AppCompatActivity {
         });
     }
 
-    private void listarAnios(ArrayList<Horario> horarios) {
+    private void listarAnios(ArrayList<Horario> horarios) { //Listando los años de los que dispone historial de horarios el trabajador para poder rellenarlos en el spinner del activity de informe
         ArrayList<Integer> arrayAuxAnios = new ArrayList<Integer>();
-        for (int i = 0; i < horarios.size(); i++) {
+        for (int i = 0; i < horarios.size(); i++) { //recorremos la lista de horarios del usuario gestionado y recogemos del campo fecha el año y lo añadimos en el array auxiliar
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 arrayAuxAnios.add(LocalDate.parse(horarios.get(i).getFecha()).getYear());
             }
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            anios = (ArrayList<Integer>) arrayAuxAnios.stream().distinct().collect(Collectors.toList());
-            if(anios.isEmpty()){
+            anios = (ArrayList<Integer>) arrayAuxAnios.stream().distinct().collect(Collectors.toList()); //gracias al metodo stream que permite trabajar con el modelo de datos de una colección, conseguimos los años que sean distintos del array
+            if(anios.isEmpty()){ //si el array está vacío devolvemos al menos el año actual
                 anios.add(LocalDate.now().getYear());
             }
         }
