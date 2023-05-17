@@ -220,14 +220,14 @@ public class UsuarioSesion extends AppCompatActivity {
         hora = LocalTime.now();
         fecha = LocalDate.now();
         Horario horario = new Horario();
-        horario.setEmpleado(usuario.getNombreUsuario() + " " +usuario.getApellidosUsuario());
-        horario.setCorreoEmpleado(usuario.getCorreoUsuario());
-        horario.setCentroTrabajo(usuario.getLugarTrabajo());
-        horario.setUsuario_fk(usuario);
-        horario.setFecha(fecha.toString());
-        horario.setFichaEntrada(String.valueOf(hora));
-        horario.setFichaSalida(String.valueOf(hora));
-        return horario;
+        horario.setEmpleado(usuario.getNombreUsuario() + " " +usuario.getApellidosUsuario()); //Fijamos el nombre y los apellidos del usuario para el horario
+        horario.setCorreoEmpleado(usuario.getCorreoUsuario()); //correo del usuario para el horario
+        horario.setCentroTrabajo(usuario.getLugarTrabajo()); //centro de trabajo del usuario para el horario
+        horario.setUsuario_fk(usuario); // Fijamos el usuario para el horario
+        horario.setFecha(fecha.toString()); //Fijamos la fecha del horario
+        horario.setFichaEntrada(String.valueOf(hora)); //Fijamos la hora que se usará en caso que se vaya a fichar la entrada
+        horario.setFichaSalida(String.valueOf(hora)); //Fijamos la hora que se usará en caso que se vaya a fichar la salida
+        return horario; //Devolvemos el horario
     }
 
     private void ficharEntrada(Usuario usuario) { //fichamos la entrada en la base de datos y lo fijamos en el TextView

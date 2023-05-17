@@ -19,18 +19,15 @@ import com.example.timetowork.models.Usuario;
 
 import java.util.ArrayList;
 
-public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.UsuarioViewHolder> {
-    Context context;
-    ArrayList<Usuario> listaUsuario;
-
-    Usuario usuarioIntent;
-
-
-    public UsuarioAdapter(Context context, ArrayList<Usuario> listaUsuario, Usuario usuario) {
+public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.UsuarioViewHolder> { //Está clase que hereda de RecyclerView.Adapter creará el modelo de datos para el listado de usuarios
+    Context context; //Contexto del layout donde se insertará el adaptador
+    ArrayList<Usuario> listaUsuario; //Listado de usuarios
+    Usuario usuarioIntent; //usuario de la sesión
+    public UsuarioAdapter(Context context, ArrayList<Usuario> listaUsuario, Usuario usuario) { //Constructor de UsuarioAdapter
         this.listaUsuario = listaUsuario;
         for(int i =0; i<this.listaUsuario.size();i++){
             if(this.listaUsuario.get(i).isEsAdmin()){
-                this.listaUsuario.remove(i);
+                this.listaUsuario.remove(i); //quitamos al administrador de la lista de usuarios
             }
         }
         this.usuarioIntent=usuario;
@@ -39,43 +36,40 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.UsuarioV
 
     @NonNull
     @Override
-    public UsuarioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) { //indicara el modelo que tendrá que tener en cuenta para crear la lista
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.content_listado_usuarios, parent, false);
-        return  new UsuarioViewHolder(view);
+    public UsuarioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) { //Este metódo será llamado cada vez que se requiera crear un item o elemento del listado, creará la vista del item
+        View view = LayoutInflater.from(context).inflate(R.layout.content_listado_usuarios, parent, false); //inflamos el layout del item, pasandole por parámetro el layout base de creación para la vista, parent que es el ViewGroup en el que se agregará la nueva Vista e indicamos como false que adjunte instantaneamente la vista en el parent para evitar un IllegalStateException
+        return  new UsuarioViewHolder(view); //devolvemos el UsuarioViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UsuarioViewHolder holder, int position) { // adjudicara a cada view su contenido
-        Log.d("Adapter", "onBindViewHolder: " + listaUsuario.get(position).getNombreUsuario());
-        holder.txtNombre.append(" " + listaUsuario.get(position).getNombreUsuario());
-        holder.txtApellidos.append(" " + listaUsuario.get(position).getApellidosUsuario());
-        holder.txtLugartrabajo.append(" " + listaUsuario.get(position).getLugarTrabajo());
+    public void onBindViewHolder(@NonNull UsuarioViewHolder holder, int position) { //Este método va a vincular los datos al ViewHolder para una posición dada en el listado del RecyclerView
+        holder.txtNombre.append(" " + listaUsuario.get(position).getNombreUsuario()); //Fijamos el nombre del usuario de la posición en el listado en el TextView
+        holder.txtApellidos.append(" " + listaUsuario.get(position).getApellidosUsuario()); //Fijamos los apellidos del usuario de la posición en el listado en el TextView
+        holder.txtLugartrabajo.append(" " + listaUsuario.get(position).getLugarTrabajo()); //Fijamos los apellidos del usuario de la posición en el listado en el TextView
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            holder.itemView.setTooltipText("Click para ver Empleado");
+            holder.itemView.setTooltipText("Click para ver Empleado"); //Fijamos para el elemento del listado un toolTip
         }
-        holder.itemView.setOnClickListener(v -> {
+        holder.itemView.setOnClickListener(v -> { //Al hacer clic en el elemento del listado hacemos un intent hacia el activity GestionUsuario
             Intent intentGestUs = new Intent(context, GestionUsuario.class);
             intentGestUs.putExtra("usuario", usuarioIntent);
-            Log.d("Usuario Adapter", "UsuarioAdapter 1: " + usuarioIntent);
             intentGestUs.putExtra("usuarioGestionado", listaUsuario.get(position));
-            Log.d("Usuario Adapter", "UsuarioAdapter 2: " + listaUsuario.get(position));
             context.startActivity(intentGestUs);
         });
 
     }
 
     @Override
-    public int getItemCount() {
-        return listaUsuario.size();
+    public int getItemCount() { //cantidad de elementos que habrá en la lista, determina su tamaño
+        return listaUsuario.size();  //devolvemos el tamaño que hay en el listado de usuarios
     }
 
-    public class UsuarioViewHolder extends RecyclerView.ViewHolder {
+    public class UsuarioViewHolder extends RecyclerView.ViewHolder { //Clase que determina la referencia de los views del layout que se utilizarán para trabajar en los elementos o items del adaptador, hereda de Recycler.ViewHolder
         TextView txtNombre, txtApellidos, txtLugartrabajo;
-        public UsuarioViewHolder(@NonNull View itemView) {
+        public UsuarioViewHolder(@NonNull View itemView) { //Constructor de UsuarioViewHolder
             super(itemView);
-            txtNombre = (TextView) itemView.findViewById(R.id.nombreUser);
-            txtApellidos = (TextView) itemView.findViewById(R.id.apellidosUser);
-            txtLugartrabajo = (TextView) itemView.findViewById(R.id.lugarTrabajo);
+            txtNombre = (TextView) itemView.findViewById(R.id.nombreUser); //TextView que contendrá el nombre del usuario
+            txtApellidos = (TextView) itemView.findViewById(R.id.apellidosUser); //TextView que contendrá los apellidos del usuario
+            txtLugartrabajo = (TextView) itemView.findViewById(R.id.lugarTrabajo); //TextView que contendrá el centro de trabajo del usuario
         }
     }
 }

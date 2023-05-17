@@ -93,8 +93,8 @@ public class InformeEmpleado extends AppCompatActivity {
         LocalDate inicioSemana = null;
         LocalDate finSemana = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            bindingInforme.txtFechaInfEmp.setText("Fecha: " + LocalDate.of(year, month+1, dayOfMonth));
-            for(int i=0; i<horarios.size(); i++){
+            bindingInforme.txtFechaInfEmp.setText("Fecha: " + LocalDate.of(year, month+1, dayOfMonth)); //Fijamos en el TextView la fecha seleccionada en el CalendarView
+            for(int i=0; i<horarios.size(); i++){ //recorremos los horarios del usuario gestionado
                 if(LocalDate.parse(horarios.get(i).getFecha()).getMonthValue()==(month + 1) && LocalDate.parse(horarios.get(i).getFecha()).getYear()==year){ //si el año y mes del array es la misma que la fecha seleccionada sumo las horas del mes, le sumo 1 porque en el calendarview empieza en 0
                     if(horarios.get(i).getFichaEntrada()!=null && horarios.get(i).getFichaSalida()!=null) { //si no se ha fichado no entra
                         HorasMes += diferenciaHoras(horarios.get(i).getFichaEntrada(), horarios.get(i).getFichaSalida()); //sumamos la horas trabajadas del mes

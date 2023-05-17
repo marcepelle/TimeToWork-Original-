@@ -43,6 +43,8 @@ public class FijarJornada extends AppCompatActivity {
     ArrayList<Integer> anios;
     Boolean selectedCentro = false;
     Boolean selectedEmpleado = false;
+    int posicionCentro;
+    int posicionCorreo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,19 +55,21 @@ public class FijarJornada extends AppCompatActivity {
         setContentView(viewFijar); // para que sea la vista activa en la pantalla
 
         Bundle bundle = getIntent().getExtras(); //obtenemos los datos pasados en el intent del anterior activity
-        Usuario usuarioIntent= (Usuario) bundle.getSerializable("usuario"); //usuario sesión
+        Usuario usuarioIntent= (Usuario) bundle.getSerializable("usuario"); //usuario de la sesión
         Usuario usuarioSpinner = (Usuario) bundle.getSerializable("usuarioSpinner"); //usuario a tratar los datos
         correosSpinner = (ArrayList<ArrayList<String>>) bundle.getSerializable("CorreosSpinner"); //obtenemos el listado de correos por centro(ordenados del mismo modo que el array centrosSpinner)
         anios =(ArrayList<Integer>) bundle.getSerializable("anios"); //obtenemos los años que existen para los horarios del usuario
         centrosSpinner = bundle.getStringArray("CentrosSpinner"); //recogemos lo valores del array que contiene los datos de los centros
+        posicionCentro = Integer.valueOf(bundle.get("posicionCentro").toString()); //posición del item seleccionado en el spinner de los centros de trabajo
+        posicionCorreo = Integer.valueOf(bundle.get("posicionEmpleado").toString()); //posición del item seleccionado en el spinner de los correos de los usuarios
 
         bindingFijar.txtSelecEmpleadoFijJor.setText("Empleado: " + usuarioSpinner.getNombreUsuario() + " " + usuarioSpinner.getApellidosUsuario()); //establecemos en el TextView el empleado al que se le va a fijar la jornada
 
         bindingFijar.spinnerCentroTrabajoFijJor.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, centrosSpinner)); //fijamos el adaptador para mostrar la información de los centros disponibles en el spinner
-        bindingFijar.spinnerCentroTrabajoFijJor.setSelection((Integer) bundle.get("posicionCentro")); //fijamos el item seleccionado del spinner del centro pasandole la posición
+        bindingFijar.spinnerCentroTrabajoFijJor.setSelection(posicionCentro); //fijamos el item seleccionado del spinner del centro pasandole la posición
 
-        bindingFijar.spinnerCorreosFijJor.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, correosSpinner.get((Integer) bundle.get("posicionCentro")))); //fijamos el adaptador para mostrar la información de los correos disponibles en el spinner
-        bindingFijar.spinnerCorreosFijJor.setSelection((Integer) bundle.get("posicionEmpleado")); //fijamos el item seleccionado del spinner de los correos pasandole la posición
+        bindingFijar.spinnerCorreosFijJor.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, correosSpinner.get(posicionCentro))); //fijamos el adaptador para mostrar la información de los correos disponibles en el spinner
+        bindingFijar.spinnerCorreosFijJor.setSelection(posicionCorreo); //fijamos el item seleccionado del spinner de los correos pasandole la posición
         bindingFijar.spinnerCentroTrabajoFijJor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //cada vez que se cambie el item seleccionado del centro de trabajo cambiaran los datos del spinner de los correos de los empleados
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

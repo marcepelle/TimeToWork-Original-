@@ -33,38 +33,42 @@ public class MensajesPerfil extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bindingMens = ActivityMensajesPerfilBinding.inflate(getLayoutInflater());
-        View viewMens = bindingMens.getRoot();
-        setContentView(viewMens);
-        Bundle bundleMens = getIntent().getExtras();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            usuarioIntent = bundleMens.getSerializable("usuario", Usuario.class);
-            correosSpinner =  bundleMens.getSerializable("CorreosSpinner", ArrayList.class);
-            recibidos = (ArrayList<Mensaje>)  bundleMens.getSerializable("mensajesRecibidos", ArrayList.class);
-            enviados = (ArrayList<Mensaje>) bundleMens.getSerializable("mensajesEnviados", ArrayList.class);
-        }
-        posicionCentro = Integer.valueOf(bundleMens.get("posicionCentro").toString());
-        posicionCorreo = Integer.valueOf(bundleMens.get("posicionCorreo").toString());
-        centrosSpinner = bundleMens.getStringArray("CentrosSpinner");
-        bindingMens.listaMensajesMens.setLayoutManager(new LinearLayoutManager(this));
-        bindingMens.btnRecibidosMens.setOnClickListener(v -> {
-            bindingMens.listaMensajesMens.setAdapter(new MensajesAdapter(this, recibidos, usuarioIntent, correosSpinner, centrosSpinner));
+
+        bindingMens = ActivityMensajesPerfilBinding.inflate(getLayoutInflater()); // crea una instancia de la clase de vinculación para la actividad que se usará
+        View viewMens = bindingMens.getRoot(); //referencia a la vista raíz
+        setContentView(viewMens); //para que sea la vista activa en la pantalla
+
+        Bundle bundleMens = getIntent().getExtras(); //obtenemos los datos pasados en el intent del anterior activity
+        usuarioIntent = (Usuario) bundleMens.getSerializable("usuario"); //usuario de la sesión
+        correosSpinner = (ArrayList<ArrayList<String>>) bundleMens.getSerializable("CorreosSpinner"); //obtenemos el listado de correos por centro(ordenados del mismo modo que el array centrosSpinner)
+        centrosSpinner = bundleMens.getStringArray("CentrosSpinner"); //recogemos lo valores del array que contiene los datos de los centros
+        recibidos = (ArrayList<Mensaje>)  bundleMens.getSerializable("mensajesRecibidos"); //Obtenemos el listado de mensajes recibidos
+        enviados = (ArrayList<Mensaje>) bundleMens.getSerializable("mensajesEnviados"); //Obtenemos el listado de mensajes envíados
+        posicionCentro = Integer.valueOf(bundleMens.get("posicionCentro").toString()); //posición del item seleccionado en el spinner de los centros de trabajo
+        posicionCorreo = Integer.valueOf(bundleMens.get("posicionCorreo").toString()); //posición del item seleccionado en el spinner de los correos de los usuarios
+
+
+        bindingMens.listaMensajesMens.setLayoutManager(new LinearLayoutManager(this)); //fijamos el layout que organizará las vistas para el RecyclerView listaMensajes
+
+        bindingMens.btnRecibidosMens.setOnClickListener(v -> { //Botón Recibidos, rellenaremos con el listado de recibidos el recyclerView, acción al hacer clic
+            bindingMens.listaMensajesMens.setAdapter(new MensajesAdapter(this, recibidos, usuarioIntent, correosSpinner, centrosSpinner)); //fijamos el adaptador del recyclerview con los mensajes recibidos
         });
-        bindingMens.btnEnviadosMens.setOnClickListener(v -> {
-            bindingMens.listaMensajesMens.setAdapter(new MensajesAdapter(this, enviados, usuarioIntent, correosSpinner, centrosSpinner));
+
+        bindingMens.btnEnviadosMens.setOnClickListener(v -> { //Botón Envíados, rellenaremos con el listado de envíados el recyclerView, acción al hacer clic
+            bindingMens.listaMensajesMens.setAdapter(new MensajesAdapter(this, enviados, usuarioIntent, correosSpinner, centrosSpinner)); //fijamos el adaptador del recyclerview con los mensajes envíados
         });
-        bindingMens.floatingActionButton.setOnClickListener(v -> {
+
+        bindingMens.floatingActionButton.setOnClickListener(v -> { //Botón flotante, hacemos un intent al activity EnviarMensaje para poder envíar un mensaje nuevo, acción al hacer clic
             Intent intentMens = new Intent(MensajesPerfil.this, EnviarMensaje.class);
             intentMens.putExtra("usuario", usuarioIntent);
             intentMens.putExtra("posicionCentro", posicionCentro);
             intentMens.putExtra("posicionCorreo", posicionCorreo);
             intentMens.putExtra("CorreosSpinner", correosSpinner);
             intentMens.putExtra("CentrosSpinner", centrosSpinner);
-            intentMens.putExtra("mensajesRecibidos", recibidos);
-            intentMens.putExtra("mensajesEnviados", enviados);
             startActivity(intentMens);
         });
-        bindingMens.btnVolverMens.setOnClickListener(v -> {
+
+        bindingMens.btnVolverMens.setOnClickListener(v -> { //Botón volver, hacemos un intent para volver al activity UsuarioSesion, acción al hacer clic
             Intent intentVolver = null;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 intentVolver = new Intent(MensajesPerfil.this, UsuarioSesion.class);

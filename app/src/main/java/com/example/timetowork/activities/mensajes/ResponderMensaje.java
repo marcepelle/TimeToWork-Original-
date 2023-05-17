@@ -42,28 +42,31 @@ public class ResponderMensaje extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bindingResMens = ActivityResponderMensajeBinding.inflate(getLayoutInflater());
-        View viewResMens = bindingResMens.getRoot();
-        setContentView(viewResMens);
-        Bundle bundleResMens = getIntent().getExtras();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            usuarioIntent = bundleResMens.getSerializable("usuario", Usuario.class);
-            mensajeIntent = bundleResMens.getSerializable("mensaje", Mensaje.class);
-            correosSpinner =  bundleResMens.getSerializable("CorreosSpinner", ArrayList.class);
-        }
-        centrosSpinner = bundleResMens.getStringArray("CentrosSpinner");
-        ObtenerEnviados(usuarioIntent);
-        ObtenerRecibidos(usuarioIntent);
-        bindingResMens.txtFechaRespMens.setText("Fecha: " + mensajeIntent.getFecha());
-        bindingResMens.txtDeRespMens.setText("De: " + mensajeIntent.getDe());
-        bindingResMens.txtParaRespMens.setText("Para: " + mensajeIntent.getPara());
-        bindingResMens.txtAsuntoRespMens.setText("Asunto: " + mensajeIntent.getAsunto());
-        bindingResMens.editMensajeEnvMens.setText(mensajeIntent.getContenido());
-        bindingResMens.btnContestarRespMens.setOnClickListener(v -> {
-            AlertDialog dialog = createSimpleDialog();
-            dialog.show();
+
+        bindingResMens = ActivityResponderMensajeBinding.inflate(getLayoutInflater()); // crea una instancia de la clase de vinculación para la actividad que se usará
+        View viewResMens = bindingResMens.getRoot(); //referencia a la vista raíz
+        setContentView(viewResMens); // para que sea la vista activa en la pantalla
+
+        Bundle bundleResMens = getIntent().getExtras(); //obtenemos los datos pasados en el intent del anterior activity
+        usuarioIntent = (Usuario) bundleResMens.getSerializable("usuario"); //usuario de la sesión
+        mensajeIntent = (Mensaje) bundleResMens.getSerializable("mensaje"); //Mensaje recibido por intent al que se va a responder
+        correosSpinner = (ArrayList<ArrayList<String>>) bundleResMens.getSerializable("CorreosSpinner"); //obtenemos el listado de correos por centro(ordenados del mismo modo que el array centrosSpinner)
+        centrosSpinner = bundleResMens.getStringArray("CentrosSpinner"); //recogemos lo valores del array que contiene los datos de los centros
+
+        ObtenerEnviados(usuarioIntent); //Obtenemos lo mensajes envíados para el usuario pasado
+        ObtenerRecibidos(usuarioIntent); //Obtenemos lo mensajes recibidos para el usuario pasado
+
+        bindingResMens.txtFechaRespMens.setText("Fecha: " + mensajeIntent.getFecha()); //Insertamos en el TextView la fecha del mensaje a responder
+        bindingResMens.txtDeRespMens.setText("De: " + mensajeIntent.getDe()); //Insertamos en el TextView la persona que envía el mensaje a responder
+        bindingResMens.txtParaRespMens.setText("Para: " + mensajeIntent.getPara()); //Insertamos en el TextView la persona que recibe el mensaje a responder
+        bindingResMens.txtAsuntoRespMens.setText("Asunto: " + mensajeIntent.getAsunto()); //Insertamos en el TextView el asunto del mensaje a responder
+        bindingResMens.editMensajeEnvMens.setText(mensajeIntent.getContenido()); //Insertamos en el EditText el contenido del mensaje a responder
+
+        bindingResMens.btnContestarRespMens.setOnClickListener(v -> { //Botón Contestar, abrimos un dialogo para contestar el mensaje, acción al hacer clic
+            AlertDialog dialog = createSimpleDialog(); //Definimos un objeto de tipo AlertDialog y le asignamos una instancia a través del método createSimpleDialog
+            dialog.show(); //Mostramos el dialogo en el activity
         });
-        bindingResMens.btnVolverRespMens.setOnClickListener(v -> {
+        bindingResMens.btnVolverRespMens.setOnClickListener(v -> { //Botón volver, volvemos al activity MensajesPerfil, acción al hacer clic
             Intent intentVolver = new Intent(ResponderMensaje.this, MensajesPerfil.class);
             intentVolver.putExtra("usuario", usuarioIntent);
             intentVolver.putExtra("posicionCentro", 0);
@@ -78,41 +81,33 @@ public class ResponderMensaje extends AppCompatActivity {
 
     }
 
-    public AlertDialog createSimpleDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = this.getLayoutInflater();
-        View viewAlert = inflater.inflate(R.layout.dialog_responder_mensaje, null);
-        EditText editMensaje = (EditText) viewAlert.findViewById(R.id.EditMensaje);
-        builder.setView(viewAlert)
-                .setTitle("Responder Mensaje")
-                .setPositiveButton("Envíar",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Mensaje mensaje = modeloMensaje(usuarioIntent, bindingResMens, mensajeIntent);
-                                mensaje.setContenido("Respuesta a correo en fecha: " + mensajeIntent.getFecha() + "Hora: " + mensajeIntent.getHora() + "\n" + "Mensaje: " + editMensaje.getText().toString());
-                                enviarMensaje(mensaje);
-                            }
+    public AlertDialog createSimpleDialog() { //Devuelve un objeto AlertDialog para poder responder el mensaje en cuestión
+        AlertDialog.Builder builder = new AlertDialog.Builder(this); //Con un elemento Builder podremos definir las partes de la creación de un objeto de clase AlertDialog
+        LayoutInflater inflater = this.getLayoutInflater(); //Obtenemos el layout donde se mostrará el dialogo
+        View viewAlert = inflater.inflate(R.layout.dialog_responder_mensaje, null); //Creamos la vista en el Layout pasandole por parámetro el Layout que se va a mostrar en la vista
+        EditText editMensaje = (EditText) viewAlert.findViewById(R.id.EditMensaje); //Obtenemos el EdiText de la vista del dialogo donde irá el contenido de la respuesta del mensaje
+        builder.setView(viewAlert) //En la vista del dialogo...
+                .setTitle("Responder Mensaje") //Fijamos el título mostrado en el dialogo
+                .setPositiveButton("Envíar", (dialog, which) -> { //En caso de que el usuario pulse enviar...
+                            Mensaje mensaje = modeloMensaje(usuarioIntent, mensajeIntent); //Crearemos un objeto mensaje que será la contestación al mensaje
+                            mensaje.setContenido("Respuesta a correo en fecha: " + mensajeIntent.getFecha() + "Hora: " + mensajeIntent.getHora() + "\n" + "Mensaje: " + editMensaje.getText().toString()); //Fijamos el contenido del mensaje
+                            enviarMensaje(mensaje); //Enviamos el mensaje
                         })
-                .setNegativeButton("Cancelar",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
+                .setNegativeButton("Cancelar", (dialog, which) -> { //En caso de que el usuario pulse cancelar no se hará nada
                         });
 
-        return builder.create();
+        return builder.create(); //Devolvemos el objeto AlertDialog creandolo con el builder
     }
 
-    private void enviarMensaje(Mensaje mensaje) {
+    private void enviarMensaje(Mensaje mensaje) { //Envíamos el mensaje pasado por parámetro
         MensajeService mensajeService = Apis.getMensajeService();
-        Call<Void> call = mensajeService.crearMensaje(mensaje);
+        Call<Void> call = mensajeService.crearMensaje(mensaje); //Hacemos una llamada a la Api para que inserte en la base de datos el mensaje pasado
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Toast.makeText(ResponderMensaje.this, "Mensaje Enviado", Toast.LENGTH_SHORT).show();
-                ObtenerEnviados(usuarioIntent);
-                ObtenerRecibidos(usuarioIntent);
+                ObtenerEnviados(usuarioIntent);  //Obtenemos lo mensajes envíados para el usuario pasado
+                ObtenerRecibidos(usuarioIntent); //Obtenemos lo mensajes recibidos para el usuario pasado
             }
 
             @Override
@@ -124,58 +119,54 @@ public class ResponderMensaje extends AppCompatActivity {
     }
 
 
-    private Mensaje modeloMensaje(Usuario usuarioIntent, ActivityResponderMensajeBinding bindingResMens, Mensaje mensajeIntent) {
-        Mensaje mensaje = new Mensaje();
-        mensaje.setAsunto(mensajeIntent.getAsunto());
-        mensaje.setDe(usuarioIntent.getCorreoUsuario());
-        mensaje.setPara(mensajeIntent.getDe());
+    private Mensaje modeloMensaje(Usuario usuarioIntent, Mensaje mensajeIntent) { //Devuelve un objeto mensaje del usuario pasado y el mensaje pasado que es el mensaje que se va responder
+        Mensaje mensaje = new Mensaje(); //Creamos un objeto mensaje
+        mensaje.setAsunto(mensajeIntent.getAsunto()); //fijamos el asunto que será el del mesnaje que se va a responder
+        mensaje.setDe(usuarioIntent.getCorreoUsuario()); //fijamos el correo de la persona que va a enviar el mensaje
+        mensaje.setPara(mensajeIntent.getDe()); //fijamos el correo de la persona que va a recibir el mensaje
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            mensaje.setFecha(LocalDate.now().toString());
-            mensaje.setHora(LocalTime.now().toString());
+            mensaje.setFecha(LocalDate.now().toString()); //fijamos la fecha de envío
+            mensaje.setHora(LocalTime.now().toString()); //fijamos la hora de envío
         }
-        mensaje.setCentroDe(usuarioIntent.getLugarTrabajo());
-        mensaje.setCentroPara(mensajeIntent.getCentroDe());
-        mensaje.setNomEmpresa(usuarioIntent.getEmpresaUsuario());
-        mensaje.setUsuario_fk(usuarioIntent);
-        return mensaje;
+        mensaje.setCentroDe(usuarioIntent.getLugarTrabajo()); //fijamos el centro de trabajo de la persona que envía el mensaje
+        mensaje.setCentroPara(mensajeIntent.getCentroDe()); //fijamos el centro de trabajo de la persona que recibe el mensaje
+        mensaje.setNomEmpresa(usuarioIntent.getEmpresaUsuario()); //fijamos el nombre de la empresa del usuario que envía el mensaje
+        mensaje.setUsuario_fk(usuarioIntent); //fijamos el usuario que envía el mensaje
+        return mensaje; //devolvemos el mensaje
     }
 
-    private void ObtenerEnviados(Usuario usuarioIntent) {
+    private void ObtenerEnviados(Usuario usuarioIntent) { //Obtenemos la lista de mensajes envíados para el usuario pasado
         MensajeService mensajeService = Apis.getMensajeService();
-        Call<ArrayList<Mensaje>> call = mensajeService.getEnviados(usuarioIntent);
+        Call<ArrayList<Mensaje>> call = mensajeService.getEnviados(usuarioIntent); //hacemos una llamada a la Api para obtener el listado de mensajes envíados
         call.enqueue(new Callback<ArrayList<Mensaje>>() {
             @Override
             public void onResponse(Call<ArrayList<Mensaje>> call, Response<ArrayList<Mensaje>> response) {
-                if(response.body().size()!=0){
-                    enviados = response.body();
+                if(response.body().size()!=0){ //Si la respuesta no está vacía
+                    enviados = response.body(); //Rellenamos el ArrayList de mensajes envíados con la respuesta de la llamada a la Api
                     return;
                 }
-                enviados = new ArrayList<Mensaje>();
+                enviados = new ArrayList<Mensaje>();  //Si está vacía inicializamos el Arraylist
             }
-
             @Override
             public void onFailure(Call<ArrayList<Mensaje>> call, Throwable t) {
-
             }
         });
     }
 
-    private void ObtenerRecibidos(Usuario usuarioIntent) {
+    private void ObtenerRecibidos(Usuario usuarioIntent) { //Obtenemos la lista de mensajes recibidos para el usuario pasado
         MensajeService mensajeService = Apis.getMensajeService();
-        Call<ArrayList<Mensaje>> call = mensajeService.getRecibidos(usuarioIntent);
+        Call<ArrayList<Mensaje>> call = mensajeService.getRecibidos(usuarioIntent); //hacemos una llamada a la Api para obtener el listado de mensajes recibidos
         call.enqueue(new Callback<ArrayList<Mensaje>>() {
             @Override
             public void onResponse(Call<ArrayList<Mensaje>> call, Response<ArrayList<Mensaje>> response) {
-                if(response.body().size()!=0){
-                    recibidos = response.body();
+                if(response.body().size()!=0){ //Si la respuesta no está vacía
+                    recibidos = response.body(); //Rellenamos el ArrayList de mensajes recibidos con la respuesta de la llamada a la Api
                     return;
                 }
-                recibidos = new ArrayList<Mensaje>();
+                recibidos = new ArrayList<Mensaje>();  //Si está vacía inicializamos el Arraylist
             }
-
             @Override
             public void onFailure(Call<ArrayList<Mensaje>> call, Throwable t) {
-
             }
         });
     }

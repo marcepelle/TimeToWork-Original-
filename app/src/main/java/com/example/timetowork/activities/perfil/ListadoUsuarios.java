@@ -51,11 +51,11 @@ public class ListadoUsuarios extends AppCompatActivity {
     }
     private void obtenerUsuarios(Usuario usuario) { //obtenemos la lista de usuarios según la empresa del usuario de la sesión
         UsuarioService usuarioService = Apis.getUsuarioService();
-        Call<ArrayList<Usuario>> call = usuarioService.listarUsuarios(usuario);
+        Call<ArrayList<Usuario>> call = usuarioService.listarUsuarios(usuario); //hacemos una llamada a la Api para que nos devuelva la lista de usuarios de la empresa del usuario pasado
         call.enqueue(new Callback<ArrayList<Usuario>>() {
             @Override
             public void onResponse(Call<ArrayList<Usuario>> call, Response<ArrayList<Usuario>> response) {
-                usuarios.addAll(response.body()); //añadimos en el arraylist usuarios la respuesta de la llamada a la Api
+                usuarios.addAll(response.body()); //añadimos en el arraylist de usuarios de la respuesta de la llamada a la Api
                 Log.d("ResUsuario", response.body().toString());
                 Log.d("ResUsuario2", usuarios.toString());
                 Toast.makeText(ListadoUsuarios.this, "Lista Obtenida", Toast.LENGTH_SHORT).show();
