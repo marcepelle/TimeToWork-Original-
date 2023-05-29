@@ -9,9 +9,9 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Horario implements Serializable {
-        @SerializedName("idHorario")
-        @Expose
+public class Horario implements Serializable { //Clase Horario que implementa la interfaz serializable para poder pasar objetos entre activities
+        @SerializedName("idHorario") //indicamos el nombre del campo de la respuesta JSON
+        @Expose //permite la serialización o deserialización JSON
         private int idHorario;
         @SerializedName("empleado")
         @Expose
@@ -44,6 +44,7 @@ public class Horario implements Serializable {
         public Horario() {
         }
 
+    //Constructores
     public Horario(int idHorario, String empleado, String correoEmpleado, String fecha, String centroTrabajo, String horaEntrada, String horaSalida, String fichaEntrada, String fichaSalida, Usuario usuario_fk) {
         this.idHorario = idHorario;
         this.empleado = empleado;
@@ -57,6 +58,7 @@ public class Horario implements Serializable {
         this.usuario_fk = usuario_fk;
     }
 
+    //Getters y Setters
     public int getIdHorario() {
         return idHorario;
     }
@@ -137,6 +139,7 @@ public class Horario implements Serializable {
         this.usuario_fk = usuario_fk;
     }
 
+    //Método toString
     @Override
     public String toString() {
         return "Horario{" +

@@ -77,8 +77,6 @@ public class ResponderMensaje extends AppCompatActivity {
             intentVolver.putExtra("mensajesEnviados", enviados);
             startActivity(intentVolver);
         });
-
-
     }
 
     public AlertDialog createSimpleDialog() { //Devuelve un objeto AlertDialog para poder responder el mensaje en cuestión

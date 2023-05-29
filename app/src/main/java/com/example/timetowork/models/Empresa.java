@@ -7,9 +7,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Empresa implements Serializable {
-    @SerializedName("idEmpresa")
-    @Expose
+public class Empresa implements Serializable { //Clase Empresa que implementa la interfaz serializable para poder pasar objetos entre activities
+    @SerializedName("idEmpresa") //indicamos el nombre del campo de la respuesta JSON
+    @Expose //permite la serialización o deserialización JSON
     private int idEmpresa;
     @SerializedName("cif")
     @Expose
@@ -36,6 +36,7 @@ public class Empresa implements Serializable {
     @Expose
     private List<Usuario> usuarios;
 
+    //Constructores
     public Empresa() {
     }
 
@@ -51,6 +52,7 @@ public class Empresa implements Serializable {
         this.usuarios = usuarios;
     }
 
+    //Getters y Setters
     public int getIdEmpresa() {
         return idEmpresa;
     }
@@ -123,6 +125,7 @@ public class Empresa implements Serializable {
         this.usuarios = usuarios;
     }
 
+    //Método toString
     @Override
     public String toString() {
         return "Empresa{" +

@@ -8,9 +8,9 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class Usuario implements Serializable {
-    @SerializedName("idUsuario")
-    @Expose
+public class Usuario implements Serializable { //Clase Usuario que implementa la interfaz serializable para poder pasar objetos entre activities
+    @SerializedName("idUsuario") //indicamos el nombre del campo de la respuesta JSON
+    @Expose //permite la serialización o deserialización JSON
     private int idUsuario;
     @SerializedName("nombreUsuario")
     @Expose
@@ -53,6 +53,7 @@ public class Usuario implements Serializable {
     @Expose
     private List<Mensaje> mensajes;
 
+    //Constructores
     public Usuario() {
     }
 
@@ -73,6 +74,7 @@ public class Usuario implements Serializable {
         this.mensajes = mensajes;
     }
 
+    //Getters y Setters
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -185,6 +187,7 @@ public class Usuario implements Serializable {
         this.mensajes = mensajes;
     }
 
+    //Método toString
     @Override
     public String toString() {
         return "Usuario{" +

@@ -27,7 +27,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     buildFeatures{
-        viewBinding = true
+        viewBinding = true //Habilitamos para poder trabajar con Binding en los activities y acceder facilmente a sus vistas
     }
 }
 
@@ -39,6 +39,6 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0' //agregamos la dependencia de retrofit
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0' //agregamos la dependencia de para convertir JSON en JAVA
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0' //agregamos la dependencia de Retrofit para poder consumir servicios web desde android
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0' //agregamos la dependencia adicional para funcionar junto con Retrofit para convertir los objetos JSON en JAVA
 }

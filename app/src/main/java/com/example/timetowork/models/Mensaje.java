@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Mensaje implements Serializable {
-    @SerializedName("idMensaje")
-    @Expose
+public class Mensaje implements Serializable { //Clase Mensaje que implementa la interfaz serializable para poder pasar objetos entre activities
+    @SerializedName("idMensaje") //indicamos el nombre del campo de la respuesta JSON
+    @Expose //permite la serialización o deserialización JSON
     private int idMensaje;
 
     @SerializedName("de")
@@ -58,6 +58,7 @@ public class Mensaje implements Serializable {
     @Expose
     private Usuario usuario_fk;
 
+    //Constructores
     public Mensaje() {
     }
 
@@ -77,6 +78,7 @@ public class Mensaje implements Serializable {
         this.usuario_fk = usuario_fk;
     }
 
+    //Getters y Setters
     public int getIdMensaje() {
         return idMensaje;
     }
@@ -181,6 +183,7 @@ public class Mensaje implements Serializable {
         this.usuario_fk = usuario_fk;
     }
 
+    //Método toString
     @Override
     public String toString() {
         return "Mensaje{" +
