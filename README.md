@@ -1,11 +1,11 @@
 # TimeToWork-Original-
 App of Schedules and Swifts in a Job
 -	La interfaz que utilizará el cliente es una aplicación de Android que se ha desarrollado con las siguientes tecnologías: 
-  o	IDE: Android Studio Electric Eel | 2022.1.1 Patch 2
-  o	Lenguaje: Java 8
-  o	SDK version: API 33 Android 13.0 Tiramisu
-  o	Tipo proyecto: Gradle (Version: 7.5)
-  o	Dependencies para conectar al API REST: 
+  - IDE: Android Studio Electric Eel | 2022.1.1 Patch 2
+  -	Lenguaje: Java 8
+  -	SDK version: API 33 Android 13.0 Tiramisu
+  -	Tipo proyecto: Gradle (Version: 7.5)
+  -	Dependencies para conectar al API REST: 	    
     - retrofit2:  
       •	retrofit (version: 2.9.0) 
       •	converter-gson (version: 2.9.0)
