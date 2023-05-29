@@ -1,5 +1,6 @@
 # TimeToWork-Original-
 App of Schedules and Swifts in a Job
+
 La interfaz que utilizará el cliente es una aplicación de Android que se ha desarrollado con las siguientes tecnologías: 
   - IDE: Android Studio Electric Eel | 2022.1.1 Patch 2
   -	Lenguaje: Java 8
