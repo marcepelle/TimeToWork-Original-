@@ -13,6 +13,7 @@ App of Schedules and Swifts in a Job
 Objetivos generales: 
   - reducir los tiempos que se destinan a controlar los horarios de los trabajadores automatizando las tareas 
   - reducir los esfuerzos de gestión de cambios de turnos que realiza el departamento implementando a los propios empleados en la gestión de los turnos.
+
 Objetivos específicos: 
   -	Crear sesiones para los usuarios (empleados) 
   -	Crear una lista o tabla que permita consultar a los usuarios sus propios horarios y a los administradores los horarios y turnos de todos los trabajadores
