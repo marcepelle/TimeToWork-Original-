@@ -8,6 +8,35 @@
     android:backgroundTint="#539F56"
     tools:context=".activities.perfil.GestionUsuario">
 
+        <TextView
+            android:id="@+id/textCambiarContrasenaGesUs"
+            android:layout_width="150dp"
+            android:layout_height="20dp"
+            android:text="@string/txtCambiarContrasena"
+            android:textColor="#212121"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.183"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.627"
+            tools:text="Cambiar contraseña:" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnCambiarContrasenaGesUs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:contentDescription="@string/CambiarContraseña"
+            app:backgroundTint="@color/teal_700"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.69"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.638"
+            app:srcCompat="@android:drawable/ic_lock_idle_lock" />
+
         <Button
             android:id="@+id/btnInformeUsGesUs3"
             android:layout_width="wrap_content"
@@ -41,10 +70,13 @@
             android:layout_height="wrap_content"
             android:text="@string/fechaNacimineto"
             android:textColor="#212121"
-            app:layout_constraintBottom_toTopOf="@+id/textCorreoGesUs"
-            app:layout_constraintStart_toStartOf="@+id/textCorreoGesUs"
-            app:layout_constraintTop_toBottomOf="@+id/textCentroTrabajoGesUs"
-            app:layout_constraintVertical_bias="0.5"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.173"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.492"
             tools:text="Fecha de Nacimiento:" />
 
         <TextView
@@ -53,10 +85,12 @@
             android:layout_height="wrap_content"
             android:text="@string/telefonoEmpresa"
             android:textColor="#212121"
-            app:layout_constraintBottom_toTopOf="@+id/textDireccionGesUs"
-            app:layout_constraintStart_toStartOf="@+id/textDireccionGesUs"
-            app:layout_constraintTop_toBottomOf="@+id/textApellidosGesUs"
-            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.136"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.292"
             tools:text="Telefono:" />
 
         <TextView
@@ -65,10 +99,12 @@
             android:layout_height="wrap_content"
             android:text="@string/apelidosEmpleado"
             android:textColor="#212121"
-            app:layout_constraintBottom_toTopOf="@+id/textTelefonoGesUs"
-            app:layout_constraintStart_toStartOf="@+id/textTelefonoGesUs"
-            app:layout_constraintTop_toBottomOf="@+id/textNombEmpleadoGesUs"
-            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.137"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.227"
             tools:text="Apellidos:" />
 
         <TextView
@@ -77,10 +113,12 @@
             android:layout_height="wrap_content"
             android:text="@string/direccionEmpleado"
             android:textColor="#212121"
-            app:layout_constraintBottom_toTopOf="@+id/textCentroTrabajoGesUs"
-            app:layout_constraintStart_toStartOf="@+id/textCentroTrabajoGesUs"
-            app:layout_constraintTop_toBottomOf="@+id/textTelefonoGesUs"
-            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.137"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.359"
             tools:text="Dirección:" />
 
         <Button
@@ -106,24 +144,13 @@
             android:layout_height="wrap_content"
             android:text="@string/nombreEmpleado"
             android:textColor="#212121"
-            app:layout_constraintBottom_toTopOf="@+id/textApellidosGesUs"
-            app:layout_constraintStart_toStartOf="@+id/textApellidosGesUs"
-            app:layout_constraintTop_toBottomOf="@+id/txtTitleCrearEmpleadoGesUs"
-            app:layout_constraintVertical_bias="0.5"
-            tools:text="Nombre Empleado:" />
-
-        <TextView
-            android:id="@+id/textRepetirContrasenaGesUs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/repetirContraseña"
-            android:textColor="#212121"
-            app:layout_constraintBottom_toTopOf="@+id/btnEstablecerDatosGesUs"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.168"
+            app:layout_constraintHorizontal_bias="0.164"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textContrasenaGesUs"
-            app:layout_constraintVertical_bias="0.5" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.161"
+            tools:text="Nombre Empleado:" />
 
         <EditText
             android:id="@+id/editNombEmpleadoGesUs"
@@ -140,12 +167,12 @@
             android:paddingEnd="5dp"
             android:textColorHint="#2E7D32"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/editApellidosGesUs"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.938"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewGesUs"
-            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.161"
             tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
@@ -163,12 +190,12 @@
             android:paddingEnd="5dp"
             android:textColorHint="#2E7D32"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/editContrasenaGesUs"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.938"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editFechaNacimientoGesUs"
-            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.556"
             tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
@@ -186,12 +213,12 @@
             android:paddingEnd="5dp"
             android:textColorHint="#2E7D32"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/editDireccionGesUs"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.938"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editApellidosGesUs"
-            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.291"
             tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
@@ -209,35 +236,12 @@
             android:paddingEnd="5dp"
             android:textColorHint="#2E7D32"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/editFechaNacimientoGesUs"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.938"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editDireccionGesUs"
-            app:layout_constraintVertical_bias="0.5"
-            tools:ignore="TouchTargetSizeCheck" />
-
-        <EditText
-            android:id="@+id/editContrasenaGesUs"
-            android:layout_width="150dp"
-            android:layout_height="20dp"
-            android:autofillHints=""
-            android:background="#FFFFFF"
-            android:backgroundTint="#FFFFFF"
-            android:ems="10"
-            android:hint="@string/password"
-            android:includeFontPadding="true"
-            android:inputType="textPassword"
-            android:paddingStart="5dp"
-            android:paddingEnd="5dp"
-            android:textColorHint="#2E7D32"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/editRepetirContraGesUs"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.938"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editCorreoGesUs"
-            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.424"
             tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
@@ -255,12 +259,12 @@
             android:paddingEnd="5dp"
             android:textColorHint="#2E7D32"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/editCentroDeTrabajoGesUs"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.938"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTelefonoGesUs"
-            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.36"
             tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
@@ -278,12 +282,12 @@
             android:paddingEnd="5dp"
             android:textColorHint="#2E7D32"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/editCorreoGesUs"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.938"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editCentroDeTrabajoGesUs"
-            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.49"
             tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
@@ -301,47 +305,13 @@
             android:paddingEnd="5dp"
             android:textColorHint="#2E7D32"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/editTelefonoGesUs"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.938"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editNombEmpleadoGesUs"
-            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.226"
             tools:ignore="TouchTargetSizeCheck" />
-
-        <EditText
-            android:id="@+id/editRepetirContraGesUs"
-            android:layout_width="150dp"
-            android:layout_height="20dp"
-            android:autofillHints=""
-            android:background="#FFFFFF"
-            android:backgroundTint="#FFFFFF"
-            android:ems="10"
-            android:hint="@string/repetirPassGesUs"
-            android:includeFontPadding="true"
-            android:inputType="textPassword"
-            android:paddingStart="5dp"
-            android:paddingEnd="5dp"
-            android:textColorHint="#2E7D32"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/btnEstablecerDatosGesUs"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.938"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editContrasenaGesUs"
-            app:layout_constraintVertical_bias="0.5"
-            tools:ignore="TouchTargetSizeCheck" />
-
-        <TextView
-            android:id="@+id/textContrasenaGesUs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/contraseña"
-            android:textColor="#212121"
-            app:layout_constraintBottom_toTopOf="@+id/textRepetirContrasenaGesUs"
-            app:layout_constraintStart_toStartOf="@+id/textRepetirContrasenaGesUs"
-            app:layout_constraintTop_toBottomOf="@+id/textCorreoGesUs"
-            app:layout_constraintVertical_bias="0.5" />
 
         <TextView
             android:id="@+id/textCorreoGesUs"
@@ -349,10 +319,12 @@
             android:layout_height="wrap_content"
             android:text="@string/txtCorreo"
             android:textColor="#212121"
-            app:layout_constraintBottom_toTopOf="@+id/textContrasenaGesUs"
-            app:layout_constraintStart_toStartOf="@+id/textContrasenaGesUs"
-            app:layout_constraintTop_toBottomOf="@+id/textFechaNacimientoGesUs"
-            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.131"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.558"
             tools:text="Correo:" />
 
         <TextView
@@ -361,10 +333,12 @@
             android:layout_height="wrap_content"
             android:text="@string/centroDeTrabajo"
             android:textColor="#212121"
-            app:layout_constraintBottom_toTopOf="@+id/textFechaNacimientoGesUs"
-            app:layout_constraintStart_toStartOf="@+id/textFechaNacimientoGesUs"
-            app:layout_constraintTop_toBottomOf="@+id/textDireccionGesUs"
-            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.162"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.426"
             tools:text="Centro de Trabajo:" />
 
         <TextView

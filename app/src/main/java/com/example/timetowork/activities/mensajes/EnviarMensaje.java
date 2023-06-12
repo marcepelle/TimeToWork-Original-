@@ -133,7 +133,7 @@ public class EnviarMensaje extends AppCompatActivity {
 
     private void ObtenerEnviados(Usuario usuarioIntent) { //Obtenemos la lista de mensajes envíados para el usuario pasado
         MensajeService mensajeService = Apis.getMensajeService();
-        Call<ArrayList<Mensaje>> call = mensajeService.getEnviados(usuarioIntent); //hacemos una llamada a la Api para obtener el listado de mensajes envíados
+        Call<ArrayList<Mensaje>> call = mensajeService.getEnviados(usuarioIntent.getCorreoUsuario()); //hacemos una llamada a la Api para obtener el listado de mensajes envíados
         call.enqueue(new Callback<ArrayList<Mensaje>>() {
             @Override
             public void onResponse(Call<ArrayList<Mensaje>> call, Response<ArrayList<Mensaje>> response) {
@@ -151,7 +151,7 @@ public class EnviarMensaje extends AppCompatActivity {
 
     private void ObtenerRecibidos(Usuario usuarioIntent) { //Obtenemos la lista de mensajes recibidos para el usuario pasado
         MensajeService mensajeService = Apis.getMensajeService();
-        Call<ArrayList<Mensaje>> call = mensajeService.getRecibidos(usuarioIntent); //hacemos una llamada a la Api para obtener el listado de mensajes recibidos
+        Call<ArrayList<Mensaje>> call = mensajeService.getRecibidos(usuarioIntent.getCorreoUsuario()); //hacemos una llamada a la Api para obtener el listado de mensajes recibidos
         call.enqueue(new Callback<ArrayList<Mensaje>>() {
             @Override
             public void onResponse(Call<ArrayList<Mensaje>> call, Response<ArrayList<Mensaje>> response) {

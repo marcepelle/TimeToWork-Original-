@@ -145,7 +145,7 @@ public class UsuarioSesion extends AppCompatActivity {
 
     private void ObtenerEnviados(Usuario usuarioIntent) { //obtenemos el listado de mensajes enviados para el usuario pasado
         MensajeService mensajeService = Apis.getMensajeService();
-        Call<ArrayList<Mensaje>> call = mensajeService.getEnviados(usuarioIntent); //hacemos la llamada a la Api para que nos devuelva los mensajes envíados para el usuario que pasemos
+        Call<ArrayList<Mensaje>> call = mensajeService.getEnviados(usuarioIntent.getCorreoUsuario()); //hacemos la llamada a la Api para que nos devuelva los mensajes envíados para el usuario que pasemos
         call.enqueue(new Callback<ArrayList<Mensaje>>() {
             @Override
             public void onResponse(Call<ArrayList<Mensaje>> call, Response<ArrayList<Mensaje>> response) {
@@ -164,7 +164,7 @@ public class UsuarioSesion extends AppCompatActivity {
 
     private void ObtenerRecibidos(Usuario usuarioIntent) { //obtenemos el listado de mensajes recibidos para el usuario pasado
         MensajeService mensajeService = Apis.getMensajeService();
-        Call<ArrayList<Mensaje>> call = mensajeService.getRecibidos(usuarioIntent); //hacemos la llamada a la Api para que nos devuelva los mensajes recibidos para el usuario que pasemos
+        Call<ArrayList<Mensaje>> call = mensajeService.getRecibidos(usuarioIntent.getCorreoUsuario()); //hacemos la llamada a la Api para que nos devuelva los mensajes recibidos para el usuario que pasemos
         call.enqueue(new Callback<ArrayList<Mensaje>>() {
             @Override
             public void onResponse(Call<ArrayList<Mensaje>> call, Response<ArrayList<Mensaje>> response) {
@@ -184,7 +184,7 @@ public class UsuarioSesion extends AppCompatActivity {
     private void obtenerFicha(Usuario usuario){ //obtenemos si ya se ha fichado en el dia e insertamos la información en los TextView
         Horario horario = modeloHorario(usuario); // creamos un objeto horario con la fecha actual para el usuario de la sesión
         HorarioService horarioService = Apis.getHorarioService();
-        Call<ArrayList<Horario>> call = horarioService.obtenerFichar(horario); //hacemos la llamada a la Api para que nos devuelva, si existe, el horario de la fecha actual para el usuario de la sesión
+        Call<ArrayList<Horario>> call = horarioService.obtenerFichar(horario.getCorreoEmpleado(), LocalDate.parse(horario.getFecha())); //hacemos la llamada a la Api para que nos devuelva, si existe, el horario de la fecha actual para el usuario de la sesión
         call.enqueue(new Callback<ArrayList<Horario>>() {
             @Override
             public void onResponse(Call<ArrayList<Horario>> call, Response<ArrayList<Horario>> response) {
@@ -279,7 +279,7 @@ public class UsuarioSesion extends AppCompatActivity {
 
     private void CorreoCentroUsuariosParaSpinner(Usuario usuario) { //obtenemos los datos de los centros y los correos para cada centro, para que puedan usarse en los activities EnviarMensaje y HorarioSelect
         UsuarioService usuarioService = Apis.getUsuarioService();
-        Call<ArrayList<Usuario>> call = usuarioService.listarUsuarios(usuario); //hacemos una llamada a la Api para que nos devuelva un listado de usuarios de la empresa del usuario que pasamos
+        Call<ArrayList<Usuario>> call = usuarioService.listarUsuarios(usuario.getEmpresaUsuario()); //hacemos una llamada a la Api para que nos devuelva un listado de usuarios de la empresa del usuario que pasamos
         call.enqueue(new Callback<ArrayList<Usuario>>() {
             @Override
             public void onResponse(Call<ArrayList<Usuario>> call, Response<ArrayList<Usuario>> response) {
@@ -332,7 +332,7 @@ public class UsuarioSesion extends AppCompatActivity {
 
     private void Obtenerhorarios(Usuario usuarioIntent) { //obtención de los horarios para el usuario pasado
         HorarioService horarioService = Apis.getHorarioService();
-        Call<ArrayList<Horario>> call = horarioService.getHorarios(usuarioIntent); //hacemos una llamada a la Api para que nos devuelva el listado de horarios para el usuario pasado
+        Call<ArrayList<Horario>> call = horarioService.getHorarios(usuarioIntent.getCorreoUsuario()); //hacemos una llamada a la Api para que nos devuelva el listado de horarios para el usuario pasado
         call.enqueue(new Callback<ArrayList<Horario>>() {
             @Override
             public void onResponse(Call<ArrayList<Horario>> call, Response<ArrayList<Horario>> response) {

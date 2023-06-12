@@ -31,14 +31,12 @@
         android:contentDescription="@string/volver"
         android:foregroundGravity="center"
         android:src="@android:drawable/ic_menu_revert"
-        android:tint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.957"
-        app:rippleColor="#FFFFFF" />
+        app:layout_constraintVertical_bias="0.957" />
 
     <Button
         android:id="@+id/btnEnviarEnvMens"

@@ -31,12 +31,13 @@ public class ListadoUsuarios extends AppCompatActivity {
         View viewLayout = bindingGestionUser.getRoot();
         setContentView(viewLayout);
 
-        bindingGestionUser.listaUsuarios.setLayoutManager(new LinearLayoutManager(this)); //fijamos el layout que organizará las vistas para el RecyclerView listaUsuarios
-
         Bundle bundlePerAdmin = getIntent().getExtras(); //obtenemos los datos pasados en el intent del anterior activity
         Usuario usuarioIntent = (Usuario) bundlePerAdmin.getSerializable("usuario"); //usuario de la sesión pasado a través del intent
+        usuarios = (ArrayList<Usuario>) bundlePerAdmin.getSerializable("ListadoUsuarios");
 
-        obtenerUsuarios(usuarioIntent); //obtenemos el listado de usuarios según el usuario de la sesión
+        bindingGestionUser.listaUsuarios.setLayoutManager(new LinearLayoutManager(this)); //fijamos el layout que organizará las vistas para el RecyclerView listaUsuarios
+        UsuarioAdapter usuarioAdapter = new UsuarioAdapter(ListadoUsuarios.this, usuarios, usuarioIntent); //creamos el adaptador para el recyclerView pasandole por parámetro el Layout del activity, el listado de usuarios y el usuario de la sesión
+        bindingGestionUser.listaUsuarios.setAdapter(usuarioAdapter); //fijamos el adaptador del recyclerview
 
         bindingGestionUser.btnNuevEmpLisUs.setOnClickListener(v -> { //Botón nuevo empleado, pasamos al activity NuevoEmpleado, acción al hacer click
             Intent intentNuevEmp = new Intent(ListadoUsuarios.this, NuevoEmpleado.class);
@@ -48,26 +49,5 @@ public class ListadoUsuarios extends AppCompatActivity {
             intentVolver.putExtra("usuario", usuarioIntent);
             startActivity(intentVolver);
         });
-    }
-    private void obtenerUsuarios(Usuario usuario) { //obtenemos la lista de usuarios según la empresa del usuario de la sesión
-        UsuarioService usuarioService = Apis.getUsuarioService();
-        Call<ArrayList<Usuario>> call = usuarioService.listarUsuarios(usuario); //hacemos una llamada a la Api para que nos devuelva la lista de usuarios de la empresa del usuario pasado
-        call.enqueue(new Callback<ArrayList<Usuario>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Usuario>> call, Response<ArrayList<Usuario>> response) {
-                usuarios.addAll(response.body()); //añadimos en el arraylist de usuarios de la respuesta de la llamada a la Api
-                Log.d("ResUsuario", response.body().toString());
-                Log.d("ResUsuario2", usuarios.toString());
-                Toast.makeText(ListadoUsuarios.this, "Lista Obtenida", Toast.LENGTH_SHORT).show();
-                UsuarioAdapter usuarioAdapter = new UsuarioAdapter(ListadoUsuarios.this, usuarios, usuario); //creamos el adaptador para el recyclerView pasandole por parámetro el Layout del activity, el listado de usuarios y el usuario de la sesión
-                bindingGestionUser.listaUsuarios.setAdapter(usuarioAdapter); //fijamos el adaptador del recyclerview
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<Usuario>> call, Throwable t) {
-                Toast.makeText(ListadoUsuarios.this, "Lista no Obtenida", Toast.LENGTH_SHORT).show();
-            }
-        });
-
     }
 }

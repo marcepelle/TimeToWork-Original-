@@ -1,5 +1,6 @@
 package com.example.timetowork.activities.horarios;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -36,7 +37,6 @@ import retrofit2.Response;
 
 public class FijarJornada extends AppCompatActivity {
     ActivityFijarJornadaBinding bindingFijar;
-    ArrayList<Usuario> usuarios;
     ArrayList<ArrayList<String>> correosSpinner = new ArrayList<>();
     String[] centrosSpinner;
     private int mYear, mMonth, mDay, mHour, mMinute;
@@ -96,27 +96,66 @@ public class FijarJornada extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        bindingFijar.editDesdeFijJor.setOnClickListener(v -> { //EditText fecha desde
+        bindingFijar.editDesdeFijJor.setFocusable(false); //Bloqueamos el EditText para que no se puedan introducir datos incorrectos
+        bindingFijar.BtnCalendarDesde.setOnClickListener(v -> { //Boton flotante para fijar fecha desde
             fijarFechaEnEdit(bindingFijar.editDesdeFijJor.getId()); //fijamos la fecha con DatePickerDialog en el EditText que se ha pasado por parámetro indicando su id
         });
-        bindingFijar.editHastaFijJor.setOnClickListener(v -> { //EditText fecha Hasta
+        bindingFijar.editHastaFijJor.setFocusable(false); //Bloqueamos el EditText para que no se puedan introducir datos incorrectos
+        bindingFijar.BtnCalendarHasta.setOnClickListener(v -> { //Boton flotante para fijar  Hasta
             fijarFechaEnEdit(bindingFijar.editHastaFijJor.getId()); //fijamos la fecha con DatePickerDialog en el EditText que se ha pasado por parámetro indicando su id
         });
-        bindingFijar.editHoraEntradaFijJor.setOnClickListener(v -> { //EditText hora entrada
+        bindingFijar.editHoraEntradaFijJor.setFocusable(false); //Bloqueamos el EditText para que no se puedan introducir datos incorrectos
+        bindingFijar.BtnHoraEntrada.setOnClickListener(v -> { //Boton flotante para fijar hora entrada
             fijarHoraEnEdit(bindingFijar.editHoraEntradaFijJor.getId()); //fijamos la hora con TimePickerDialog en el EditText que se ha pasado por parámetro indicando su id
         });
-        bindingFijar.editHoraSalidaFijJor.setOnClickListener(v -> { //EditText hora salida
+        bindingFijar.editHoraSalidaFijJor.setFocusable(false); //Bloqueamos el EditText para que no se puedan introducir datos incorrectos
+        bindingFijar.BtnHoraSalida.setOnClickListener(v -> { //Boton flotante para fijar hora salida
             fijarHoraEnEdit(bindingFijar.editHoraSalidaFijJor.getId()); //fijamos la hora con TimePickerDialog en el EditText que se ha pasado por parámetro indicando su id
         });
         bindingFijar.btnFijarJornadaFijJor.setOnClickListener(v -> { //Botón Fijar jornada, creamos los horarios del trabajador seleccionado en las fechas, horas y días fijadas
             bindingFijar.btnFijarJornadaFijJor.setClickable(false); //Al hacer clic bloqueamos el botón para no repetir la acción varias veces
+            if(!comprobarEditsFechas()){
+                Toast.makeText(this, "Debe rellenar las fechas", Toast.LENGTH_SHORT).show();
+                bindingFijar.btnFijarJornadaFijJor.setClickable(true); //Habilitamos el Botón fijar jornada
+                return;
+            }
+            if(!comprobarEditsHoras()){
+                Toast.makeText(this, "Debe rellenar las horas", Toast.LENGTH_SHORT).show();
+                bindingFijar.btnFijarJornadaFijJor.setClickable(true); //Habilitamos el Botón fijar jornada
+                return;
+            }
+            if(!comprobarFechas()){
+                Toast.makeText(this, "La fecha \"hasta\" no puede ser anterior a la de \"desde\"", Toast.LENGTH_SHORT).show();
+                bindingFijar.btnFijarJornadaFijJor.setClickable(true); //Habilitamos el Botón fijar jornada
+                return;
+            }
+            if(!comprobarHora()){
+                Toast.makeText(this, "La hora de \"salida\" no puede ser anterior a la de \"entrada\"", Toast.LENGTH_SHORT).show();
+                bindingFijar.btnFijarJornadaFijJor.setClickable(true); //Habilitamos el Botón fijar jornada
+                return;
+            }
+            if(!comprobarDias()){
+                Toast.makeText(this, "Debe tener clicado un día de la semana al menos", Toast.LENGTH_SHORT).show();
+                bindingFijar.btnFijarJornadaFijJor.setClickable(true); //Habilitamos el Botón fijar jornada
+                return;
+            }
             fijarJornada(usuarioSpinner, bindingFijar); //Fijamos la jornada del Usuario que hemos seleccionado en el spinner
             bindingFijar.btnFijarJornadaFijJor.setClickable(true); //Habilitamos el Botón fijar jornada
         });
         bindingFijar.btnEliminarJornadaFijJor.setOnClickListener(v -> { //Botón Eliminar jornada, eliminamos los horarios del trabajador seleccionado en las fechas, horas y días fijadas
-            bindingFijar.btnFijarJornadaFijJor.setClickable(false); //Al hacer clic bloqueamos el botón para no repetir la acción varias veces
-            eliminarJornada(usuarioSpinner, bindingFijar); //Eliminamos la jornada del Usuario que hemos seleccionado en el spinner
-            bindingFijar.btnFijarJornadaFijJor.setClickable(true); //Habilitamos el Botón eliminar jornada
+            bindingFijar.btnEliminarJornadaFijJor.setClickable(false); //Al hacer clic bloqueamos el botón para no repetir la acción varias veces
+            if(!comprobarEditsFechas()){
+                Toast.makeText(this, "Debe rellenar las fechas", Toast.LENGTH_SHORT).show();
+                bindingFijar.btnEliminarJornadaFijJor.setClickable(true); //Habilitamos el Botón fijar jornada
+                return;
+            }
+            if(!comprobarFechas()){
+                Toast.makeText(this, "La fecha \"hasta\" no puede ser anterior a la de \"desde\"", Toast.LENGTH_SHORT).show();
+                bindingFijar.btnEliminarJornadaFijJor.setClickable(true); //Habilitamos el Botón eliminar jornada
+                return;
+            }
+            dialogoEliminarHorarios(usuarioSpinner);
+            bindingFijar.btnEliminarJornadaFijJor.setClickable(true); //Habilitamos el Botón eliminar jornada
         });
         bindingFijar.btnVolverFijJor.setOnClickListener(v -> { //Botón volver, hacemos un intent hacia el activity HorarioSelect, acción al hacer clic
             Intent intentVolver = null;
@@ -191,9 +230,21 @@ public class FijarJornada extends AppCompatActivity {
         }
         Toast.makeText(this, "Horarios Eliminados", Toast.LENGTH_SHORT).show();
     }
+    private void dialogoEliminarHorarios(Usuario userSpinner) { //crea un dialogo emergente al intentar eliminar horarios
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("¿Seguro que quiere eliminar los horarios para las fechas?") //establecemos el mensaje del dialogo
+                .setPositiveButton("Si", (dialog, which) -> { //si la persona hace clic en Si
+                    eliminarJornada(userSpinner, bindingFijar); //Eliminamos la jornada del Usuario que hemos seleccionado en el spinner
+                })
+                .setNegativeButton("Cancelar", (dialog, which) -> dialog.dismiss()); //si la persona hace clic en Cancelar no pasa nada
+        builder.show(); //mostramos el dialogo
+    }
     private void eliminarHorario(Horario horario) { //Eliminar el horario pasado por parámetro en la base de datos
         HorarioService horarioService = Apis.getHorarioService();
-        Call<Void> call = horarioService.eliminarHorarios(horario); //hacemos una llamada a la Api para que elimine en la base de datos el horario pasado
+        Call<Void> call = null; //hacemos una llamada a la Api para que elimine en la base de datos el horario pasado
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            call = horarioService.eliminarHorarios(horario.getCorreoEmpleado(), LocalDate.parse(horario.getFecha()));
+        }
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -279,10 +330,8 @@ public class FijarJornada extends AppCompatActivity {
     }
 
     private void obtenerUsuario(String correo, Usuario usuarioIntent) { //Obtenemos el usuario al que se le va a gestionar la jornada
-        CorreoContrasena correoContrasena = new CorreoContrasena();
-        correoContrasena.setCorreo(correo); //obtenemos un objeto de correoContrasena y le establecemos el atributo correo el correo pasado por parámetro para la llamada a la Api
         UsuarioService usuarioService = Apis.getUsuarioService();
-        Call<Usuario> call = usuarioService.obtenerUsuario(correoContrasena); //hacemos una llamada a la Api para obtener el usuario pasandole un objeto correoContrasena que contendrá el correo que se ha seleccionado en el spinner de los correos
+        Call<Usuario> call = usuarioService.obtenerUsuario(correo); //hacemos una llamada a la Api para obtener el usuario pasandole el correo que se ha seleccionado en el spinner de los correos
         call.enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) { //en la respuesta de la solicitud a la Api hacemos un intent al mismo activity para actualizarlo con el nuevo usuario al que se le va a gestionar la jornada
@@ -356,5 +405,40 @@ public class FijarJornada extends AppCompatActivity {
                     mYear, mMonth, mDay); //establecemos el año, el mes y el día que se va a mostrar al abrir el dialogo
         }
         datePickerDialog.show(); //mostramos el dialogo
+    }
+
+    private boolean comprobarEditsFechas(){
+        if(bindingFijar.editDesdeFijJor.getText().toString().isEmpty()||bindingFijar.editHastaFijJor.getText().toString().isEmpty()){
+            return false; // si no se rellenaron todos lo edits de las fechas devolvemos false
+        }
+        return true; //si se rellenaron todos los edits de las fechas
+    }
+    private boolean comprobarEditsHoras(){
+        if(bindingFijar.editHoraEntradaFijJor.getText().toString().isEmpty()||bindingFijar.editHoraSalidaFijJor.getText().toString().isEmpty()){
+            return false; // si no se rellenaron todos lo edits de las horas devolvemos false
+        }
+        return true; //si se rellenaron todos los edits de las horas
+    }
+    private boolean comprobarFechas(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if(LocalDate.parse(bindingFijar.editDesdeFijJor.getText().toString()).isBefore(LocalDate.parse(bindingFijar.editHastaFijJor.getText().toString()))){
+                return true; // si la fecha desde es anterior a la fecha hasta
+            }
+        }
+        return false; //la fecha desde no es anterior a la fecha hasta
+    }
+    private boolean comprobarHora(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if(LocalTime.parse(bindingFijar.editHoraEntradaFijJor.getText().toString()).isBefore(LocalTime.parse(bindingFijar.editHoraSalidaFijJor.getText().toString()))){
+                return true; //si la hora de entrada es anterior a la de salida
+            }
+        }
+        return false; //si la hora de entrada no es anterior a la de salida
+    }
+    private boolean comprobarDias(){
+        if(!bindingFijar.CheckLunesFijJor.isChecked() && !bindingFijar.CheckMartesFijJor.isChecked() && !bindingFijar.CheckMiercolesFijJor.isChecked() && !bindingFijar.CheckJuevesFijJor.isChecked() && !bindingFijar.CheckViernesFijJor.isChecked() && !bindingFijar.CheckSabadoFijJor.isChecked() && !bindingFijar.CheckDomingoFijJor.isChecked()){
+            return false; //si no se ha checkeado ningún dia
+        }
+        return true; //si se ha checkeado algún día
     }
 }

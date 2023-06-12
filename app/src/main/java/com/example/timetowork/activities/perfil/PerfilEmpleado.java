@@ -106,7 +106,7 @@ public class PerfilEmpleado extends AppCompatActivity {
 
     private void Obtenerhorarios(Usuario usuario) { //obtenemos el listado de horarios para el usuario que le pasemos y rellenamos el array anios
         HorarioService horarioService = Apis.getHorarioService();
-        Call<ArrayList<Horario>> call = horarioService.getHorarios(usuario);
+        Call<ArrayList<Horario>> call = horarioService.getHorarios(usuario.getCorreoUsuario());
         call.enqueue(new Callback<ArrayList<Horario>>() {
             @Override
             public void onResponse(Call<ArrayList<Horario>> call, Response<ArrayList<Horario>> response) {

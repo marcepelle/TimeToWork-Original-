@@ -52,6 +52,7 @@ public class MensajesAdapter extends RecyclerView.Adapter <MensajesAdapter.Mensa
     @Override
     public void onBindViewHolder(@NonNull MensajesAdapter.MensajesHolder holder, int position) { //Este método va a vincular los datos al ViewHolder para una posición dada en el listado del RecyclerView
         holder.fecha.setText(mensajes.get(position).getFecha()); //fijamos la fecha del mensaje en el TextView
+        holder.hora.setText(mensajes.get(position).getHora()); //fijamos la hora del mensaje en el TextView
         holder.de.setText(mensajes.get(position).getDe()); //fijamos el correo de la persona que envía el mensaje en el TextView
         holder.para.setText(mensajes.get(position).getPara()); //fijamos el correo de la persona que recibe el mensaje en el TextView
         holder.asunto.setText(mensajes.get(position).getAsunto()); //fijamos el asunto del mensaje en el TextView
@@ -88,10 +89,11 @@ public class MensajesAdapter extends RecyclerView.Adapter <MensajesAdapter.Mensa
     }
 
     public class MensajesHolder extends  RecyclerView.ViewHolder { //Clase que determina la referencia de los views del layout que se utilizarán para trabajar en los elementos o items del adaptador, hereda de Recycler.ViewHolder
-        TextView fecha, de, para, asunto, accion, visto;
+        TextView fecha, hora, de, para, asunto, accion, visto;
         public MensajesHolder(@NonNull View itemView) {  //Constructor de MensajesHolder
             super(itemView);
             fecha = (TextView) itemView.findViewById(R.id.txtFechaContMens); //TextView que contendrá la fecha del mensaje
+            hora = (TextView) itemView.findViewById(R.id.txtHoraContMens); //TextView que contendrá la hora del mensaje
             de = (TextView) itemView.findViewById(R.id.txtDeContMens); //TextView que contendrá el correo de la persona que envía el mensaje
             para = (TextView) itemView.findViewById(R.id.txtParaContMens); //TextView que contendrá el correo de la persona que recibe el mensaje
             asunto = (TextView) itemView.findViewById(R.id.txtAsuntoContMens); //TextView que contendrá el asunto del mensaje

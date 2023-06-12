@@ -15,7 +15,7 @@
         app:srcCompat="@mipmap/ic_logo_foreground" />
 
     <EditText
-        android:id="@+id/EditMensaje"
+        android:id="@+id/editContenido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"

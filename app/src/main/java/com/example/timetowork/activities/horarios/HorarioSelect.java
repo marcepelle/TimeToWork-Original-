@@ -152,7 +152,7 @@ public class HorarioSelect extends AppCompatActivity {
 
     private void Obtenerhorarios(Usuario usuarioIntent) { //obtenemos el listado de horarios para el usuario pasado
         HorarioService horarioService = Apis.getHorarioService();
-        Call<ArrayList<Horario>> call = horarioService.getHorarios(usuarioIntent); //hacemos una llamada a la Api para que nos devuelva el listado de horarios para el usuario pasado
+        Call<ArrayList<Horario>> call = horarioService.getHorarios(usuarioIntent.getCorreoUsuario()); //hacemos una llamada a la Api para que nos devuelva el listado de horarios para el usuario pasado
         call.enqueue(new Callback<ArrayList<Horario>>() {
             @Override
             public void onResponse(Call<ArrayList<Horario>> call, Response<ArrayList<Horario>> response) {
@@ -184,10 +184,8 @@ public class HorarioSelect extends AppCompatActivity {
     }
 
     private void obtenerUsuario(String correo) { //obtenemos el usuario para la variable usuarioSpinner que corresponde con el correo seleccionado en el spinner
-        CorreoContrasena correoContrasena = new CorreoContrasena(); //usaremos un objeto CorreoContrasena para pasar en el Body de la solicitud a la Api
-        correoContrasena.setCorreo(correo); //establecemos el correo que se ha pasado por parámetro
         UsuarioService usuarioService = Apis.getUsuarioService();
-        Call<Usuario> call = usuarioService.obtenerUsuario(correoContrasena); //hacemos una llamada a la Api para obtener el usuario que corresponde con el correo pasado
+        Call<Usuario> call = usuarioService.obtenerUsuario(correo); //hacemos una llamada a la Api para obtener el usuario que corresponde con el correo pasado
         call.enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {

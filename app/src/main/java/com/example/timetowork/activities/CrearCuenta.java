@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -22,7 +23,10 @@ import com.example.timetowork.utils.UsuarioService;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +35,6 @@ import retrofit2.Response;
 public class CrearCuenta extends AppCompatActivity {
     UsuarioService usuarioService;
     ActivityCrearCuentaBinding binding;
-    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +60,29 @@ public class CrearCuenta extends AppCompatActivity {
         binding.checkBoxTerminos.setMovementMethod(LinkMovementMethod.getInstance()); //indicamos como debe comportarse el textview en funciones de posicionamiento del cursor, desplazamiento y selección
 
         binding.btnCrearCuenta.setOnClickListener(v -> { //Botón crear cuenta, crearemos una cuenta para una empresa nueva y el usuario administrador para la empresa creada, acción al hacer clic
-            if(binding.checkBoxTerminos.isChecked()){ //Se realizarán las acciones si se han aceptado los terminos clicando en el checkbox
-                crearCuentaEmpresa(modeloEmpresa()); //crearemos una cuenta para una empresa nueva
-                crearCuentaUsuario(modeloUsuario()); //crearemos un usuario administrador para la empresa creada
-                Intent intentCrear = new Intent(CrearCuenta.this, MainActivity.class); //hacemos un intent hacia el activity MainActivity
-                startActivity(intentCrear);
+            if(!binding.checkBoxTerminos.isChecked()){ //Si no se han aceptado los terminos clicando en el checkbox
+                Toast.makeText(this, "Debe aceptar los términos de uso", Toast.LENGTH_SHORT).show();
+                return;
             }
+            if(emptyEdits()){ //Si los edits están vacíos
+                Toast.makeText(this, "Debe rellenar todos los espacios", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(!comprobarCIF(binding.editCIF.getText().toString())){ //Si el CIF no está bien estructurado
+                Toast.makeText(this, "El CIF debe contener: 1 letra y 8 dígitos (Ej.: B01234567 o B-01234567)", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(!comprobarCorreo(binding.editCorreo.getText().toString())){ //Si el correo no está bien estructurado
+                Toast.makeText(this, "Correo no válido", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(!(binding.editContrasena.getText().toString()==binding.editRepetirContra.getText().toString())){ //si la contraseña no se ha escrito bien las dos veces
+                Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            crearCuentaEmpresa(modeloEmpresa()); //crearemos una cuenta para una empresa nueva
         });
+
     }
 
 
@@ -80,13 +99,21 @@ public class CrearCuenta extends AppCompatActivity {
     }
     private void crearCuentaEmpresa(Empresa empresa) { //Creamos una cuenta para la empresa pasada
         usuarioService = Apis.getUsuarioService();
-        Call<Void> call = usuarioService.crearEmpresa(empresa); //hacemos una llamada a la Api para que cree una cuenta o registro de la empresa en la base de datos
-        call.enqueue(new Callback<Void>() {
+        Call<Integer> call = usuarioService.crearEmpresa(empresa); //hacemos una llamada a la Api para que cree una cuenta o registro de la empresa en la base de datos
+        call.enqueue(new Callback<Integer>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if(response.body()==1){
+                    crearCuentaUsuario(modeloUsuario()); //crearemos un usuario administrador para la empresa creada
+                    Intent intentCrear = new Intent(CrearCuenta.this, MainActivity.class); //hacemos un intent hacia el activity MainActivity
+                    startActivity(intentCrear);
+                }else{
+                    Toast.makeText(CrearCuenta.this,"Cuenta no creada, Empresa o CIF ya existentes", Toast.LENGTH_SHORT).show();
+                }
             }
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<Integer> call, Throwable t) {
+                Toast.makeText(CrearCuenta.this,"Cuenta no creada", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -99,7 +126,9 @@ public class CrearCuenta extends AppCompatActivity {
         usuario.setDireccion(binding.editCiudad.getText() +", "+binding.editProvincia.getText()+", "+binding.editPais.getText()+"."); //Fijamos la dirección del centro de trabajo del usuario administrador que se ha escrito en el EditText
         usuario.setEmpresaUsuario(String.valueOf(binding.editNomEmpresa.getText())); //Fijamos el nombre de la empresa del usuario administrador que se ha escrito en el EditText
         usuario.setLugarTrabajo(String.valueOf(binding.editCiudad.getText())); //Fijamos el centro de trabajo del usuario administrador que se ha escrito en el EditText
-        usuario.setFechaNacimiento(dateFormat.format(new Date())); //Fijamos la fecha de creación del usuario administrador
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            usuario.setFechaNacimiento(LocalDate.now().toString()); //Fijamos la fecha de creación del usuario administrador
+        }
         usuario.setCorreoUsuario(String.valueOf(binding.editCorreo.getText())); //Fijamos el correo del usuario administrador que se ha escrito en el EditText
         usuario.setContrasena(String.valueOf(binding.editContrasena.getText())); //Fijamos la contraseña del usuario administrador que se ha escrito en el EditText
         usuario.setEsAdmin(true); //Fijamos como verdadero que sea usuario administrador
@@ -108,20 +137,47 @@ public class CrearCuenta extends AppCompatActivity {
 
     private void crearCuentaUsuario(Usuario usuario) { //Creamos una cuenta usuario para el objeto usuario pasado
         usuarioService = Apis.getUsuarioService();
-        Call<Void> call= usuarioService.crearUsuario(usuario); //hacemos una llamada a la Api para que cree una cuenta o registro del usuario administrador en la base de datos
-        call.enqueue(new Callback<Void>() {
+        Call<Integer> call= usuarioService.crearUsuario(usuario); //hacemos una llamada a la Api para que cree una cuenta o registro del usuario administrador en la base de datos
+        call.enqueue(new Callback<Integer>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if(response.isSuccessful()){
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if(response.body()==1){
                     Toast.makeText(CrearCuenta.this, "Cuenta Creada", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(CrearCuenta.this,"Cuenta no creada, correo existente", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<Integer> call, Throwable t) {
                     Toast.makeText(CrearCuenta.this,"Cuenta no creada", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
+    private boolean emptyEdits() { //comprobamos que ningún editext este vacío
+        if(binding.editNomEmpresa.getText().toString().isEmpty()||binding.editCIF.getText().toString().isEmpty()||binding.editNombAdmin.getText().toString().isEmpty()||binding.editPais.getText().toString().isEmpty()||binding.editProvincia.getText().toString().isEmpty()||binding.editCiudad.getText().toString().isEmpty()||binding.editTelefonoEmp.getText().toString().isEmpty()||binding.editCorreo.getText().toString().isEmpty()||binding.editContrasena.getText().toString().isEmpty()||binding.editRepetirContra.getText().toString().isEmpty()){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean comprobarCIF(String cif){ //Comprobamos mediante expresiones regulares que la cadena pasada sea una estructura valida para un CIF
+        Pattern patron = Pattern.compile("([A-Z])(-)?([0-9]{8})$"); //Definimos el patron a comprobar
+        Matcher coincide = patron.matcher(cif); //Le pasamos la cadena al interpretador de patrones
+        if(coincide.matches()){ //si coincide devolveremos true
+            return true;
+        }else{
+            return false;
+        }
+    }
+    private boolean comprobarCorreo(String correo){ //Comprobamos mediante expresiones regulares que la cadena pasada sea una estructura valida para un correo
+        Pattern patron = Pattern.compile("^[A-Za-z0-9-_]+(\\.[A-Za-z0-9-_]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"); //Definimos el patron a comprobar
+        Matcher coincide = patron.matcher(correo); //Le pasamos la cadena al interpretador de patrones
+        if(coincide.matches()){ //si coincide devolveremos true
+            return true;
+        }else{ // en caso contrario false
+            return false;
+        }
+    }
 
 }

@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void usuarioLoggueado(CorreoContrasena correoContrasena)  { //Intentamos inicar sesión pasandole el objeto correoContrasena
         UsuarioService usuarioService = Apis.getUsuarioService();
-        Call<Usuario> call = usuarioService.loginUsuario(correoContrasena); //Hacemos una llamada a la Api para que compruebe en la base de datos si el correo y la contraseña son correctos
+        Call<Usuario> call = usuarioService.loginUsuario(correoContrasena.getCorreo(), correoContrasena.getPassword()); //Hacemos una llamada a la Api para que compruebe en la base de datos si el correo y la contraseña son correctos
         call.enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {

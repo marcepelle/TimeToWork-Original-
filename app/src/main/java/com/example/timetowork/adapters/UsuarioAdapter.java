@@ -43,9 +43,9 @@ public class UsuarioAdapter extends RecyclerView.Adapter<UsuarioAdapter.UsuarioV
 
     @Override
     public void onBindViewHolder(@NonNull UsuarioViewHolder holder, int position) { //Este método va a vincular los datos al ViewHolder para una posición dada en el listado del RecyclerView
-        holder.txtNombre.append(" " + listaUsuario.get(position).getNombreUsuario()); //Fijamos el nombre del usuario de la posición en el listado en el TextView
-        holder.txtApellidos.append(" " + listaUsuario.get(position).getApellidosUsuario()); //Fijamos los apellidos del usuario de la posición en el listado en el TextView
-        holder.txtLugartrabajo.append(" " + listaUsuario.get(position).getLugarTrabajo()); //Fijamos los apellidos del usuario de la posición en el listado en el TextView
+        holder.txtNombre.setText("Nombre: " + listaUsuario.get(position).getNombreUsuario()); //Fijamos el nombre del usuario de la posición en el listado en el TextView
+        holder.txtApellidos.setText("Apellidos: " + listaUsuario.get(position).getApellidosUsuario()); //Fijamos los apellidos del usuario de la posición en el listado en el TextView
+        holder.txtLugartrabajo.setText("Centro: " + listaUsuario.get(position).getLugarTrabajo()); //Fijamos los apellidos del usuario de la posición en el listado en el TextView
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             holder.itemView.setTooltipText("Click para ver Empleado"); //Fijamos para el elemento del listado un toolTip
         }

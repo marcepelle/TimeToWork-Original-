@@ -147,6 +147,16 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/txtHoraMens"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_gravity="center"
+                    android:width="80dp"
+                    android:text="Hora"
+                    android:textStyle="bold" />
+
+                <TextView
                     android:id="@+id/txtDeMens"
                     android:layout_column="2"
                     android:layout_gravity="center"

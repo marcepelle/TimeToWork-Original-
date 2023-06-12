@@ -123,4 +123,16 @@
     <string name="horasMesInfEmp">Horas trabajadas este mes:</string>
     <string name="entradaInfEmp">Entrada:</string>
     <string name="salidaInfEmp">Salida:</string>
+    <string name="BtnCalendarDesde">Fecha desde</string>
+    <string name="BtnHoraSalida">Hora Salida</string>
+    <string name="BtnHoraEntrada">Hora Entrada</string>
+    <string name="BtnCalendarHasta">Fecha Hasta</string>
+    <string name="CiudadPerAdm">Ciudad:</string>
+    <string name="HintCiudadPerAdm">Ciudad</string>
+    <string name="CambiarContraseña">Cambiar Contraseña</string>
+    <string name="txtCambiarContrasena">Cambiar Contraseña:</string>
+    <string name="edtiContrasena">Password</string>
+    <string name="editRepeatContrasena">Repeat Password</string>
+    <string name="tittleDialog">Cambiar Contraseña:</string>
+    <string name="buttonCambiar">Actualizar Contraseña</string>
 </resources>

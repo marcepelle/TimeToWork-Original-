@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -63,7 +62,7 @@ public class ResponderMensaje extends AppCompatActivity {
         bindingResMens.editMensajeEnvMens.setText(mensajeIntent.getContenido()); //Insertamos en el EditText el contenido del mensaje a responder
 
         bindingResMens.btnContestarRespMens.setOnClickListener(v -> { //Botón Contestar, abrimos un dialogo para contestar el mensaje, acción al hacer clic
-            AlertDialog dialog = createSimpleDialog(); //Definimos un objeto de tipo AlertDialog y le asignamos una instancia a través del método createSimpleDialog
+            AlertDialog dialog = dialogResponder(); //Definimos un objeto de tipo AlertDialog y le asignamos una instancia a través del método dialogResponder
             dialog.show(); //Mostramos el dialogo en el activity
         });
         bindingResMens.btnVolverRespMens.setOnClickListener(v -> { //Botón volver, volvemos al activity MensajesPerfil, acción al hacer clic
@@ -79,11 +78,11 @@ public class ResponderMensaje extends AppCompatActivity {
         });
     }
 
-    public AlertDialog createSimpleDialog() { //Devuelve un objeto AlertDialog para poder responder el mensaje en cuestión
+    public AlertDialog dialogResponder() { //Devuelve un objeto AlertDialog para poder responder el mensaje en cuestión
         AlertDialog.Builder builder = new AlertDialog.Builder(this); //Con un elemento Builder podremos definir las partes de la creación de un objeto de clase AlertDialog
         LayoutInflater inflater = this.getLayoutInflater(); //Obtenemos el layout donde se mostrará el dialogo
         View viewAlert = inflater.inflate(R.layout.dialog_responder_mensaje, null); //Creamos la vista en el Layout pasandole por parámetro el Layout que se va a mostrar en la vista
-        EditText editMensaje = (EditText) viewAlert.findViewById(R.id.EditMensaje); //Obtenemos el EdiText de la vista del dialogo donde irá el contenido de la respuesta del mensaje
+        EditText editMensaje = (EditText) viewAlert.findViewById(R.id.editContenido); //Obtenemos el EdiText de la vista del dialogo donde irá el contenido de la respuesta del mensaje
         builder.setView(viewAlert) //En la vista del dialogo...
                 .setTitle("Responder Mensaje") //Fijamos el título mostrado en el dialogo
                 .setPositiveButton("Envíar", (dialog, which) -> { //En caso de que el usuario pulse enviar...
@@ -135,7 +134,7 @@ public class ResponderMensaje extends AppCompatActivity {
 
     private void ObtenerEnviados(Usuario usuarioIntent) { //Obtenemos la lista de mensajes envíados para el usuario pasado
         MensajeService mensajeService = Apis.getMensajeService();
-        Call<ArrayList<Mensaje>> call = mensajeService.getEnviados(usuarioIntent); //hacemos una llamada a la Api para obtener el listado de mensajes envíados
+        Call<ArrayList<Mensaje>> call = mensajeService.getEnviados(usuarioIntent.getCorreoUsuario()); //hacemos una llamada a la Api para obtener el listado de mensajes envíados
         call.enqueue(new Callback<ArrayList<Mensaje>>() {
             @Override
             public void onResponse(Call<ArrayList<Mensaje>> call, Response<ArrayList<Mensaje>> response) {
@@ -153,7 +152,7 @@ public class ResponderMensaje extends AppCompatActivity {
 
     private void ObtenerRecibidos(Usuario usuarioIntent) { //Obtenemos la lista de mensajes recibidos para el usuario pasado
         MensajeService mensajeService = Apis.getMensajeService();
-        Call<ArrayList<Mensaje>> call = mensajeService.getRecibidos(usuarioIntent); //hacemos una llamada a la Api para obtener el listado de mensajes recibidos
+        Call<ArrayList<Mensaje>> call = mensajeService.getRecibidos(usuarioIntent.getCorreoUsuario()); //hacemos una llamada a la Api para obtener el listado de mensajes recibidos
         call.enqueue(new Callback<ArrayList<Mensaje>>() {
             @Override
             public void onResponse(Call<ArrayList<Mensaje>> call, Response<ArrayList<Mensaje>> response) {
