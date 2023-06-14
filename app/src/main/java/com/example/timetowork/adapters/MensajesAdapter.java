@@ -63,11 +63,19 @@ public class MensajesAdapter extends RecyclerView.Adapter <MensajesAdapter.Mensa
                     mensajeVistoTrue(mensajes.get(position), "De"); //insertamos como true en la base de datos que la persona que envío el mensaje lo ha visto
                     mensajes.get(position).setVistoDe(true); //fijamos como true en el objeto mensaje que la persona que envío el mensaje lo ha visto
                 }
-                holder.visto.setText(String.valueOf(mensajes.get(position).isVistoDe())); //fijamos en el TextView visto el valor del boolean del atributo vistoDe del objeto mensaje
+                if(mensajes.get(position).isVistoDe()){
+                    holder.visto.setText("Sí"); //fijamos en el TextView visto el valor del boolean del atributo vistoDe del objeto mensaje, en este caso si es true
+                }else{
+                    holder.visto.setText("No"); //fijamos en el TextView visto el valor del boolean del atributo vistoDe del objeto mensaje, en este caso si es false
+                }
                 AlertDialog alertDialog = dialogVerEnviado(mensajes.get(position)); //creamos el dialogo emergente para ver el mensaje envíado por el usuario de la sesión
                 alertDialog.show(); //mostramos el dialogo
             });
-            holder.visto.setText(String.valueOf(mensajes.get(position).isVistoDe())); //fijamos en el TextView visto el valor del boolean del atributo vistoDe del objeto mensaje
+            if(mensajes.get(position).isVistoDe()){
+                holder.visto.setText("Sí"); //fijamos en el TextView visto el valor del boolean del atributo vistoDe del objeto mensaje, en este caso si es true
+            }else{
+                holder.visto.setText("No"); //fijamos en el TextView visto el valor del boolean del atributo vistoDe del objeto mensaje, en este caso si es true
+            }
         }else{ //si el usuario de la sesión no coincide con el usuario que envía el mensaje quiere decir que es un mensaje recibido
             holder.accion.setText("ver"); //fijamos la acción en el TextView
             holder.accion.setOnClickListener(v -> { //en el TextView acción, al clicar, mostraremos a través de un dialogo emergente(AlertDialog) el mensaje recibido en cuestión y lo fijaremos como visto
@@ -75,11 +83,19 @@ public class MensajesAdapter extends RecyclerView.Adapter <MensajesAdapter.Mensa
                     mensajeVistoTrue(mensajes.get(position), "Para"); //insertamos como true en la base de datos que la persona que recibió el mensaje lo ha visto
                     mensajes.get(position).setVistoPara(true); //fijamos como true en el objeto mensaje que la persona que recibió el mensaje lo ha visto
                 }
-                holder.visto.setText(String.valueOf(mensajes.get(position).isVistoPara())); //fijamos en el TextView visto el valor del boolean del atributo vistoPara del objeto mensaje
+                if(mensajes.get(position).isVistoPara()){
+                    holder.visto.setText("Sí"); //fijamos en el TextView visto el valor del boolean del atributo vistoPara del objeto mensaje, en este caso si es true
+                }else{
+                    holder.visto.setText("No"); //fijamos en el TextView visto el valor del boolean del atributo vistoPara del objeto mensaje, en este caso si es true
+                }
                 AlertDialog alertDialog = dialogVerRecibido(mensajes.get(position)); //creamos el dialogo emergente para ver el mensaje recibido por el usuario de la sesión
                 alertDialog.show(); //mostramos el dialogo
             });
-            holder.visto.setText(String.valueOf(mensajes.get(position).isVistoPara())); //fijamos en el TextView visto el valor del boolean del atributo vistoPara del objeto mensaje
+            if(mensajes.get(position).isVistoPara()){
+                holder.visto.setText("Sí"); //fijamos en el TextView visto el valor del boolean del atributo vistoPara del objeto mensaje, en este caso si es true
+            }else{
+                holder.visto.setText("No"); //fijamos en el TextView visto el valor del boolean del atributo vistoPara del objeto mensaje, en este caso si es true
+            }
         }
     }
 
