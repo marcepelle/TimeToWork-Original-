@@ -53,7 +53,7 @@ public class EnviarMensaje extends AppCompatActivity {
         ObtenerEnviados(usuarioIntent); //Obtenemos lo mensajes envíados para el usuario pasado
         ObtenerRecibidos(usuarioIntent); //Obtenemos lo mensajes recibidos para el usuario pasado
 
-        bindingEnvMens.txtEmpleadoEnvMens.setText(usuarioIntent.getNombreUsuario() + " " + usuarioIntent.getApellidosUsuario()); //Insertamos en el TextView el nombre y los apellidos del usuario de la sesión que va a ser quien envie el mensaje
+        bindingEnvMens.txtEmpleadoEnvMens.setText((usuarioIntent.isEsAdmin())?usuarioIntent.getNombreUsuario() : usuarioIntent.getNombreUsuario() + " " + usuarioIntent.getApellidosUsuario()); //Insertamos en el TextView el nombre y los apellidos del usuario de la sesión que va a ser quien envie el mensaje
 
         bindingEnvMens.spinnerCentroTrabajoEnvMens.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, centrosSpinner)); //fijamos el adaptador para mostrar la información de los centros disponibles en el spinner
         bindingEnvMens.spinnerCentroTrabajoEnvMens.setSelection(posicionCentro); //fijamos el item seleccionado del spinner del centro pasandole la posición

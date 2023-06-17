@@ -63,7 +63,8 @@ public class FijarJornada extends AppCompatActivity {
         posicionCentro = Integer.valueOf(bundle.get("posicionCentro").toString()); //posición del item seleccionado en el spinner de los centros de trabajo
         posicionCorreo = Integer.valueOf(bundle.get("posicionEmpleado").toString()); //posición del item seleccionado en el spinner de los correos de los usuarios
 
-        bindingFijar.txtSelecEmpleadoFijJor.setText("Empleado: " + usuarioSpinner.getNombreUsuario() + " " + usuarioSpinner.getApellidosUsuario()); //establecemos en el TextView el empleado al que se le va a fijar la jornada
+
+        bindingFijar.txtSelecEmpleadoFijJor.setText((usuarioSpinner.isEsAdmin())?"Empleado: " + usuarioSpinner.getNombreUsuario() : "Empleado: " + usuarioSpinner.getNombreUsuario() + " " + usuarioSpinner.getApellidosUsuario()); //establecemos en el TextView el empleado al que se le va a fijar la jornada, usamos el operador ternario para fijar el nombre
 
         bindingFijar.spinnerCentroTrabajoFijJor.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, centrosSpinner)); //fijamos el adaptador para mostrar la información de los centros disponibles en el spinner
         bindingFijar.spinnerCentroTrabajoFijJor.setSelection(posicionCentro); //fijamos el item seleccionado del spinner del centro pasandole la posición
@@ -355,7 +356,7 @@ public class FijarJornada extends AppCompatActivity {
 
     private Horario modeloHorario(Usuario usuario, LocalDate fecha, ActivityFijarJornadaBinding binding) { //método que devuelve un objeto horario pasandole la fecha que tendrá el horario y de que usuario va a ser
         Horario horario = new Horario();
-        horario.setEmpleado(usuario.getNombreUsuario() + " " + usuario.getApellidosUsuario()); //nombre y apellidos del usuario
+        horario.setEmpleado((usuario.isEsAdmin())?usuario.getNombreUsuario() : usuario.getNombreUsuario() + " " + usuario.getApellidosUsuario()); //nombre y apellidos del usuario
         horario.setCorreoEmpleado(usuario.getCorreoUsuario()); //correo del usuario
         horario.setCentroTrabajo(usuario.getLugarTrabajo()); //centro de trabajo del usuario
         horario.setUsuario_fk(usuario); //objeto usuario para la clave foranea

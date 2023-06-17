@@ -47,7 +47,7 @@ public class InformeEmpleado extends AppCompatActivity {
         horarios = (ArrayList<Horario>) bundleInforme.getSerializable("horarios"); //horarios del usuario a gestionar
         anios = (ArrayList<Integer>) bundleInforme.getSerializable("anios"); //años en los que hay horarios para el usuario a gestionar
 
-        bindingInforme.txtnomEmpleadoInfEmp.setText(usuarioGestionado.getNombreUsuario() + " " + usuarioGestionado.getApellidosUsuario());
+        bindingInforme.txtnomEmpleadoInfEmp.setText((usuarioGestionado.isEsAdmin())?usuarioGestionado.getNombreUsuario() : usuarioGestionado.getNombreUsuario() + " " + usuarioGestionado.getApellidosUsuario());
         int minAnio = anios.size() - 1; //al estar ordenados de mayor a menor obtenemos el menor año del array en la ultima posición
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             LocalDateTime date = LocalDateTime.of((LocalDate.of(anios.get(minAnio), 1, 1)), LocalTime.now()); //creamos un objeto de tipo LocalDateTime para poder pasarselo a la clase Instant

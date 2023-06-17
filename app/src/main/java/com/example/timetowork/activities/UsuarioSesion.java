@@ -66,7 +66,7 @@ public class UsuarioSesion extends AppCompatActivity {
         Bundle intentObtenido = getIntent().getExtras(); //obtenemos los datos pasados en el intent del anterior activity
         Usuario usuarioIntent = (Usuario) intentObtenido.getSerializable("usuario"); //obtenemos el usuario de la sesión pasado por intent
 
-        bindingSesion.textTitleUsrProfile.append(usuarioIntent.getNombreUsuario()); //añadimos el nombre en el título
+        bindingSesion.textTitleUsrProfile.setText("Usuario: " + usuarioIntent.getNombreUsuario()); //añadimos el nombre en el título
         fecha = LocalDate.now();
         currentDate =" " + fecha; //obteniendo la fecha actual
         bindingSesion.textFechaUsrProfile.append(currentDate); //añadimos la fecha actual al textview
@@ -220,7 +220,7 @@ public class UsuarioSesion extends AppCompatActivity {
         hora = LocalTime.now();
         fecha = LocalDate.now();
         Horario horario = new Horario();
-        horario.setEmpleado(usuario.getNombreUsuario() + " " +usuario.getApellidosUsuario()); //Fijamos el nombre y los apellidos del usuario para el horario
+        horario.setEmpleado((usuario.isEsAdmin())?usuario.getNombreUsuario() : usuario.getNombreUsuario() + " " +usuario.getApellidosUsuario()); //Fijamos el nombre y los apellidos del usuario para el horario
         horario.setCorreoEmpleado(usuario.getCorreoUsuario()); //correo del usuario para el horario
         horario.setCentroTrabajo(usuario.getLugarTrabajo()); //centro de trabajo del usuario para el horario
         horario.setUsuario_fk(usuario); // Fijamos el usuario para el horario
